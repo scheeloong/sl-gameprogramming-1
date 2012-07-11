@@ -5,15 +5,18 @@
 class Mario
 {
 	private:
-		int x; // temporary
+		Display *display(); 
+		Keyboard *keyboard();
+		Database *database(); 
 	public:
 	// Constructor
-		Mario() : x(0) {}
-
+		Mario()
+		{
+			*keyboard(event_queue);
+		}
 	// Methods
 	void run() 
 	{
-		ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 		// Initialize EVERYTHING: 
 		// ALLEGRO init!!
 		// ALLEGRO addon!! 
@@ -35,8 +38,9 @@ class Mario
 
 		// This function handles everything, it is used to run the whole game. 
 		// the game loop is contained in here
-		while(true)
+		while(!done)
 		{
+			keyboard->keyboardUpdate(&event_queue);
 			// GAME LOOP
 		}
 	}
