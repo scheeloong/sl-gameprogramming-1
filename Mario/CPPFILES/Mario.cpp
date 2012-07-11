@@ -5,9 +5,9 @@
 class Mario
 {
 	private:
-		Display *display(); 
-		Keyboard *keyboard();
-		Database *database(); 
+		Display *display; 
+		Keyboard *keyboard;
+		Database *database; 
 	public:
 	// Constructor
 		Mario()
