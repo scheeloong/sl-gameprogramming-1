@@ -1,19 +1,12 @@
-#include <allegro5\allegro.h>
 #include "Keyboard.h"
 
 Keyboard::Keyboard(ALLEGRO_EVENT_QUEUE *event_queue)
 {
-	//initialize both bool arrays
-	for (int i = 0; i < 6; i++)
-	{
-		keys[i] = false;
-		lock[i] = false;
-	}
 	al_install_keyboard();
 	al_register_event_source(event_queue, al_get_keyboard_event_source());
 }
 
-void Keyboard::keyboardUpdate(ALLEGRO_EVENT &ev)
+void Keyboard::updateKeyboard(ALLEGRO_EVENT &ev)
 {
 	
 	if(ev.type == ALLEGRO_EVENT_KEY_DOWN)

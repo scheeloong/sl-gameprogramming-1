@@ -5,14 +5,19 @@
 class Mario
 {
 	private:
+		Timer *timer;
 		Display *display; 
 		Keyboard *keyboard;
 		Database *database; 
+		Player *player;
 	public:
 	// Constructor
 		Mario()
 		{
-			*keyboard(event_queue);
+			timer = new Timer(player, clocker, event_queue);
+			player = new Player();
+			display = new Display(event_queue, player);
+			keyboard = new Keyboard(event_queue);
 		}
 	// Methods
 	void run() 
@@ -38,10 +43,24 @@ class Mario
 
 		// This function handles everything, it is used to run the whole game. 
 		// the game loop is contained in here
+		// Keyboard NOTE: delete keyboard at end.
+		al_start_timer(clocker);
 		while(!done)
 		{
-			keyboard->keyboardUpdate(&event_queue);
+			ALLEGRO_EVENT ev;
+			al_wait_for_event(event_queue, &ev);
+			timer->updateTimer(ev);
+			keyboard->updateKeyboard(ev);
+			display->updateDisplay(event_queue);
 			// GAME LOOP
 		}
+		delete player;
+		al_destroy_event_queue(event_queue);
+		timer->destroyTimer(clocker);
+		display->destroyDisplay();
+		display->destroyFont();
+		delete timer; 
+		delete keyboard;
+		delete display;
 	}
 }; 
