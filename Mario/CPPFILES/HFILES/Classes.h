@@ -1,4 +1,5 @@
-	// This class stores all the header files needed. 
+/*//
+    // This class stores all the header files needed. 
 	// For simplicity, every header file and main function includes this class. 
 #pragma once
 #include <iostream>
@@ -104,3 +105,4 @@ enum ID{PLAYER, ENEMY, BULLET, BORDER, MISC, EXPLOSION};
 
 typedef Bou (*ObjectArray)[5][10][15];
  ObjectArray ptr = (ObjectArray) new object[5][10][15];
+ //*/

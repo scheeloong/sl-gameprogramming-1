@@ -1,3 +1,4 @@
+/*//
 // This class deals with PowerUps
 #pragma once
 #include "Classes.h"
@@ -15,4 +16,5 @@ class PowerUp : public GameObject
 		void Init(); // Initialize powerup based on position and type
 		// Methods		
 };
+//*/
 

@@ -1,3 +1,4 @@
+/*//
 #include "HFILES/Score.h"
 
 // Definitions
@@ -26,3 +27,4 @@ void Score::updateScore() // Update your own score
 	// if Mario gets a coin or something, 
 	addScore(); 
 }
+//*/

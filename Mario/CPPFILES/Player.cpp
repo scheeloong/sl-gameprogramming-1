@@ -1,3 +1,4 @@
+/*//
 #include "HFILES/Player.h"
 // Constructor
 Player::Player() : score(), lives(3) {}
@@ -21,6 +22,5 @@ Player::Player(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BIT
 		this->lives = 0; 
 		addLife(lives); 
 }
-
-
+//*/
 

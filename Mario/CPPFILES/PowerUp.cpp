@@ -1,3 +1,4 @@
+/*//
 #include "HFILES/PowerUp.h"
 
 // Constructor
@@ -14,3 +15,4 @@ void PowerUp::Init()
 {
 	
 }
+//*/

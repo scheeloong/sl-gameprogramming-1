@@ -1,3 +1,4 @@
+/*//
 #include "HFILES/Enemy.h"
 
 Enemy::Enemy() : GameObject::GameObject(), lives(1) {}; // normal enemy has 1 live only 
@@ -24,3 +25,4 @@ Enemy::Enemy(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMA
 	 this->lives = 0;
 	 addLife(lives); 
 }
+//*/

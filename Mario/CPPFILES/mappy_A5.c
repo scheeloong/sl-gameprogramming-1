@@ -5,7 +5,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "mappy_A5.h"
+//#include "mappy_A5.h" // note: edited for SL Game Programming
+#include "HFILES\mappy_A5.h"
 
 /* NOTES: 
 	1. all drawing uses the current target bitmap using, set beforehand if this is to change

@@ -1,3 +1,4 @@
+/*//
 // This class deals with handling the game states of the objects
 #pragma once
 #include "Classes.h"

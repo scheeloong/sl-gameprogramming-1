@@ -1,3 +1,4 @@
+/*//
 // This is the main class that handles all the execution of the game
 	// The actual main function will be defined in MarioApp.cpp
 #include "HFILES\Mario.h"
@@ -25,13 +26,13 @@ class Mario
 		// Initialize EVERYTHING: 
 		// ALLEGRO init!!
 		// ALLEGRO addon!! 
-					  /*al_install_keyboard();
-						al_init_image_addon();
-						al_init_font_addon();
-						al_init_ttf_addon();
-						al_init_primitives_addon();
-						al_install_audio();
-						al_init_acodec_addon();*/
+//				        al_install_keyboard();
+//						al_init_image_addon();
+//						al_init_font_addon();
+//						al_init_ttf_addon();
+//						al_init_primitives_addon();
+//						al_install_audio();
+//						al_init_acodec_addon();
 		// ALLEGRO LOAD RESOURCES!! (SOUND, FONT, IMAGES)
 		// EVENT QUEUE AND TIMER
 		// i) Display
@@ -64,3 +65,4 @@ class Mario
 		delete display;
 	}
 }; 
+//*/
