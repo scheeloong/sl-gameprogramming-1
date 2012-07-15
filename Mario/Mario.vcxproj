@@ -55,7 +55,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>allegro-5.0.6-monolith-md-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>allegro-5.0.7-monolith-md-debug.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <AdditionalLibraryDirectories>c:\allegro\lib</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
@@ -77,39 +77,43 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="cheatsheet.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="Database.cpp" />
-    <ClCompile Include="Display.cpp" />
-    <ClCompile Include="Enemy.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="mappy_A5.c" />
-    <ClCompile Include="Mario.cpp" />
-    <ClCompile Include="MarioApp.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PowerUp.cpp" />
-    <ClCompile Include="Score.cpp" />
-    <ClCompile Include="Sound.cpp" />
-    <ClCompile Include="State.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="Background.h" />
-    <ClInclude Include="Classes.h" />
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="Database.h" />
-    <ClInclude Include="Display.h" />
-    <ClInclude Include="Enemy.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="mappy_A5.h" />
-    <ClInclude Include="Mario.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="PowerUp.h" />
-    <ClInclude Include="Score.h" />
-    <ClInclude Include="Sound.h" />
-    <ClInclude Include="State.h" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Arial.ttf" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="CPPFILES\cheatsheet.cpp" />
+    <ClCompile Include="CPPFILES\Collision.cpp" />
+    <ClCompile Include="CPPFILES\Database.cpp" />
+    <ClCompile Include="CPPFILES\Display.cpp" />
+    <ClCompile Include="CPPFILES\Enemy.cpp" />
+    <ClCompile Include="CPPFILES\GameObject.cpp" />
+    <ClCompile Include="CPPFILES\Keyboard.cpp" />
+    <ClCompile Include="CPPFILES\mappy_A5.c" />
+    <ClCompile Include="CPPFILES\Mario.cpp" />
+    <ClCompile Include="CPPFILES\MarioApp.cpp" />
+    <ClCompile Include="CPPFILES\Player.cpp" />
+    <ClCompile Include="CPPFILES\PowerUp.cpp" />
+    <ClCompile Include="CPPFILES\Score.cpp" />
+    <ClCompile Include="CPPFILES\Sound.cpp" />
+    <ClCompile Include="CPPFILES\State.cpp" />
+    <ClCompile Include="CPPFILES\Timer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="CPPFILES\HFILES\Background.h" />
+    <ClInclude Include="CPPFILES\HFILES\Classes.h" />
+    <ClInclude Include="CPPFILES\HFILES\Collision.h" />
+    <ClInclude Include="CPPFILES\HFILES\Database.h" />
+    <ClInclude Include="CPPFILES\HFILES\Display.h" />
+    <ClInclude Include="CPPFILES\HFILES\Enemy.h" />
+    <ClInclude Include="CPPFILES\HFILES\GameObject.h" />
+    <ClInclude Include="CPPFILES\HFILES\Keyboard.h" />
+    <ClInclude Include="CPPFILES\HFILES\mappy_A5.h" />
+    <ClInclude Include="CPPFILES\HFILES\Mario.h" />
+    <ClInclude Include="CPPFILES\HFILES\Player.h" />
+    <ClInclude Include="CPPFILES\HFILES\PowerUp.h" />
+    <ClInclude Include="CPPFILES\HFILES\Score.h" />
+    <ClInclude Include="CPPFILES\HFILES\Sound.h" />
+    <ClInclude Include="CPPFILES\HFILES\State.h" />
+    <ClInclude Include="CPPFILES\HFILES\Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
