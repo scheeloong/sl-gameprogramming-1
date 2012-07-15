@@ -1,6 +1,10 @@
 // This class stores all the game objects in a linked list. 
-#pragma once
-#include "HFILES/Classes.h"
+
+#ifndef DATABASE_H 
+#define DATABSE_H
+//#pragma once
+
+#include "Classes.h"
 
 class Database
 {/*
@@ -28,3 +32,5 @@ class Database
 		void destroyEnemy(); 
 		void destroyPowerUps(); */
 };
+
+#endif DATABASE_H

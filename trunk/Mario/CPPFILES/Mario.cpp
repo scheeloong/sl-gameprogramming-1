@@ -9,13 +9,13 @@ class Mario
 		Display *display; 
 		Keyboard *keyboard;
 		Database *database; 
-//		Player *player;
+		Player *player;
 	public:
 	// Constructor
 		Mario()
 		{
 //			timer = new Timer(player, clocker, event_queue);
-//			player = new Player();
+			player = new Player();
 //			display = new Display(event_queue, player);
 			keyboard = new Keyboard(event_queue);
 		}
@@ -54,7 +54,7 @@ class Mario
 			display->updateDisplay(event_queue);
 			// GAME LOOP
 		}
-//		delete player;
+		delete player;
 		al_destroy_event_queue(event_queue);
 		timer->destroyTimer(clocker);
 		display->destroyDisplay();

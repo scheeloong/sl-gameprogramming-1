@@ -1,6 +1,9 @@
 // This class deals with PowerUps
 
-#pragma once
+#ifndef POWERUP_H
+#define POWERUP_H
+//#pragma once
+
 #include "Classes.h"
 #include "GameObject.h"
 
@@ -18,4 +21,5 @@ class PowerUp : public GameObject
 		// Methods	*/ 
 };
 
+#endif POWERUP_H
 //*/

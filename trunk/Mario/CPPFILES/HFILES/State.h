@@ -1,5 +1,10 @@
 // This class deals with handling the game states of the objects
-#pragma once
+
+#ifndef STATE_H
+#define STATE_H
+
+//#pragma once
+
 #include "Classes.h"
 
 class State
@@ -21,3 +26,4 @@ public:
 		// Methods
 		void changeState(State &state, State newState); */
 };
+#endif STATE_H

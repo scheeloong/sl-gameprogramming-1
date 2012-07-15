@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAMEOBJECT_H
+#define GAMEOBJECT_H
+
 #include "HFILES/Classes.h"
 #include "HFILES/State.h"
 #include "HFILES/Collision.h"
@@ -87,3 +89,4 @@ public:
 	friend class Collision; // Allow collision class to access private members of GameObject's data
 }; 
 
+#endif GAMEOBJECT_H

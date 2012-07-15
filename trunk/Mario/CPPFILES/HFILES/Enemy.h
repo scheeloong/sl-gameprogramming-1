@@ -1,4 +1,7 @@
-#pragma once
+#ifndef ENEMY_H
+#define ENEMY_H
+//#pragma once
+
 #include "Classes.h"
 #include "GameObject.h"
 
@@ -18,5 +21,6 @@ class Enemy : public GameObject
 		void takeLife(int i); // Minus i from lives
 		void addLife(int i); // add i to lives (may not be needed) */ 
 };
+#endif ENEMY_H
 //*/
 

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef PLAYER_H
+#define PLAYER_H
+//#pragma once
 #include "HFILES/Classes.h"
 #include "HFILES/GameObject.h"
 
@@ -30,4 +32,6 @@ class Player : public GameObject
 		void takeLife (int i); // Minus lives by i
 		void addLife (int i); // Add lives by i
 };
+
+#endif PLAYER_H
 //*/
