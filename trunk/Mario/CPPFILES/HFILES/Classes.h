@@ -1,7 +1,8 @@
 	// This class stores all the header files needed. 
 	// For simplicity, every header file and main function includes this class. 
 #pragma once
-
+#include <iostream>
+using namespace std; 
 // We will be using Java Conventions
 // Class name (Capital letters) EX: Mario (capital M)
 // variable/method names (small then Capital letters) EX: doSomethingHere (small d, big S and H) 
@@ -61,7 +62,7 @@
 // Input / Output  
 //===================
 #include "Display.h"
-#include <iostream>
+
 #include "Sound.h"
 
 
@@ -70,7 +71,6 @@
 //===================
 #include <list> 
 #include <set>
-using namespace std; 
 
 //===================
 // Globals
