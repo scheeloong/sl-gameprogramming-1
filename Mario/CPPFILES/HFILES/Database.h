@@ -1,10 +1,9 @@
-/*//
 // This class stores all the game objects in a linked list. 
 #pragma once
 #include "Classes.h"
 
 class Database
-{
+{/*
 	private:
 		// Create generic double linked list of GameObjects used
 		list<Player *> players; // create a double linked list of players 
@@ -27,6 +26,5 @@ class Database
 
 		void destroyPlayer();
 		void destroyEnemy(); 
-		void destroyPowerUps(); 
+		void destroyPowerUps(); */
 };
-//*/

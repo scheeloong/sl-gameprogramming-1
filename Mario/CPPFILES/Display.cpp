@@ -1,4 +1,3 @@
-/*//
 #include "HFILES/Display.h"
 
 Display::Display(ALLEGRO_EVENT_QUEUE *event_queue, Player *player)
@@ -51,4 +50,3 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue)
 			al_clear_to_color(al_map_rgb(0,0,0));
 		}
 }
-//*/

@@ -1,4 +1,3 @@
-/*//
 //
 // This class is the User_Interface file. 
 // It is used to test that the Mario Game is working
@@ -26,7 +25,3 @@ class MarioApp
 			mario.run(); 
 		}
 };
-
-
-
-//*/
