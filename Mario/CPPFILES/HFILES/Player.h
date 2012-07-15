@@ -1,6 +1,6 @@
 #pragma once
-#include "Classes.h"
 #include "HFILES/GameObject.h"
+#include "HFILES/Classes.h"
 
 class Player : public GameObject
 {

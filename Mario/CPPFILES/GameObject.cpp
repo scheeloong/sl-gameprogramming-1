@@ -1,5 +1,5 @@
 #include "HFILES/GameObject.h"
-#include <stdlib.h>
+#include <stdlib.h> // for NULL
 #include "HFILES/State.h"
 #include "HFILES/Collision.h"
 

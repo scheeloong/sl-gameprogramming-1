@@ -1,6 +1,6 @@
 // This class contains display and font initialization.
 #pragma once
-#include "Classes.h"
+#include "HFILES/Classes.h"
 
 // Main class (Mario) will have an instance of Display
 class Display
@@ -9,7 +9,7 @@ class Display
 		//string name; // keeps track of name of actor playing. 
 		ALLEGRO_DISPLAY *display; 
 		ALLEGRO_FONT *font18;
-		Player *player;
+//		Player *player;
 		// font
 		// background images? 
 		// Mappy? 
@@ -19,7 +19,7 @@ class Display
 
 	public:
 		// Constructor
-		Display(ALLEGRO_EVENT_QUEUE *event_queue, Player *player = NULL);
+//		Display(ALLEGRO_EVENT_QUEUE *event_queue, Player *player = NULL);
 		void Init(); // Gets actor's name
 		// Methods
 		//void displayMessage(int posx, int posy, string message);
