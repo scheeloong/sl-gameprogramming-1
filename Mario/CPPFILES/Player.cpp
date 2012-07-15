@@ -1,4 +1,3 @@
-#pragma once
 #include "HFILES\Player.h"
 // Constructor
 //Player::Player() : score(), lives(3) {}

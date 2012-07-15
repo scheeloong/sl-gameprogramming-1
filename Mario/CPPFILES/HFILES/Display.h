@@ -1,5 +1,9 @@
+//
 // This class contains display and font initialization.
-#pragma once
+#ifndef DISPLAY_H
+#define DISPLAY_H
+//#pragma once
+
 #include "HFILES/Classes.h"
 
 // Main class (Mario) will have an instance of Display
@@ -28,3 +32,6 @@ class Display
 		void destroyFont() {al_destroy_font(font18);}
 		void destroyDisplay() {al_destroy_display(display);}
 };
+
+#endif DISPLAY_H
+//*/

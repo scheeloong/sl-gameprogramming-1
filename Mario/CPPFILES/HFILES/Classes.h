@@ -1,11 +1,14 @@
-// This class stores all the header files needed. 
-	// For simplicity, every header file and main function includes this class. 
-#pragma once
+#ifndef CLASSES_H
+#define CLASSES_H
+
+//#pragma once
+
 //================================================================================================================
 // LATEST UPDATE: NO IDEA WHY SOMETIMES INCLUDE USING "HFILES/CLassname" whereas now needs "Classname" directly
 // Suspecting error comes from the way pragma once is used. 
 // Trying out including files needed in each H File instead of here. 
 // FOr now, this class is for allegro includes and globals only 
+// NOTE: THE ORDER WHICH YOU INCLUDE STUFF MATTERS!! INCLUDE WHATEVER THAT IS INDEPENDENT FIRST!!
 //================================================================================================================
 
 // We will be using Java Conventions
@@ -19,8 +22,7 @@
 
 // SelfNote: I may be making too many classes.. Classes like Score may not be needed.. We'll see. 
 
-// NOTE: THE ORDER WHICH YOU INCLUDE STUFF MATTERS!! INCLUDE WHATEVER THAT IS INDEPENDENT FIRST!!
-
+#include <stdlib.h>
 //==========================
 // Allegro 5 
 //==========================
@@ -35,7 +37,7 @@
 #include <allegro5\allegro_audio.h> 
 #include <allegro5\allegro_acodec.h>
 // Mappy
-#include "mappy_A5.h"
+#include "HFILES/mappy_A5.h"
 
 //#include "HFILES/Database.h" // shifted from below in case order matters. 
 
@@ -63,14 +65,12 @@
 ALLEGRO_EVENT_QUEUE *event_queue = al_create_event_queue();
 ALLEGRO_TIMER *clocker = NULL;
 
-
 //===================
 // Input / Output  
 //===================
-
 #include <iostream>
 using namespace std; 
-#include <stdlib.h>
+
 /*
 #include "HFILES/Display.h"
 #include "HFILES/Keyboard.h"
@@ -111,4 +111,4 @@ enum ID{PLAYER, ENEMY, BULLET, BORDER, MISC, EXPLOSION};
 enum GAMESTATES{INTRO, MENU, PLAY, GAMEOVER};
 enum KEYS{UP, DOWN, LEFT, RIGHT, SPACE};
 
-
+#endif CLASSES_H

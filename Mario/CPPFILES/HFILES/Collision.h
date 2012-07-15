@@ -1,17 +1,21 @@
 // This class deals with collisions
-#pragma once
-#include "HFILES/Classes.h"
+#ifndef COLLISION_H
+#define COLLISION_H
+//#pragma once
+//#include "HFILES/Player.h" // include player cause no idea how pragma once works, it did not allow collision to re-include GameObject
 #include "HFILES/GameObject.h"
 
 class Collision
 {
-	// TEMPORARY
+// TEMPORARY (start)
 private:
 	int i;
 public:
 	Collision() : i(0) {}
-//bool superCheckCollision(GameObject *object1, GameObject *object2); // may need to change to &object1 , &object2
-	
+
+//bool superCheckCollision(GameObject &object1, GameObject &object2); // may need to change to &object1 , &object2
+// TEMPORARY (end)
+
 /*
 	private:
 		int *BoundX; // an array
@@ -60,3 +64,5 @@ public:
 				return false;
 		}*/
 };
+
+#endif

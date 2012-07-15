@@ -1,4 +1,3 @@
-#pragma once
 #include "HFILES/GameObject.h"
 // Defining Methods
 GameObject::GameObject()
