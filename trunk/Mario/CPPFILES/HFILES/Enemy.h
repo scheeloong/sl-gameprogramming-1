@@ -1,7 +1,6 @@
 #pragma once
-#include "HFILES/GameObject.h"
-#include "HFILES/Classes.h"
-
+#include "Classes.h"
+#include "GameObject.h"
 
 class Enemy : public GameObject
 {/*
@@ -17,6 +16,7 @@ class Enemy : public GameObject
 
 		// Methods
 		void takeLife(int i); // Minus i from lives
-		void addLife(int i); // add i to lives (may not be needed) */
+		void addLife(int i); // add i to lives (may not be needed) */ 
 };
+//*/
 

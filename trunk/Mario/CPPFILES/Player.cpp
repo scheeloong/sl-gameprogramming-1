@@ -1,4 +1,5 @@
-#include "HFILES/Player.h"
+#pragma once
+#include "HFILES\Player.h"
 // Constructor
 //Player::Player() : score(), lives(3) {}
 
@@ -13,6 +14,7 @@ void Player::addLife (int i)
 	lives += i; 
 }
 
+
 Player::Player(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, /*State state, Collision col,*/ bool alive,
 		bool render, int lives)
 {
@@ -21,3 +23,4 @@ Player::Player(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BIT
 		addLife(lives); 
 }
 
+//*/

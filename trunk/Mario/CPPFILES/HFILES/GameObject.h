@@ -1,6 +1,8 @@
 #pragma once
 #include "HFILES/Classes.h"
-
+#include "HFILES/State.h"
+#include "HFILES/Collision.h"
+//#include <stdlib.h> // for NULL (might not be needed since defined in Classes.h
 class GameObject 
 {
 protected: 
