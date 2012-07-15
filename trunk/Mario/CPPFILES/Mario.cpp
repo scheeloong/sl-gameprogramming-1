@@ -1,6 +1,6 @@
 // This is the main class that handles all the execution of the game
 	// The actual main function will be defined in MarioApp.cpp
-#include "Mario.h" 
+#include "HFILES\Mario.h"
 
 class Mario
 {

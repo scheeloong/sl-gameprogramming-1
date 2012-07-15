@@ -1,4 +1,4 @@
-#include "GameObject.h"
+#include "HFILES/GameObject.h"
 
 // Defining Methods
 GameObject::GameObject()

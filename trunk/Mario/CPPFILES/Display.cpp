@@ -1,4 +1,4 @@
-#include "Display.h"
+#include "HFILES/Display.h"
 
 Display::Display(ALLEGRO_EVENT_QUEUE *event_queue, Player *player)
 //Department(Teacher *pcTeacher=NULL) : m_pcTeacher(pcTeacher)

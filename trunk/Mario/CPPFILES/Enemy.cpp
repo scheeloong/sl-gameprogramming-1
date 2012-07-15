@@ -1,4 +1,4 @@
-#include "Enemy.h"
+#include "HFILES/Enemy.h"
 
 Enemy::Enemy() : GameObject::GameObject(), lives(1) {}; // normal enemy has 1 live only 
 Enemy::Enemy(int lives) : GameObject::GameObject(), lives(lives) {}; // Boss enemy has >1 live 
