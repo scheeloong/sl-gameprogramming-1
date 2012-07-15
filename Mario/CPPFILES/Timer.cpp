@@ -1,5 +1,5 @@
 #pragma once
-#include "Timer.h"
+#include "HFILES/Timer.h"
 
 Timer::Timer(Player *player, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *event_queue)
 {
