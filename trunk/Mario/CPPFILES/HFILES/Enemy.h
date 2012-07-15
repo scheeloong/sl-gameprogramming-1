@@ -1,6 +1,7 @@
 #pragma once
-#include "Classes.h"
 #include "HFILES/GameObject.h"
+#include "HFILES/Classes.h"
+
 
 class Enemy : public GameObject
 {/*
@@ -13,7 +14,6 @@ class Enemy : public GameObject
 
 		Enemy(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, State state, Collision col, bool alive,
 			bool render, int lives); 
-
 
 		// Methods
 		void takeLife(int i); // Minus i from lives

@@ -13,6 +13,8 @@
 
 // SelfNote: I may be making too many classes.. Classes like Score may not be needed.. We'll see. 
 
+// NOTE: THE ORDER WHICH YOU INCLUDE STUFF MATTERS!! INCLUDE WHATEVER THAT IS INDEPENDENT FIRST!!
+
 //==========================
 // Allegro 5 
 //==========================
@@ -27,10 +29,12 @@
 #include <allegro5\allegro_audio.h> 
 #include <allegro5\allegro_acodec.h>
 // Mappy
-#include "mappy_A5.h"
+#include "HFILES/mappy_A5.h"
 
 //TODO: Include all the allegro 5 header files
 
+
+#include "HFILES/Database.h" // shifted from below in case order matters. 
 //=======================
 // Game Objects Files 
 //=======================
@@ -43,19 +47,19 @@
 // Collision Files 
 //====================
 #include "HFILES/Collision.h"
-#include "State.h"
-#include "Score.h"
-#include "Database.h"
+#include "HFILES/State.h"
+#include "HFILES/Score.h"
+//#include "HFILES/Database.h"
 ALLEGRO_EVENT_QUEUE *event_queue = al_create_event_queue();
 ALLEGRO_TIMER *clocker = NULL;
 //===================
 // Input / Output  
 //===================
-#include "Display.h"
-#include "Keyboard.h"
-#include "Timer.h"
+#include "HFILES/Display.h"
+#include "HFILES/Keyboard.h"
+#include "HFILES/Timer.h"
 #include <iostream>
-#include "Sound.h"
+#include "HFILES/Sound.h"
 #include <stdlib.h>
 //===================
 // Databases

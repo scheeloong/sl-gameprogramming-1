@@ -1,7 +1,7 @@
 // This class deals with PowerUps
 #pragma once
-#include "Classes.h"
-#include "HFILES/GameObjects.h"
+#include "HFILES/Classes.h"
+#include "HFILES/GameObject.h"
 
 
 class PowerUp : public GameObject

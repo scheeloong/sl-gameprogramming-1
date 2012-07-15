@@ -14,9 +14,9 @@ class Mario
 	// Constructor
 		Mario()
 		{
-			timer = new Timer(player, clocker, event_queue);
+//			timer = new Timer(player, clocker, event_queue);
 			player = new Player();
-			display = new Display(event_queue, player);
+//			display = new Display(event_queue, player);
 			keyboard = new Keyboard(event_queue);
 		}
 	// Methods

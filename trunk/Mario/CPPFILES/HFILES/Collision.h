@@ -1,6 +1,6 @@
 // This class deals with collisions
 #pragma once
-#include "Classes.h"
+#include "HFILES/Classes.h"
 
 class Collision
 {
