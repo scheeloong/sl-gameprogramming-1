@@ -1,4 +1,3 @@
-/*//
 #pragma once
 #include "HFILES/Timer.h"
 
@@ -38,4 +37,3 @@ void Timer::updateTimer(ALLEGRO_EVENT &ev)
 			}
 		}
 }
-//*/

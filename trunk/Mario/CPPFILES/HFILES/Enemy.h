@@ -1,9 +1,8 @@
-/*//
 #pragma once
 #include "Classes.h"
 
 class Enemy : public GameObject
-{
+{/*
 	private:
 		int lives; // BOSS ENEMY has > 1 life
 	public:
@@ -17,7 +16,6 @@ class Enemy : public GameObject
 
 		// Methods
 		void takeLife(int i); // Minus i from lives
-		void addLife(int i); // add i to lives (may not be needed) 
+		void addLife(int i); // add i to lives (may not be needed) */
 };
-//*/
 

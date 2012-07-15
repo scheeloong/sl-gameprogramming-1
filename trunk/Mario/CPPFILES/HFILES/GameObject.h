@@ -1,4 +1,3 @@
-/*//
 #pragma once
 #include "Classes.h"
 
@@ -21,16 +20,16 @@ protected:
 	ALLEGRO_BITMAP *image; 
 
 	// State
-	State state; 
+	//State state; 
 	// Collision
-	Collision col; 
+//	Collision col; 
 	bool collidable; // if it is collidable, set collidable to true
 
 	// Alive and Draw? 
 	bool alive; 
 	bool render; 
 
-	friend Collision; // Allow collision class to access private members of GameObject's data
+	//friend Collision; // Allow collision class to access private members of GameObject's data
 
 	/*
 	// Animations
@@ -49,7 +48,7 @@ public:
 	GameObject();
 
 	// Method for constructor (more specific) 
-	void Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, State state, Collision col,
+	void Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, /*State state, Collision col,*/
 		 bool alive, bool render); 
 
 	//===============================
@@ -84,5 +83,4 @@ public:
 		// Virtual cause different objects have different update methods
 	// Destructor (will need to handle in some special way due to multiple inheritance) 
 }; 
-//*/
 

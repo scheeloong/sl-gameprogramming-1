@@ -1,4 +1,3 @@
-/*//
 #pragma once
 #include "Classes.h"
 
@@ -12,7 +11,8 @@ class Player : public GameObject
 
 	public: 
 		// Constructor (automatically calls parent's no-argument constructor by default) 
-		Player();
+		Player(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, /*State state, Collision col,*/ bool alive,
+		bool render, int lives);
 		//Player() : score(), lives(3) {};
 
 		void moveUp() {setY(y -= velY);};
@@ -25,4 +25,3 @@ class Player : public GameObject
 		void takeLife (int i); // Minus lives by i
 		void addLife (int i); // Add lives by i
 };
-//*/

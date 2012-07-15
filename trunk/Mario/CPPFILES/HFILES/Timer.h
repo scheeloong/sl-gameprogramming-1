@@ -1,6 +1,5 @@
-/*//
 #pragma once
-#include "Classes.h"
+#include "HFILES/Classes.h"
 
 class Timer
 {
@@ -14,4 +13,3 @@ public:
 	void updateTimer(ALLEGRO_EVENT &ev);
 	void destroyTimer(ALLEGRO_TIMER *timer) {al_destroy_timer(timer);}
 };
-//*/

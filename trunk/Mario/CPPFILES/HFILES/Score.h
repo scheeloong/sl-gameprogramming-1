@@ -1,10 +1,9 @@
-/*//
 // This class deals with keeping track of scores of the players
 #pragma once
 #include "Classes.h"
 
 class Score
-{
+{/*
 	private:
 		int score; 
 		int highestScore; // Keep track of highest score
@@ -21,6 +20,5 @@ class Score
 
 		// Methods
 		void displayScore(); // Use Display class to display score
-		void updateScore(); // Update own score
+		void updateScore(); // Update own score*/
 };
-//*/

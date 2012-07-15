@@ -1,4 +1,3 @@
-/*//
 #include "HFILES/GameObject.h"
 
 // Defining Methods
@@ -15,7 +14,7 @@ GameObject::GameObject()
 }
 
 // Initializing
-void GameObject::Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, State state, Collision col,
+void GameObject::Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, /*State state, Collision col,*/
 		bool alive, bool render)
 {
 	setX(x); 
@@ -35,4 +34,3 @@ bool GameObject::checkCollision(GameObject *object2)
 {
 	return col.superCheckCollision(this, object2); 
 }
-//*/

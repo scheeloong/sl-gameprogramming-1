@@ -1,11 +1,9 @@
-/*// This class deals with collisions
+// This class deals with collisions
 #pragma once
 #include "Classes.h"
-#include <iostream> 
-using namespace std;
 
 class Collision
-{
+{/*
 	private:
 		int *BoundX; // an array
 		int *BoundY;
@@ -51,6 +49,5 @@ class Collision
 				return true;
 			else
 				return false;
-		}
+		}*/
 };
-//*/
