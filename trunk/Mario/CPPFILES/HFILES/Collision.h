@@ -3,7 +3,15 @@
 #include "Classes.h"
 
 class Collision
-{/*
+{
+	// TEMPORARY
+private:
+	int i;
+public:
+	Collision() : i(0) {}
+bool superCheckCollision(GameObject *object1, GameObject *object2); // may need to change to &object1 , &object2
+	
+/*
 	private:
 		int *BoundX; // an array
 		int *BoundY;

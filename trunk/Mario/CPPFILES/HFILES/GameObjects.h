@@ -1,7 +1,7 @@
 #pragma once
 #include "HFILES/Classes.h"
 
-class GameObject 
+class GameObjects
 {
 protected: 
 	// Type of Game Object
@@ -43,7 +43,7 @@ int x;
 
 public:
 	// Constructor
-	GameObject();
+	GameObjects();
 
 	// Method for constructor (more specific) 
 	void Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, /*State state, Collision col,*/
@@ -75,7 +75,7 @@ public:
 	int getSpecies() {return species;}
 
 	// Methods
-	bool checkCollision(GameObject *object2);   // Returns true if there is collision
+	bool checkCollision(GameObjects *object2);   // Returns true if there is collision
 
 	virtual void update(); // update GameObject's position, vel, dir, image etc..
 		// Virtual cause different objects have different update methods

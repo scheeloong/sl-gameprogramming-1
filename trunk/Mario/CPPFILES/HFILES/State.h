@@ -3,7 +3,14 @@
 #include "Classes.h"
 
 class State
-{/*
+{
+private: 
+	int i;
+public:
+	State() : i(0) {}
+	
+
+/*
 	private:
 		enum modes{NORMAL, STRONG, SUPER, DEAD};
 		int state; 

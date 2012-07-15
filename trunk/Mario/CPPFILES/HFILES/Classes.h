@@ -34,15 +34,15 @@
 //=======================
 // Game Objects Files 
 //=======================
-#include "GameObject.h"
-#include "Player.h"
-#include "Enemy.h"
-#include "PowerUp.h"
+#include "HFILES/GameObject.h"
+#include "HFILES/Player.h"
+#include "HFILES/Enemy.h"
+#include "HFILES/PowerUp.h"
 
 //====================
 // Collision Files 
 //====================
-#include "Collision.h"
+#include "HFILES/Collision.h"
 #include "State.h"
 #include "Score.h"
 #include "Database.h"
@@ -56,7 +56,7 @@ ALLEGRO_TIMER *clocker = NULL;
 #include "Timer.h"
 #include <iostream>
 #include "Sound.h"
-
+#include <stdlib.h>
 //===================
 // Databases
 //===================
