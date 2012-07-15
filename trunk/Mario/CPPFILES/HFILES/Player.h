@@ -31,6 +31,8 @@ class Player : public GameObject
 		int getLife() {return lives;};
 		void takeLife (int i); // Minus lives by i
 		void addLife (int i); // Add lives by i
+
+		 void update();
 };
 
 #endif PLAYER_H

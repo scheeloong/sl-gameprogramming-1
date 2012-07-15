@@ -1,7 +1,7 @@
-#ifndef CLASSES_H
-#define CLASSES_H
+//#ifndef CLASSES_H
+//#define CLASSES_H
 
-//#pragma once
+#pragma once
 
 //================================================================================================================
 // LATEST UPDATE: NO IDEA WHY SOMETIMES INCLUDE USING "HFILES/CLassname" whereas now needs "Classname" directly
@@ -62,8 +62,8 @@
 #include "HFILES/Score.h"
 //#include "HFILES/Database.h"
 */
-ALLEGRO_EVENT_QUEUE *event_queue = al_create_event_queue();
-ALLEGRO_TIMER *clocker = NULL;
+static ALLEGRO_EVENT_QUEUE *event_queue = al_create_event_queue();
+static ALLEGRO_TIMER *clocker = NULL;
 
 //===================
 // Input / Output  
@@ -90,25 +90,25 @@ using namespace std;
 // our user defined width and height that the Mario depends on, might not be const
 //const int SLWIDTH, STARTWIDTH, ENDWIDTH;  
 //const int SLHEIGHT, STARTHEIGHT, ENDHEIGHT; 
-bool done = false;
-bool redraw = false;
+static bool done = false;
+static bool redraw = false;
 //only truified when player lives are over.
-bool isGameOver = false;
+static bool isGameOver = false;
 
 //TODO: Include our formula to defined our own width and height later
 
 // The actual width and height of the screen
-const int WIDTH = 600; 
-const int HEIGHT = 800; 
+static const int WIDTH = 600; 
+static const int HEIGHT = 800; 
 
 // These will be updated between Keyboard and Timer classes
-bool keys[] = {false, false, false, false, false};
-bool lock[] = {false, false, false, false, false};
+static bool keys[] = {false, false, false, false, false};
+static bool lock[] = {false, false, false, false, false};
 
 
 // To be updated later
-enum ID{PLAYER, ENEMY, BULLET, BORDER, MISC, EXPLOSION};
-enum GAMESTATES{INTRO, MENU, PLAY, GAMEOVER};
-enum KEYS{UP, DOWN, LEFT, RIGHT, SPACE};
+static enum ID{PLAYER, ENEMY, BULLET, BORDER, MISC, EXPLOSION};
+static enum GAMESTATES{INTRO, MENU, PLAY, GAMEOVER};
+static enum KEYS{UP, DOWN, LEFT, RIGHT, SPACE};
 
-#endif CLASSES_H
+//#endif CLASSES_H

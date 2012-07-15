@@ -22,4 +22,9 @@ Player::Player(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BIT
 		addLife(lives); 
 }
 
+void Player::update()
+{
+	printf("Update Players");
+}
+
 //*/

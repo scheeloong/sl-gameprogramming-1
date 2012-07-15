@@ -3,7 +3,7 @@
 #define COLLISION_H
 //#pragma once
 //#include "HFILES/Player.h" // include player cause no idea how pragma once works, it did not allow collision to re-include GameObject
-#include "HFILES/GameObject.h"
+#include "GameObject.h"
 
 class Collision
 {

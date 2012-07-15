@@ -1,7 +1,7 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-#include "HFILES/Classes.h"
+//#include "HFILES/Classes.h"
 #include "HFILES/State.h"
 #include "HFILES/Collision.h"
 //#include <stdlib.h> // for NULL (might not be needed since defined in Classes.h
@@ -81,8 +81,12 @@ public:
 	// Methods
 	bool checkCollision(GameObject *object2);   // Returns true if there is collision
 
-	virtual void update(); // update GameObject's position, vel, dir, image etc..
-		// Virtual cause different objects have different update methods
+	virtual void update() //;
+	{
+		printf("Gameobject Update");
+	}
+	// update GameObject's position, vel, dir, image etc..
+	// Virtual cause different objects have different update methods
 	// Destructor (will need to handle in some special way due to multiple inheritance) 
 	
 	// Friend Class
