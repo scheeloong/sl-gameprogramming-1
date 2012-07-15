@@ -5,6 +5,7 @@
 //#pragma once
 
 #include "HFILES/Classes.h"
+#include "HFILES/Player.h"
 
 // Main class (Mario) will have an instance of Display
 class Display
@@ -13,7 +14,7 @@ class Display
 		//string name; // keeps track of name of actor playing. 
 		ALLEGRO_DISPLAY *display; 
 		ALLEGRO_FONT *font18;
-//		Player *player;
+		Player *player;
 		// font
 		// background images? 
 		// Mappy? 
@@ -23,10 +24,10 @@ class Display
 
 	public:
 		// Constructor
-//		Display(ALLEGRO_EVENT_QUEUE *event_queue, Player *player = NULL);
+		Display(ALLEGRO_EVENT_QUEUE *event_queue, Player *player = NULL);
 		void Init(); // Gets actor's name
 		// Methods
-		//void displayMessage(int posx, int posy, string message);
+		void displayMessage(int posx, int posy, string message);
 		void inputName(); // Get's actor's name and inputs into game for high score. 
 		void updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue);
 		void destroyFont() {al_destroy_font(font18);}

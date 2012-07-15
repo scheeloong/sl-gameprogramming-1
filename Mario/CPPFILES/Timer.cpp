@@ -1,7 +1,7 @@
 #pragma once
 #include "HFILES/Timer.h"
 
-/*
+
 Timer::Timer(Player *player, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *event_queue)
 {
 	Timer::player = player;
@@ -39,4 +39,3 @@ void Timer::updateTimer(ALLEGRO_EVENT &ev)
 			}
 		}
 }
-*/

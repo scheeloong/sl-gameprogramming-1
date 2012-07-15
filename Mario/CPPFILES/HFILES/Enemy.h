@@ -2,7 +2,7 @@
 #define ENEMY_H
 //#pragma once
 
-#include "Classes.h"
+//#include "Classes.h"
 #include "GameObject.h"
 
 class Enemy : public GameObject
