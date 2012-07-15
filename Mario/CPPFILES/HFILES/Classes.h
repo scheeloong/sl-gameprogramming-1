@@ -1,6 +1,12 @@
 // This class stores all the header files needed. 
 	// For simplicity, every header file and main function includes this class. 
 #pragma once
+//================================================================================================================
+// LATEST UPDATE: NO IDEA WHY SOMETIMES INCLUDE USING "HFILES/CLassname" whereas now needs "Classname" directly
+// Suspecting error comes from the way pragma once is used. 
+// Trying out including files needed in each H File instead of here. 
+// FOr now, this class is for allegro includes and globals only 
+//================================================================================================================
 
 // We will be using Java Conventions
 // Class name (Capital letters) EX: Mario (capital M)
@@ -29,43 +35,53 @@
 #include <allegro5\allegro_audio.h> 
 #include <allegro5\allegro_acodec.h>
 // Mappy
-#include "HFILES/mappy_A5.h"
+#include "mappy_A5.h"
 
-//TODO: Include all the allegro 5 header files
+//#include "HFILES/Database.h" // shifted from below in case order matters. 
 
-
-#include "HFILES/Database.h" // shifted from below in case order matters. 
 //=======================
 // Game Objects Files 
 //=======================
+
+/*
 #include "HFILES/GameObject.h"
 #include "HFILES/Player.h"
 #include "HFILES/Enemy.h"
 #include "HFILES/PowerUp.h"
+*/
 
 //====================
 // Collision Files 
 //====================
+
+/*
 #include "HFILES/Collision.h"
 #include "HFILES/State.h"
 #include "HFILES/Score.h"
 //#include "HFILES/Database.h"
+*/
 ALLEGRO_EVENT_QUEUE *event_queue = al_create_event_queue();
 ALLEGRO_TIMER *clocker = NULL;
+
+
 //===================
 // Input / Output  
 //===================
+
+#include <iostream>
+using namespace std; 
+#include <stdlib.h>
+/*
 #include "HFILES/Display.h"
 #include "HFILES/Keyboard.h"
 #include "HFILES/Timer.h"
-#include <iostream>
 #include "HFILES/Sound.h"
-#include <stdlib.h>
+*/
+
 //===================
 // Databases
 //===================
 #include <list> 
-using namespace std; 
 
 //===================
 // Globals

@@ -1,5 +1,5 @@
 #ifdef __cplusplus
-#error "Hey, stop compiling mappyal.c as C++!, see MappyAL readme.txt"
+//#error "Hey, stop compiling mappyal.c as C++!, see MappyAL readme.txt"
 #endif
 
 #include <stdio.h>

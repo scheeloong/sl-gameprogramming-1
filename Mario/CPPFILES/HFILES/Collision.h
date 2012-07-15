@@ -1,6 +1,7 @@
 // This class deals with collisions
 #pragma once
 #include "HFILES/Classes.h"
+#include "HFILES/GameObject.h"
 
 class Collision
 {
@@ -9,7 +10,7 @@ private:
 	int i;
 public:
 	Collision() : i(0) {}
-bool superCheckCollision(GameObject *object1, GameObject *object2); // may need to change to &object1 , &object2
+//bool superCheckCollision(GameObject *object1, GameObject *object2); // may need to change to &object1 , &object2
 	
 /*
 	private:
