@@ -1,3 +1,4 @@
+/*//
 #pragma once
 #include "Classes.h"
 
@@ -83,5 +84,5 @@ public:
 		// Virtual cause different objects have different update methods
 	// Destructor (will need to handle in some special way due to multiple inheritance) 
 }; 
-
+//*/
 

@@ -1,3 +1,4 @@
+/*//
 #pragma once
 #include "HFILES/Timer.h"
 
@@ -20,15 +21,15 @@ void Timer::updateTimer(ALLEGRO_EVENT &ev)
 			else if(keys[DOWN] && !lock[DOWN])
 				player->moveDown();
 			//animations for later
-			/*else
-				ResetShipAnimation(ship, 1);*/
+			//else
+			//	ResetShipAnimation(ship, 1);
 
 			if(keys[LEFT] && !lock[LEFT])
 				player->moveLeft();
 			else if(keys[RIGHT] && !lock[RIGHT])
 				player->moveRight();
-			/*else
-				ResetShipAnimation(ship, 2);*/
+			//else
+			//	ResetShipAnimation(ship, 2);
 
 			if(!isGameOver)
 			{
@@ -37,3 +38,4 @@ void Timer::updateTimer(ALLEGRO_EVENT &ev)
 			}
 		}
 }
+//*/

@@ -1,3 +1,4 @@
+/*//
 // This class deals with keeping track of scores of the players
 #pragma once
 #include "Classes.h"
@@ -22,3 +23,4 @@ class Score
 		void displayScore(); // Use Display class to display score
 		void updateScore(); // Update own score
 };
+//*/

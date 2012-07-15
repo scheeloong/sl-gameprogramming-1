@@ -1,7 +1,6 @@
+/*//
 #include "HFILES/State.h"
-
 // defining methods
-//*/
 
 State::State()
 {
@@ -18,3 +17,4 @@ void State::changeState(State &state, State newState)
 
 	// Leaving state 
 }
+//*/

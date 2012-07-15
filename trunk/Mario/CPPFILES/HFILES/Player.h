@@ -1,3 +1,4 @@
+/*//
 #pragma once
 #include "Classes.h"
 
@@ -24,3 +25,4 @@ class Player : public GameObject
 		void takeLife (int i); // Minus lives by i
 		void addLife (int i); // Add lives by i
 };
+//*/

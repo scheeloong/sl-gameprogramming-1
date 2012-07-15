@@ -1,3 +1,4 @@
+/*//
 #include "HFILES/Display.h"
 
 Display::Display(ALLEGRO_EVENT_QUEUE *event_queue, Player *player)
@@ -15,19 +16,19 @@ Display::Display(ALLEGRO_EVENT_QUEUE *event_queue, Player *player)
 	font18 = al_load_font("arial.ttf", 18, 0);
 }
 
-/*void Display::Init()
-{
-	//modify this to print to display. 
-	cout << "Please enter your name: " << endl;
-	cin >> name;
-	cout << "Hi, " << name << " !" << endl;
-}
+//void Display::Init()
+//{
+//	//modify this to print to display. 
+//	cout << "Please enter your name: " << endl;
+//	cin >> name;
+//	cout << "Hi, " << name << " !" << endl;
+//}
 
-void Display::displayMessage(int posx, int posy, string message) // Display message at x and y position of screen
-{
-	//why does this work? try message..c_str()
-	al_draw_textf(font18, al_map_rgb(255, 255, 255), posx, posy, 0, "%s", message);
-}*/
+//void Display::displayMessage(int posx, int posy, string message) // Display message at x and y position of screen
+//{
+//	//why does this work? try message..c_str()
+//	al_draw_textf(font18, al_map_rgb(255, 255, 255), posx, posy, 0, "%s", message);
+//}
 
 void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue)
 {
@@ -50,3 +51,4 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue)
 			al_clear_to_color(al_map_rgb(0,0,0));
 		}
 }
+//*/

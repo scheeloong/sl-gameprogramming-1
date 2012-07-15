@@ -1,3 +1,4 @@
+/*//
 #include "HFILES/GameObject.h"
 
 // Defining Methods
@@ -34,3 +35,4 @@ bool GameObject::checkCollision(GameObject *object2)
 {
 	return col.superCheckCollision(this, object2); 
 }
+//*/

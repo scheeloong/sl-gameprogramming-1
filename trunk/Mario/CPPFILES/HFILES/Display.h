@@ -1,3 +1,4 @@
+/*//
 // This class contains display and font initialization.
 #pragma once
 #include "Classes.h"
@@ -29,3 +30,4 @@ class Display
 		void destroyFont() {al_destroy_font(font18);}
 		void destroyDisplay() {al_destroy_display(display);}
 };
+//*/
