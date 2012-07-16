@@ -7,6 +7,8 @@
 #include "HFILES/Classes.h"
 #include "HFILES/Player.h"
 
+extern bool done;
+extern bool render;
 // Main class (Mario) will have an instance of Display
 class Display
 {

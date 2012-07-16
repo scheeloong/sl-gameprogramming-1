@@ -2,7 +2,6 @@
 
 void Keyboard::updateKeyboard(ALLEGRO_EVENT *ev)
 {
-	cout << "updating keyboard" <<endl;
 	if(ev->type == ALLEGRO_EVENT_KEY_DOWN)
 	{
 		switch(ev->keyboard.keycode)
