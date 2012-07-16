@@ -4,20 +4,21 @@
 
 class Mario
 {
-	private:
+public:
 		Timer *timer;
 		Display *display; 
 		Keyboard *keyboard;
-		Database *database; 
+		//Database *database; 
 		Player *player;
-	public:
+		static ALLEGRO_EVENT_QUEUE *event_queue;
+		static ALLEGRO_TIMER *clocker;
 	// Constructor
 		Mario()
 		{
-//			timer = new Timer(player, clocker, event_queue);
 			player = new Player();
-//			display = new Display(event_queue, player);
-			keyboard = new Keyboard(event_queue);
+			timer = new Timer(player, clocker, event_queue);
+			display = new Display(event_queue, player);
+			keyboard = new Keyboard(event_queue);			
 		}
 	// Methods
 	void run() 
@@ -44,6 +45,7 @@ class Mario
 		// This function handles everything, it is used to run the whole game. 
 		// the game loop is contained in here
 		// Keyboard NOTE: delete keyboard at end.
+		
 		al_start_timer(clocker);
 		while(!done)
 		{
