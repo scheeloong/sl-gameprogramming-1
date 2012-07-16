@@ -3,10 +3,10 @@
 #ifndef DISPLAY_H
 #define DISPLAY_H
 //#pragma once
-
 #include "HFILES/Classes.h"
 #include "HFILES/Player.h"
 
+//only truified when player lives are over.
 // Main class (Mario) will have an instance of Display
 class Display
 {

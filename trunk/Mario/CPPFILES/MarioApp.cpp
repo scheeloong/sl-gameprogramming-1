@@ -16,22 +16,12 @@
 // where main function is
 //===================================
 
-void sleep(long d)
-{
-	clock_t start = clock();
-	while(clock() - start < d); ///loop until time's up
-}
 	Mario *mario = new Mario();
-	
 	
 // currently infinite loop before anything even happens
 int main()
-{
-	__EXTERN(bool , done, false);
-	__EXTERN(bool , redraw, false);
-	__EXTERN(bool , isGameOver, false);
+{	
 	printf("hahahaa\n");
-	//sleep(1000000000000000);	
 	mario->run();
 	return 0;
 }

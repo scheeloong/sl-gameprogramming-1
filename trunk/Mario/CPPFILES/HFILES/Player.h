@@ -21,10 +21,10 @@ class Player : public GameObject
 		// TEMPORARY CONSTRUCTOR
 		//Player() : lives(3) {}; 
 
-		void moveUp() {setY(y -= velY);};
-		void moveDown() {setY(y += velY);};
-		void moveLeft() {setX(x -= velX);};
-		void moveRight() {setX(x += velX);}; 
+		void moveUp() {y -= velY;}
+		void moveDown() {y += velY;}
+		void moveLeft() {setX(x -= velX);}
+		void moveRight() {setX(x += velX);}
 
 		// Methods
 		//int getLife() {return lives;};
