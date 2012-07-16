@@ -2,7 +2,6 @@
 	// The actual main function will be defined in MarioApp.cpp
 #include "HFILES\Mario.h"
 
-
 class Mario
 {
 public:
@@ -11,7 +10,7 @@ public:
 		Keyboard *keyboard;
 		//Database *database; 
 		Player *player;
-		//static ALLEGRO_DISPLAY *display;
+		Background *background;
 	// Constructor
 		Mario()
 		{
@@ -23,6 +22,7 @@ public:
 			timer = new Timer(player);
 			screen = new Display(player);
 			keyboard = new Keyboard();
+			background = new Background();
 		}
 	// Methods
 	int run() 
@@ -58,11 +58,14 @@ public:
 		event_queue = al_create_event_queue();
 		al_register_event_source(event_queue, al_get_display_event_source(display));
 
+		
+
 		al_install_keyboard();
+		al_init_image_addon();
 		al_register_event_source(event_queue, al_get_keyboard_event_source());
 
-
-
+		//if(MapLoad("50x50.fmp", 1))
+			//return(-5); 
 		clocker = al_create_timer(1.0/FPS);
 		srand(time(NULL));
 		al_register_event_source(event_queue, al_get_timer_event_source(clocker));
@@ -81,7 +84,7 @@ public:
 		timer->destroyTimer(clocker);
 		//screen->destroyDisplay();
 		screen->destroyFont();
-		
+		MapFreeMem();
 		delete timer; 
 		delete keyboard;
 		delete screen;

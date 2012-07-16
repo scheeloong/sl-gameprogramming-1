@@ -37,7 +37,7 @@
 #include <allegro5\allegro_audio.h> 
 #include <allegro5\allegro_acodec.h>
 // Mappy
-//#include "HFILES/mappy_A5.h"
+#include "HFILES/mappy_A5.h"
 
 //#include "HFILES/Database.h" // shifted from below in case order matters. 
 
@@ -99,7 +99,8 @@ using namespace std;
 __EXTERN(bool , done, false);
 __EXTERN(bool , redraw, false);
 __EXTERN(bool , isGameOver, false);*/
-
+ 
+#define MODE GFX_AUTODETECT_WINDOWED
 extern bool done;
 extern bool redraw;
 extern bool isGameOver;
@@ -117,7 +118,8 @@ static ALLEGRO_TIMER *clocker = NULL;
 // These will be updated between Keyboard and Timer classes
 extern bool keys[5];
 extern bool lock[5];
-
+extern int xOff;
+extern int yOff;
 // To be updated later
 static enum ID{PLAYER, ENEMY, BULLET, BORDER, MISC, EXPLOSION};
 static enum GAMESTATES{INTRO, MENU, PLAY, GAMEOVER};

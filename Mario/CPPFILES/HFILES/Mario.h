@@ -8,4 +8,5 @@
 #include "HFILES\Display.h"
 #include "HFILES\Keyboard.h"
 #include "HFILES\Database.h"
+#include "HFILES\Background.h"
 #endif MARIO_H
