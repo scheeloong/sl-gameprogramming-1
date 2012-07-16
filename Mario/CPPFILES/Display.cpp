@@ -5,6 +5,7 @@ bool redraw = false;
 bool isGameOver = false;
 bool keys[] = {false, false, false, false, false};
 bool lock[] = {false, false, false, false, false};
+
 Display::Display(Player *player)
 {
 	//kill this soon
@@ -53,7 +54,6 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 			{
 			//When Mario dies, execute here.
 			}
-
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0,0,0));
 		}

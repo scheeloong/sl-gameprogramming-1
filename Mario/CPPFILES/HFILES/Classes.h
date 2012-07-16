@@ -118,7 +118,6 @@ static ALLEGRO_TIMER *clocker = NULL;
 extern bool keys[5];
 extern bool lock[5];
 
-
 // To be updated later
 static enum ID{PLAYER, ENEMY, BULLET, BORDER, MISC, EXPLOSION};
 static enum GAMESTATES{INTRO, MENU, PLAY, GAMEOVER};

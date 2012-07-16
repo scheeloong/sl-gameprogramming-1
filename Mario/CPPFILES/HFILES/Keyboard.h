@@ -9,7 +9,7 @@
 class Keyboard
 {
 public:
-	//Keyboard(ALLEGRO_EVENT_QUEUE *event_queue);
+	//Keyboard();
 	void updateKeyboard(ALLEGRO_EVENT *ev);
 };
 
