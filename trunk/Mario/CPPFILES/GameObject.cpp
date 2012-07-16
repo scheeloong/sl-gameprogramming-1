@@ -7,7 +7,7 @@ GameObject::GameObject()
 	species = 1;
 	//////////////
 	x = 0, y = 0; 
-	velX = 0, velY = 0;
+	velX = 10, velY = 10;
 	dirX = 0, dirY = 0; 
 	alive = true; 
 	render = true; 
