@@ -3,6 +3,8 @@
 bool done = false;
 bool redraw = false;
 bool isGameOver = false;
+bool keys[] = {false, false, false, false, false};
+bool lock[] = {false, false, false, false, false};
 Display::Display(Player *player)
 {
 	//kill this soon

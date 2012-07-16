@@ -115,8 +115,8 @@ static ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 static ALLEGRO_TIMER *clocker = NULL;
 
 // These will be updated between Keyboard and Timer classes
-static bool keys[] = {false, false, false, false, false};
-static bool lock[] = {false, false, false, false, false};
+extern bool keys[5];
+extern bool lock[5];
 
 
 // To be updated later
