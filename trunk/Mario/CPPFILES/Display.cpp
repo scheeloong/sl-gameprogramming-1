@@ -5,6 +5,8 @@ bool redraw = false;
 bool isGameOver = false;
 bool keys[] = {false, false, false, false, false};
 bool lock[] = {false, false, false, false, false};
+int xOff = 0;
+int yOff = 0;
 
 Display::Display(Player *player)
 {
@@ -42,6 +44,10 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 	}
 	if(redraw && al_is_event_queue_empty(event_queue))
 		{
+			//xOff and yOff as defined in classes.h
+			MapDrawBG(xOff, yOff, 0, 0, WIDTH, HEIGHT);
+			MapDrawFG(xOff, yOff, 0, 0, WIDTH, HEIGHT, 0);
+			MapDrawFG(xOff, yOff, 0, 0, WIDTH, HEIGHT, 1);
 			redraw = false;
 			if(!isGameOver)
 			{

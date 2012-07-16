@@ -3,6 +3,7 @@
 
 void Timer::updateTimer(ALLEGRO_EVENT *ev)
 {
+	MapUpdateAnims();
 	if(ev->type == ALLEGRO_EVENT_TIMER)
 		{
 			redraw = true;
