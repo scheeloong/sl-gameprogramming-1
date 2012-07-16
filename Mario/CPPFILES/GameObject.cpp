@@ -13,12 +13,12 @@ GameObject::GameObject()
 	render = true; 
 	collidable = true; 
 	State::State(); // call State's class default constructor which initializes to normal
-	Collision::Collision();
+//	Collision::Collision();
 	image = NULL; 
 }
 
 // Initializing
-void GameObject::Init(int x, int y, int velX, int velY, int dirX, int dirY, /*ALLEGRO_BITMAP *image, State state, Collision col,*/
+void GameObject::Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image,/* State state, Collision col,*/
 		bool alive, bool render)
 {
 	setX(x); 
@@ -27,7 +27,7 @@ void GameObject::Init(int x, int y, int velX, int velY, int dirX, int dirY, /*AL
 	setVelY(velY); 
 	setDirX(dirX); 
 	setDirY(dirY); 
-	//setImage(image);  
+	setImage(image);  
 	//state; 
 	//col; 
 	setAlive(alive); 

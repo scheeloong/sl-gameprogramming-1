@@ -1,10 +1,9 @@
 #ifndef GAMEOBJECT_H
 #define GAMEOBJECT_H
 
-//#include "HFILES/Classes.h"
+#include "HFILES/Classes.h"
 #include "HFILES/State.h"
 #include "HFILES/Collision.h"
-//#include <stdlib.h> // for NULL (might not be needed since defined in Classes.h
 class GameObject 
 {
 protected: 
@@ -23,10 +22,9 @@ protected:
 	// Image
 	ALLEGRO_BITMAP *image; 
 
-	// State
-	//State state; 
+	// State state; 
 	// Collision
-//	Collision col; 
+    // Collision col; 
 	bool collidable; // if it is collidable, set collidable to true
 
 	// Alive and Draw? 
@@ -50,7 +48,7 @@ public:
 	GameObject();
 
 	// Method for constructor (more specific) 
-	void Init(int x, int y, int velX, int velY, int dirX, int dirY, /*ALLEGRO_BITMAP *image, State state, Collision col,*/
+	void Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image,/* State state, Collision col,*/
 		 bool alive, bool render); 
 
 	//===============================
@@ -90,7 +88,7 @@ public:
 	// Destructor (will need to handle in some special way due to multiple inheritance) 
 	
 	// Friend Class
-	friend class Collision; // Allow collision class to access private members of GameObject's data
+//	friend class Collision; // Allow collision class to access private members of GameObject's data
 }; 
 
 #endif GAMEOBJECT_H
