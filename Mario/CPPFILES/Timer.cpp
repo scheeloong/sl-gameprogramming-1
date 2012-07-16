@@ -1,17 +1,6 @@
 #pragma once
 #include "HFILES/Timer.h"
 
-
-Timer::Timer(Player *player, ALLEGRO_TIMER *timer1, ALLEGRO_EVENT_QUEUE *event_queue)
-{
-	Timer::player = player;
-	FPS = 60;
-	timer1 = al_create_timer(1.0/FPS);
-	srand(time(NULL));
-	al_register_event_source(event_queue, al_get_timer_event_source(timer1));
-}
-
-
 void Timer::updateTimer(ALLEGRO_EVENT &ev)
 {
 	if(ev.type == ALLEGRO_EVENT_TIMER)

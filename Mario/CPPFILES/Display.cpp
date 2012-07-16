@@ -1,14 +1,8 @@
 #include "HFILES/Display.h"
 
-Display::Display(ALLEGRO_EVENT_QUEUE *event_queue, Player *player)
+Display::Display(Player *player)
 {
 	Display::player = player;
-	display = NULL;
-	display = al_create_display(WIDTH, HEIGHT);
-	//immediately stop program should an error occur
-	if(!display)										
-		exit (-1);
-	al_register_event_source(event_queue, al_get_display_event_source(display));
 	al_init_font_addon();
 	al_init_ttf_addon();
 	font18 = al_load_font("arial.ttf", 18, 0);
@@ -32,8 +26,10 @@ void Display::displayMessage(int posx, int posy, string message) // Display mess
 
 
 
-void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue)
+void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 {
+	if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+			done = true;
 	if(redraw && al_is_event_queue_empty(event_queue))
 		{
 			redraw = false;
