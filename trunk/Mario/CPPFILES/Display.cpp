@@ -28,7 +28,7 @@ void Display::displayMessage(int posx, int posy, string message) // Display mess
 
 void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 {
-	if(ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)
+	if(ev->type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 			done = true;
 	if(redraw && al_is_event_queue_empty(event_queue))
 		{
