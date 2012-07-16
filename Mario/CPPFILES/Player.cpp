@@ -1,6 +1,6 @@
 #include "HFILES\Player.h"
 // Constructor
-Player::Player() : lives(3) {}
+//Player::Player() : lives(3) {}
 
 // Methods
 void Player::takeLife (int i)
