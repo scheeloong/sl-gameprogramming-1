@@ -37,7 +37,7 @@
 #include <allegro5\allegro_audio.h> 
 #include <allegro5\allegro_acodec.h>
 // Mappy
-#include "HFILES/mappy_A5.h"
+//#include "HFILES/mappy_A5.h"
 
 //#include "HFILES/Database.h" // shifted from below in case order matters. 
 
@@ -90,7 +90,7 @@ using namespace std;
 //const int SLWIDTH, STARTWIDTH, ENDWIDTH;  
 //const int SLHEIGHT, STARTHEIGHT, ENDHEIGHT; 
 
-#ifdef __MAIN__
+/*#ifdef __MAIN__
 	#define __EXTERN(type, name, value) type name = value;
 #else
 	#define __EXTERN(type, name, value) extern type name;
@@ -98,12 +98,11 @@ using namespace std;
 
 __EXTERN(bool , done, false);
 __EXTERN(bool , redraw, false);
-__EXTERN(bool , isGameOver, false);
+__EXTERN(bool , isGameOver, false);*/
 
-/*extern bool done;
+extern bool done;
 extern bool redraw;
-//only truified when player lives are over.
-extern bool isGameOver;*/
+extern bool isGameOver;
 
 //TODO: Include our formula to defined our own width and height later
 

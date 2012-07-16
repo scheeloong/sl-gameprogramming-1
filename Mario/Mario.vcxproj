@@ -80,6 +80,7 @@
     <None Include="Arial.ttf" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Classes.cpp" />
     <ClCompile Include="CPPFILES\cheatsheet.cpp" />
     <ClCompile Include="CPPFILES\Collision.cpp" />
     <ClCompile Include="CPPFILES\Database.cpp" />

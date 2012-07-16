@@ -1,7 +1,12 @@
 #include "HFILES/Display.h"
 
+bool done = false;
+bool redraw = false;
+bool isGameOver = false;
 Display::Display(Player *player)
 {
+	//kill this soon
+	al_init_primitives_addon();
 	Display::player = player;
 	al_init_font_addon();
 	al_init_ttf_addon();
@@ -30,9 +35,7 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 {
 	if(ev->type == ALLEGRO_EVENT_DISPLAY_CLOSE)
 	{
-		cout << "DONE" << endl;
 		done = true;
-		cout << "done = " << done << endl;
 	}
 	if(redraw && al_is_event_queue_empty(event_queue))
 		{

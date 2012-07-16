@@ -1,8 +1,8 @@
 // This is the main class that handles all the execution of the game
 	// The actual main function will be defined in MarioApp.cpp
 #include "HFILES\Mario.h"
-		//extern bool	redraw = false;
-		//extern bool	isGameOver = false;
+
+
 class Mario
 {
 public:
@@ -27,6 +27,7 @@ public:
 	// Methods
 	int run() 
 	{
+		
 		// Initialize EVERYTHING: 
 		// ALLEGRO init!!
 		// ALLEGRO addon!! 
@@ -59,6 +60,8 @@ public:
 
 		al_install_keyboard();
 		al_register_event_source(event_queue, al_get_keyboard_event_source());
+
+
 
 		clocker = al_create_timer(1.0/FPS);
 		srand(time(NULL));
