@@ -1,11 +1,11 @@
 #include "HFILES/Keyboard.h"
 
-void Keyboard::updateKeyboard(ALLEGRO_EVENT &ev)
+void Keyboard::updateKeyboard(ALLEGRO_EVENT *ev)
 {
 	cout << "updating keyboard" <<endl;
-	if(ev.type == ALLEGRO_EVENT_KEY_DOWN)
+	if(ev->type == ALLEGRO_EVENT_KEY_DOWN)
 	{
-		switch(ev.keyboard.keycode)
+		switch(ev->keyboard.keycode)
 		{
 		case ALLEGRO_KEY_ESCAPE:
 			done = true;
@@ -27,9 +27,9 @@ void Keyboard::updateKeyboard(ALLEGRO_EVENT &ev)
 			break;
 		}
 	}
-	else if(ev.type == ALLEGRO_EVENT_KEY_UP)
+	else if(ev->type == ALLEGRO_EVENT_KEY_UP)
 	{
-		switch(ev.keyboard.keycode)
+		switch(ev->keyboard.keycode)
 		{
 		case ALLEGRO_KEY_ESCAPE:
 			done = true;

@@ -1,9 +1,9 @@
 #pragma once
 #include "HFILES/Timer.h"
 
-void Timer::updateTimer(ALLEGRO_EVENT &ev)
+void Timer::updateTimer(ALLEGRO_EVENT *ev)
 {
-	if(ev.type == ALLEGRO_EVENT_TIMER)
+	if(ev->type == ALLEGRO_EVENT_TIMER)
 		{
 			redraw = true;
 			if(keys[UP] && !lock[UP])

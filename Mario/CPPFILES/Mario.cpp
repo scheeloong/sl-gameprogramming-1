@@ -67,9 +67,8 @@ public:
 		{
 			ALLEGRO_EVENT ev;
 			al_wait_for_event(event_queue, &ev);
-
-			timer->updateTimer(ev);
-			keyboard->updateKeyboard(ev);
+			timer->updateTimer(&ev);
+			keyboard->updateKeyboard(&ev);
 			screen->updateDisplay(event_queue, &ev);
 			// GAME LOOP
 		}
