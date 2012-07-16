@@ -12,7 +12,7 @@ class Display
 {
 	private:
 		//string name; // keeps track of name of actor playing. 
-		ALLEGRO_DISPLAY *display; 
+		//ALLEGRO_DISPLAY *display; 
 		ALLEGRO_FONT *font18;
 		Player *player;
 		// font
@@ -24,14 +24,14 @@ class Display
 
 	public:
 		// Constructor
-		Display(ALLEGRO_EVENT_QUEUE *event_queue, Player *player = NULL);
+		Display(Player *player = NULL);
 		void Init(); // Gets actor's name
 		// Methods
 		void displayMessage(int posx, int posy, string message);
 		void inputName(); // Get's actor's name and inputs into game for high score. 
-		void updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue);
+		void updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev);
 		void destroyFont() {al_destroy_font(font18);}
-		void destroyDisplay() {al_destroy_display(display);}
+		//void destroyDisplay() {al_destroy_display(display);}
 };
 
 #endif DISPLAY_H

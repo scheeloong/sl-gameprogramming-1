@@ -1,14 +1,8 @@
 #include "HFILES/Keyboard.h"
 
-Keyboard::Keyboard(ALLEGRO_EVENT_QUEUE *event_queue)
-{
-	al_install_keyboard();
-	al_register_event_source(event_queue, al_get_keyboard_event_source());
-}
-
 void Keyboard::updateKeyboard(ALLEGRO_EVENT &ev)
 {
-	
+	cout << "updating keyboard" <<endl;
 	if(ev.type == ALLEGRO_EVENT_KEY_DOWN)
 	{
 		switch(ev.keyboard.keycode)

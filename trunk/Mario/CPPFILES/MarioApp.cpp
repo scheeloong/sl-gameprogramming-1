@@ -21,8 +21,8 @@ void sleep(long d)
 	while(clock() - start < d); ///loop until time's up
 }
 	Mario *mario = new Mario();
-	ALLEGRO_EVENT_QUEUE *Mario :: event_queue = al_create_event_queue();
-	ALLEGRO_TIMER *Mario :: clocker = NULL;
+	
+	
 // currently infinite loop before anything even happens
 int main()
 {

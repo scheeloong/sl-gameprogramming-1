@@ -99,6 +99,10 @@ static bool isGameOver = false;
 // The actual width and height of the screen
 static const int WIDTH = 600; 
 static const int HEIGHT = 800; 
+static const int FPS = 60;
+static ALLEGRO_DISPLAY *display = NULL;
+static ALLEGRO_EVENT_QUEUE *event_queue = NULL;
+static ALLEGRO_TIMER *clocker = NULL;
 
 // These will be updated between Keyboard and Timer classes
 static bool keys[] = {false, false, false, false, false};
