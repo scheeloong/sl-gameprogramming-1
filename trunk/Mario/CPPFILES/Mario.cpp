@@ -1,7 +1,8 @@
 // This is the main class that handles all the execution of the game
 	// The actual main function will be defined in MarioApp.cpp
 #include "HFILES\Mario.h"
-
+		//extern bool	redraw = false;
+		//extern bool	isGameOver = false;
 class Mario
 {
 public:
@@ -10,18 +11,18 @@ public:
 		Keyboard *keyboard;
 		//Database *database; 
 		Player *player;
-		
 		//static ALLEGRO_DISPLAY *display;
 	// Constructor
 		Mario()
 		{
 			//clocker = NULL;
 			//event_queue = NULL;
+			//done = false;
+
 			player = new Player();
 			timer = new Timer(player);
 			screen = new Display(player);
 			keyboard = new Keyboard();
-
 		}
 	// Methods
 	int run() 

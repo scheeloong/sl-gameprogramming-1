@@ -89,10 +89,21 @@ using namespace std;
 // our user defined width and height that the Mario depends on, might not be const
 //const int SLWIDTH, STARTWIDTH, ENDWIDTH;  
 //const int SLHEIGHT, STARTHEIGHT, ENDHEIGHT; 
-static bool done = false;
-static bool redraw = false;
+
+#ifdef __MAIN__
+	#define __EXTERN(type, name, value) type name = value;
+#else
+	#define __EXTERN(type, name, value) extern type name;
+#endif 
+
+__EXTERN(bool , done, false);
+__EXTERN(bool , redraw, false);
+__EXTERN(bool , isGameOver, false);
+
+/*extern bool done;
+extern bool redraw;
 //only truified when player lives are over.
-static bool isGameOver = false;
+extern bool isGameOver;*/
 
 //TODO: Include our formula to defined our own width and height later
 
