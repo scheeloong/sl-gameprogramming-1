@@ -12,7 +12,7 @@ protected:
 	int ID; 
 	int species;
 	// Positions
-int x; 
+	int x; 
 	int y; 
 	// Velocities
 	int velX; 
@@ -50,7 +50,7 @@ public:
 	GameObject();
 
 	// Method for constructor (more specific) 
-	void Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, /*State state, Collision col,*/
+	void Init(int x, int y, int velX, int velY, int dirX, int dirY, /*ALLEGRO_BITMAP *image, State state, Collision col,*/
 		 bool alive, bool render); 
 
 	//===============================

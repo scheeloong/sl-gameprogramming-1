@@ -20,14 +20,15 @@ void sleep(long d)
 	clock_t start = clock();
 	while(clock() - start < d); ///loop until time's up
 }
-
+	Mario *mario = new Mario();
+	ALLEGRO_EVENT_QUEUE *Mario :: event_queue = al_create_event_queue();
+	ALLEGRO_TIMER *Mario :: clocker = NULL;
 // currently infinite loop before anything even happens
 int main()
 {
 	printf("hahahaa\n");
-	sleep(1000000000000000);
-	//Mario mario;
-	//mario.run();
+	//sleep(1000000000000000);	
+	mario->run();
 }
 
 // undefined reference to main if used this for now. Not using Main Function properly

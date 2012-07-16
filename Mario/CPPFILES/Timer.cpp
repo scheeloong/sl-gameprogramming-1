@@ -2,13 +2,13 @@
 #include "HFILES/Timer.h"
 
 
-Timer::Timer(Player *player, ALLEGRO_TIMER *timer, ALLEGRO_EVENT_QUEUE *event_queue)
+Timer::Timer(Player *player, ALLEGRO_TIMER *timer1, ALLEGRO_EVENT_QUEUE *event_queue)
 {
 	Timer::player = player;
 	FPS = 60;
-	timer = al_create_timer(1.0/FPS);
+	timer1 = al_create_timer(1.0/FPS);
 	srand(time(NULL));
-	al_register_event_source(event_queue, al_get_timer_event_source(timer));
+	al_register_event_source(event_queue, al_get_timer_event_source(timer1));
 }
 
 
@@ -34,8 +34,8 @@ void Timer::updateTimer(ALLEGRO_EVENT &ev)
 
 			if(!isGameOver)
 			{
-				if(player->getLife() <= 0)
-					isGameOver = true;
+				//if(player->getLife() <= 0)
+					//isGameOver = true;
 			}
 		}
 }

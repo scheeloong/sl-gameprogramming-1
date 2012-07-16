@@ -62,8 +62,7 @@
 #include "HFILES/Score.h"
 //#include "HFILES/Database.h"
 */
-static ALLEGRO_EVENT_QUEUE *event_queue = al_create_event_queue();
-static ALLEGRO_TIMER *clocker = NULL;
+
 
 //===================
 // Input / Output  
@@ -110,5 +109,6 @@ static bool lock[] = {false, false, false, false, false};
 static enum ID{PLAYER, ENEMY, BULLET, BORDER, MISC, EXPLOSION};
 static enum GAMESTATES{INTRO, MENU, PLAY, GAMEOVER};
 static enum KEYS{UP, DOWN, LEFT, RIGHT, SPACE};
+
 
 //#endif CLASSES_H
