@@ -4,21 +4,21 @@
 #define POWERUP_H
 //#pragma once
 
-#include "Classes.h"
-#include "GameObject.h"
+#include "HFILES/Classes.h"
+#include "HFILES/GameObject.h"
 
 class PowerUp : public GameObject
-{/*
+{
 	private:
 		enum pTypes{COIN, POWER, HEART}; // Types of powerUps
 
 	public:
 		// Constructors
 		PowerUp(); 
-		PowerUp(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, State state, Collision col, bool alive,
+		PowerUp(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image,/*State state, Collision col,*/ bool alive,
 		bool render);
 		void Init(); // Initialize powerup based on position and type
-		// Methods	*/ 
+		// Methods	
 };
 
 #endif POWERUP_H
