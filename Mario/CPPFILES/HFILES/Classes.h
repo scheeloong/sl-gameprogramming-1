@@ -1,7 +1,7 @@
-//#ifndef CLASSES_H
-//#define CLASSES_H
+#ifndef CLASSES_H
+#define CLASSES_H
 
-#pragma once
+//#pragma once
 
 //================================================================================================================
 // LATEST UPDATE: NO IDEA WHY SOMETIMES INCLUDE USING "HFILES/CLassname" whereas now needs "Classname" directly
@@ -97,8 +97,8 @@ static bool isGameOver = false;
 //TODO: Include our formula to defined our own width and height later
 
 // The actual width and height of the screen
-static const int WIDTH = 600; 
-static const int HEIGHT = 800; 
+static const int WIDTH = 800; 
+static const int HEIGHT = 600; 
 static const int FPS = 60;
 static ALLEGRO_DISPLAY *display = NULL;
 static ALLEGRO_EVENT_QUEUE *event_queue = NULL;
@@ -115,4 +115,4 @@ static enum GAMESTATES{INTRO, MENU, PLAY, GAMEOVER};
 static enum KEYS{UP, DOWN, LEFT, RIGHT, SPACE};
 
 
-//#endif CLASSES_H
+#endif CLASSES_H
