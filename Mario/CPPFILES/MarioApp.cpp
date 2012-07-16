@@ -7,7 +7,8 @@
 // TEMPORARY FILE FOR TRYING OUT BUILD IS WORKING IN VISUAL STUDIO 2010
 #include <stdio.h>
 #include <iostream>
-#include <time.h> 
+#include <time.h>
+#include "HFILES\Classes.h"
 //===================================
 // For now, just use main function,
 // instead of making MarioApp
@@ -26,9 +27,13 @@ void sleep(long d)
 // currently infinite loop before anything even happens
 int main()
 {
+	__EXTERN(bool , done, false);
+	__EXTERN(bool , redraw, false);
+	__EXTERN(bool , isGameOver, false);
 	printf("hahahaa\n");
 	//sleep(1000000000000000);	
 	mario->run();
+	return 0;
 }
 
 // undefined reference to main if used this for now. Not using Main Function properly

@@ -6,8 +6,6 @@
 
 #include "HFILES\Classes.h"
 
-extern bool done;
-
 class Keyboard
 {
 public:
