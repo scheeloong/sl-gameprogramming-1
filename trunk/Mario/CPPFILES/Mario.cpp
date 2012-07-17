@@ -97,6 +97,7 @@ public:
 		delete player;
 		al_destroy_event_queue(event_queue);
 		timer->destroyTimer(clocker);
+		al_destroy_bitmap(BabyMario);
 		//screen->destroyDisplay();
 		screen->destroyFont();
 		MapFreeMem();

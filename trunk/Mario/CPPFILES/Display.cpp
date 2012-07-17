@@ -5,6 +5,7 @@ bool redraw = false;
 bool isGameOver = false;
 bool keys[] = {false, false, false, false, false};
 bool lock[] = {false, false, false, false, false};
+const float PI = 3.14159;
 int xOff = 0;
 int yOff = 0;
 

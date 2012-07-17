@@ -17,8 +17,8 @@ class Player : public GameObject
 
 		void moveUp() {y -= velY;}
 		void moveDown() {y += velY;}
-		void moveLeft() {setX(x -= velX);}
-		void moveRight() {setX(x += velX);}
+		void moveLeft() {facing = WALKLEFT; x -= velX;}
+		void moveRight() {facing = WALKRIGHT; x += velX;}
 
 		// Methods
 		int getLife() {return lives;}
@@ -27,6 +27,7 @@ class Player : public GameObject
 
 		void update();
 		void draw();
+		void destroy() {al_destroy_bitmap(image);}
 };
 
 #endif PLAYER_H

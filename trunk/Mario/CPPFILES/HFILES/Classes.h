@@ -38,6 +38,7 @@
 #include <allegro5\allegro_acodec.h>
 // Mappy
 #include "HFILES/mappy_A5.h"
+#include <math.h>
 
 //#include "HFILES/Database.h" // shifted from below in case order matters. 
 
@@ -100,7 +101,8 @@ __EXTERN(bool , done, false);
 __EXTERN(bool , redraw, false);
 __EXTERN(bool , isGameOver, false);*/
  
-#define MODE GFX_AUTODETECT_WINDOWED
+//#define MODE GFX_AUTODETECT_WINDOWED
+extern const float PI;
 extern bool done;
 extern bool redraw;
 extern bool isGameOver;
@@ -124,6 +126,9 @@ extern int yOff;
 static enum ID{PLAYER, ENEMY, BULLET, BORDER, MISC, EXPLOSION};
 static enum GAMESTATES{INTRO, MENU, PLAY, GAMEOVER};
 static enum KEYS{UP, DOWN, LEFT, RIGHT, SPACE};
+//For the animations of all sprites.
+//LEFT means walking to the left, RIGHT means walking to the right.
+static enum FACING{WALKLEFT = -1, WALKRIGHT = 1};
 
 
 #endif CLASSES_H
