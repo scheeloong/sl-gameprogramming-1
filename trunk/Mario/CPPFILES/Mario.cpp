@@ -5,27 +5,27 @@
 class Mario
 {
 public:
-		Timer *timer;
-		Display *screen; 
-		Keyboard *keyboard;
-		//Database *database; 
-		Player *player;
-		Background *background;
-		Collision *collision;
+	Timer *timer;
+	Display *screen; 
+	Keyboard *keyboard;
+	//Database *database; 
+	Player *player;
+	Background *background;
+	Collision *collision;
 	// Constructor
-		Mario()
-		{
-			//clocker = NULL;
-			//event_queue = NULL;
-			//done = false;
+	Mario()
+	{
+		//clocker = NULL;
+		//event_queue = NULL;
+		//done = false;
 
-			player = new Player();
-			timer = new Timer(player);
-			screen = new Display(player);
-			keyboard = new Keyboard();
-			background = new Background();
-			collision = new Collision(player);
-		}
+		player = new Player();
+		timer = new Timer(player);
+		screen = new Display(player);
+		keyboard = new Keyboard();
+		background = new Background();
+		collision = new Collision(player);
+	}
 	// Methods
 	int run() 
 	{
@@ -115,8 +115,6 @@ public:
 		delete screen;		
 		delete collision;
 		al_destroy_display(display);
-		cout << "12" << endl;
 		return 0;
-	}
-	
+	}	
 }; 
