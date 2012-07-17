@@ -98,21 +98,24 @@ public:
 			screen->updateDisplay(event_queue, &ev);
 			// GAME LOOP
 		}
-		cout << "HEY lol" << endl;
+		
 		player->destroy();
 		al_destroy_event_queue(event_queue);
 		timer->destroyTimer(clocker);
-		al_destroy_bitmap(BabyMario);
+		//THIS LINE WILL CAUSE CRASH! Because the bitmap was 
+		//already destroyed in player->destroy()
+		//I've left the remains here so we don't make the same 4 hour mistake.
+		//al_destroy_bitmap(BabyMario);
 		//screen->destroyDisplay();
 		screen->destroyFont();
 		MapFreeMem();
 		delete player;
 		delete timer; 
 		delete keyboard;
-		delete screen;
-		
+		delete screen;		
 		delete collision;
 		al_destroy_display(display);
+		cout << "12" << endl;
 		return 0;
 	}
 	
