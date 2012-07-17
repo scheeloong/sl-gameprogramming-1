@@ -11,16 +11,15 @@ void Timer::updateTimer(ALLEGRO_EVENT *ev)
 				player->moveUp();
 			else if(keys[DOWN] && !lock[DOWN])
 				player->moveDown();
-			//animations for later
-			//else
-			//	ResetShipAnimation(ship, 1);
+			else
+				//player->resetAnimation();
 
 			if(keys[LEFT] && !lock[LEFT])
 				player->moveLeft();
 			else if(keys[RIGHT] && !lock[RIGHT])
 				player->moveRight();
-			//else
-			//	ResetShipAnimation(ship, 2);
+			else
+				player->resetAnimation();
 
 			if(!isGameOver)
 			{

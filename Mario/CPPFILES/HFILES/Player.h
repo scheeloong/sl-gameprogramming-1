@@ -19,6 +19,7 @@ class Player : public GameObject
 		void moveDown() {y += velY;}
 		void moveLeft() {facing = WALKLEFT; x -= velX;}
 		void moveRight() {facing = WALKRIGHT; x += velX;}
+		void resetAnimation() {curFrame = 0;}
 
 		// Methods
 		int getLife() {return lives;}
