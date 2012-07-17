@@ -14,14 +14,13 @@ void Timer::updateTimer(ALLEGRO_EVENT *ev)
 			}
 			else if(keys[DOWN] && !lock[DOWN])
 				player->moveDown();
-			else
-				player->resetAnimation();
 
 			if(keys[LEFT] && !lock[LEFT])
 				player->moveLeft();
 			else if(keys[RIGHT] && !lock[RIGHT])
 				player->moveRight();
-			else
+			//animation only goes back to frame 0 when all keys are released.
+			if(!keys[UP] && !keys[DOWN] && !keys[LEFT] && !keys[RIGHT])
 				player->resetAnimation();
 
 			if(!isGameOver)
