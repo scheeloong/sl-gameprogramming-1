@@ -16,6 +16,7 @@ void Player::addLife (int i)
 void Player::Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image /*, State state, Collision col,*/)
 {
 		GameObject::Init(x, y, velX, velY, dirX, dirY, image/*, state, col,*/);
+		//array indexing, so 2 frames.
 		maxFrame = 1;
 		curFrame = 0;
 		frameCount = 4;
@@ -36,10 +37,13 @@ void Player::Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_
 //Update animations
 void Player::update()
 {
+	if(curFrame == JUMPMODE); //TODO: Mario needs to hold his jump position until
+	// he hits the ground again. 
+
 	//Allows the mario sprite to move fluently through
 	//his 3 positions: Stand, Step, and Land
 	//1 2 3 2 1 2 3 2 1 instead of 1 2 3 1 2 3 1 2 3
-	if(++frameCount >= frameDelay && (keys[RIGHT]||keys[LEFT]))
+	else if(++frameCount >= frameDelay && (keys[RIGHT]||keys[LEFT]))
 	{
 		// Go forward through the sprite sheet (LtoR)
 		if(rewind == 1)

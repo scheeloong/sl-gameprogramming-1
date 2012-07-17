@@ -8,11 +8,14 @@ void Timer::updateTimer(ALLEGRO_EVENT *ev)
 		{
 			redraw = true;
 			if(keys[UP] && !lock[UP])
+			{	
 				player->moveUp();
+				player->jumpGlide();
+			}
 			else if(keys[DOWN] && !lock[DOWN])
 				player->moveDown();
 			else
-				//player->resetAnimation();
+				player->resetAnimation();
 
 			if(keys[LEFT] && !lock[LEFT])
 				player->moveLeft();
