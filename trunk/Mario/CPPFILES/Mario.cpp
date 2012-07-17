@@ -94,13 +94,14 @@ public:
 			screen->updateDisplay(event_queue, &ev);
 			// GAME LOOP
 		}
-		delete player;
+		player->destroy();
 		al_destroy_event_queue(event_queue);
 		timer->destroyTimer(clocker);
 		al_destroy_bitmap(BabyMario);
 		//screen->destroyDisplay();
 		screen->destroyFont();
 		MapFreeMem();
+		delete player;
 		delete timer; 
 		delete keyboard;
 		delete screen;
