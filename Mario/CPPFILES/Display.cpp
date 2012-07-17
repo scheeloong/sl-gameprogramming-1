@@ -47,6 +47,9 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 			MapDrawBG(xOff, yOff, 0, 0, WIDTH, HEIGHT);
 			MapDrawFG(xOff, yOff, 0, 0, WIDTH, HEIGHT, 0);
 			MapDrawFG(xOff, yOff, 0, 0, WIDTH, HEIGHT, 1);
+			MapChangeLayer(1);
+			MapDrawBG(xOff, yOff, 0, 0, WIDTH, HEIGHT);
+			MapChangeLayer(0);
 			redraw = false;
 			if(!isGameOver)
 			{
