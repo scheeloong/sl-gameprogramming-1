@@ -41,11 +41,15 @@ protected:
 	int frameWidth;
 	int frameHeight;
 	int animationColumns;
+	//Unused by Player class atm.
 	int animationDirection;
 
 	//animationRow only needed for gridded sprite sheets
 	// not single row
 	int animationRow;
+	int rewind;
+	//Direction the sprite is facing.
+	int facing;
 
 public:
 	// Constructor
@@ -93,6 +97,7 @@ public:
 	// update GameObject's position, vel, dir, image etc..
 	// Virtual cause different objects have different update methods
 	// Destructor (will need to handle in some special way due to multiple inheritance) 
+	virtual void destroy() {}
 	
 	// Friend Class
 //	friend class Collision; // Allow collision class to access private members of GameObject's data
