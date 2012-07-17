@@ -9,7 +9,9 @@ class GameObject
 protected: 
 	// Type of Game Object
 	int ID; 
-	int species;
+	// Can't remember why we needed species. Assuming state will handle all this...
+	// int species;
+
 	// Positions
 	int x; 
 	int y; 
@@ -27,11 +29,10 @@ protected:
     // Collision col; 
 	bool collidable; // if it is collidable, set collidable to true
 
-	// Alive and Draw? 
+	// Alive and Draw
 	bool alive; 
 	bool render; 
 
-	/*
 	// Animations
 	int maxFrame;
 	int curFrame;
@@ -41,15 +42,19 @@ protected:
 	int frameHeight;
 	int animationColumns;
 	int animationDirection;
-	*/
+
+	//animationRow only needed for gridded sprite sheets
+	// not single row
+	int animationRow;
 
 public:
 	// Constructor
 	GameObject();
 
 	// Method for constructor (more specific) 
-	void Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image,/* State state, Collision col,*/
-		 bool alive, bool render); 
+	// This Init function is expected to be called ONCE for each GameObject, so some parameters 
+	// might never need to be updated. (state, col..?)
+	void Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image/*, State state, Collision col,*/); 
 
 	//===============================
 	// Set & Get
@@ -73,8 +78,8 @@ public:
 	void setImage(ALLEGRO_BITMAP *im) { image = im; }
 	void setID(int id) { ID = id; } 
 	int getID() {return ID;}
-	void setSpecies(int spec) {species = spec;}
-	int getSpecies() {return species;}
+	/*void setSpecies(int spec) {species = spec;}
+	int getSpecies() {return species;}*/
 
 	// Methods
 	bool checkCollision(GameObject *object2);   // Returns true if there is collision
@@ -83,6 +88,8 @@ public:
 	{
 		printf("Gameobject Update");
 	}
+
+	virtual void draw() {}
 	// update GameObject's position, vel, dir, image etc..
 	// Virtual cause different objects have different update methods
 	// Destructor (will need to handle in some special way due to multiple inheritance) 

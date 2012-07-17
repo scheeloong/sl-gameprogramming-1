@@ -10,9 +10,10 @@ class Player : public GameObject
 		int lives; // number of lives
 	public: 
 		// Constructor (automatically calls parent's no-argument constructor by default) 
-		Player();
-		Player(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, bool alive,
-		bool render, int lives);
+		Player() : GameObject() {ID = PLAYER; lives = 3;}
+		// The Init function CANNOT be a constructor because the ALLEGRO_BITMAP *image is not 
+		// initialized when the constructor is called. This must be called after the object is constructed.
+		void Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image);
 
 		void moveUp() {y -= velY;}
 		void moveDown() {y += velY;}
@@ -20,11 +21,12 @@ class Player : public GameObject
 		void moveRight() {setX(x += velX);}
 
 		// Methods
-		int getLife() {return lives;};
+		int getLife() {return lives;}
 		void takeLife (int i); // Minus lives by i
 		void addLife (int i); // Add lives by i
 
-		 void update();
+		void update();
+		void draw();
 };
 
 #endif PLAYER_H

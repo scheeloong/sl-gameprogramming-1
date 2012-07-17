@@ -1,6 +1,6 @@
 //
 #ifndef BACKGROUND_H
-#define BACKGROUN_H
+#define BACKGROUND_H
 #include "Classes.h"
 #include "Player.h"
 //#include "mappy_A5.h"
@@ -13,8 +13,8 @@ private:
 public:
 	Background()
 	{
-		if(MapLoad("50x50.fmp", 1))
-			exit(-5); 
+		/*if(MapLoad("50x50.fmp", 1))
+			exit(-5); */
 	}
 };
 #endif BACKGROUND_H
