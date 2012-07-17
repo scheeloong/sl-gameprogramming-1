@@ -2,6 +2,7 @@
 #define PLAYER_H
 //#pragma once
 #include "HFILES/Classes.h"
+//#include "HFILES/Collision.h"
 #include "HFILES/GameObject.h"
 
 class Player : public GameObject

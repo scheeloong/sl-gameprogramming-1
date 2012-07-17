@@ -3,7 +3,7 @@
 
 #include "HFILES/Classes.h"
 #include "HFILES/State.h"
-#include "HFILES/Collision.h"
+//#include "HFILES/Collision.h"
 class GameObject 
 {
 protected: 
@@ -50,6 +50,8 @@ protected:
 	int rewind;
 	//Direction the sprite is facing.
 	int facing;
+
+	int gravity;
 
 public:
 	// Constructor

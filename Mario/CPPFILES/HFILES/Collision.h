@@ -3,66 +3,135 @@
 #define COLLISION_H
 //#pragma once
 //#include "HFILES/Player.h" // include player cause no idea how pragma once works, it did not allow collision to re-include GameObject
-#include "HFILES\GameObject.h"
+#include "Classes.h"
+#include "GameObject.h"
+#include "Player.h"
+
 
 class Collision
 {
-// TEMPORARY (start)
+/*// TEMPORARY (start)
 private:
 	int i;
 public:
 	Collision() : i(0) {}
 
 //bool superCheckCollision(GameObject &object1, GameObject &object2); // may need to change to &object1 , &object2
-// TEMPORARY (end)
+// TEMPORARY (end)*/
 
-/*
-	private:
-		int *BoundX; // an array
-		int *BoundY;
+//TODO: give this class 3 pointers to the 3 database arrays.
 
-	public:
+private:
+	//Change this to include all types of creatures.
+	vector<int> boundX;
+	vector<int> boundY;
+	Player *player;
+
+public:
 		
 		// Constructor
-		//Collision() : boundX(0), boundY(0) {}
-		Collision()  
-		{
-			Collision::BoundX =  BoundX;
-			Collision::BoundY =  BoundY;
+	//Collision() : boundX(0), boundY(0) {}
+	Collision(Player *player)  
+	{
+		Collision::player = player;
+		insertObjectBounds(PLAYER, 10, 15);
+	}
 
-			//TODO: Incorporate hash tables here to determine boundX and boundY for specific objects,
-			//based on ID.
+	//Adds new GameObject bounds to the two vectors. 
+	//The ID is just a stub, so you see what you're adding.
+	//It's not used in the function at all. The ID should be 
+	// the index of the added bounds.
+	void insertObjectBounds(int ID, int boundX, int boundY)
+	{
+		Collision::boundX.push_back(boundX);
+		Collision::boundY.push_back(boundY);
+	}
+
+	// Methods
+	void updateBounds(GameObject GameObject)
+	{
+		// May need to check somewhere the type of GameObject, can use dynamic cast or simple ID to check
+		//boundX = meObject.x + 20; 
+		//boundY = GameObject.y + 20; 
+	}
+
+	//TODO: modify parameter to pass in three lists.
+	void checkTileCollision()
+	{
+		float x = player->getX();
+		float y = player->getY();
+
+		int bx = boundX[player->getID()];
+		int by = boundY[player->getID()];
+
+		//Check 4 corners of object1's bound box.
+		
+		//Underfeet check
+		if (isTileCollidable(x, y + by)) lock[DOWN] = true;
+		else lock[DOWN] = false;
+		//Overhead check
+		if (isTileCollidable(x, y - by)) lock[UP] = true;
+		else lock[UP] = false;
+		//Rightside check
+		if (isTileCollidable(x + bx, y)) lock[RIGHT] = true;
+		else lock[RIGHT] = false;
+		//Leftside check
+		if (isTileCollidable(x - bx, y)) lock[LEFT] = true;
+		else lock[LEFT] = false;
+
+		//TODO: modify to check every side of body.
+		if(isTileSpecial(x, y))
+		{
+			if(isQuestionTile(x, y))
+			{
+				//do stuff
+			}
+			else if(isCoinTile(x, y))
+			{
+				//do stuff
+			}
+			else if(isBrickTile(x, y))
+			{
+				//do stuff
+		
+			}
 		}
+	}
 
-		// Methods
-		void updateBounds(GameObject GameObject)
-		{
-			// May need to check somewhere the type of GameObject, can use dynamic cast or simple ID to check
-			//boundX = meObject.x + 20; 
-			//boundY = GameObject.y + 20; 
-		}
+	inline bool isTileCollidable(int x, int y)
+	{
+		BLKSTR *blockdata;
+		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
+		return blockdata->user1;
+	}
 
-		bool superCheckCollision(GameObject &object1, GameObject &object2) // FIXME
-		{
-			float X1 = object1.getX();
-			float Y1 = object1.getY();
+	inline bool isTileSpecial(int x, int y)
+	{
+		BLKSTR *blockdata;
+		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
+		return blockdata->user2;
+	}
 
-			float X2 = object2.getX();
-			float Y2 = object2.getY();
+	inline bool isQuestionTile(int x, int y)
+	{
+		BLKSTR *blockdata;
+		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
+		return blockdata->tl;
+	}
 
-			int bX1 = BoundX[object1.getID()] [object1.getSpecies()];
-			int bY1 = BoundY[object1.getID()]  [object1.getID()];
-			int bX2 = BoundX[ object2.getID()]  [object2.getSpecies()];
-			int bY2 = BoundY[object2.getID()]  [object2.getSpecies()];
+	inline bool isCoinTile(int x, int y)
+	{
+		BLKSTR *blockdata;
+		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
+		return blockdata->br;
+	}
 
-			if( X1 + bX1 > X2 - bX2 &&
-				X1 - bX1 < X2 + bX2 &&
-				Y1 + bY1 > Y2 - bY2 &&
-				Y1 - bY1 < Y2 + bY2)
-				return true;
-			else
-				return false;
-		}*/
+	inline bool isBrickTile(int x, int y)
+	{
+		BLKSTR *blockdata;
+		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
+		return blockdata->tr;
+	}
 };
 
 #endif
