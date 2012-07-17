@@ -39,6 +39,7 @@
 // Mappy
 #include "HFILES/mappy_A5.h"
 #include <math.h>
+#include <vector>
 
 //#include "HFILES/Database.h" // shifted from below in case order matters. 
 

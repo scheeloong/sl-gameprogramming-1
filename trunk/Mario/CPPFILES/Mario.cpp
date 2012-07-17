@@ -11,6 +11,7 @@ public:
 		//Database *database; 
 		Player *player;
 		Background *background;
+		Collision *collision;
 	// Constructor
 		Mario()
 		{
@@ -23,6 +24,7 @@ public:
 			screen = new Display(player);
 			keyboard = new Keyboard();
 			background = new Background();
+			collision = new Collision(player);
 		}
 	// Methods
 	int run() 
@@ -72,6 +74,7 @@ public:
 			return(-5); 
 		ALLEGRO_BITMAP *BabyMario;
 		BabyMario = al_load_bitmap("BabyMario 120.png");
+
 		//Register
 		al_register_event_source(event_queue, al_get_display_event_source(display));
 		al_register_event_source(event_queue, al_get_keyboard_event_source());		
@@ -88,12 +91,14 @@ public:
 			ALLEGRO_EVENT ev;
 			al_wait_for_event(event_queue, &ev);
 			timer->updateTimer(&ev);
+			collision->checkTileCollision();
 			keyboard->updateKeyboard(&ev);
 			//This will be replaced by the updating member of database.
 			player->update();
 			screen->updateDisplay(event_queue, &ev);
 			// GAME LOOP
 		}
+		cout << "HEY lol" << endl;
 		player->destroy();
 		al_destroy_event_queue(event_queue);
 		timer->destroyTimer(clocker);
@@ -105,6 +110,8 @@ public:
 		delete timer; 
 		delete keyboard;
 		delete screen;
+		
+		delete collision;
 		al_destroy_display(display);
 		return 0;
 	}

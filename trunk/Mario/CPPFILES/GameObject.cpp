@@ -12,6 +12,7 @@ GameObject::GameObject()
 //	Collision::Collision();
 	image = NULL;
 
+	gravity = 1;
 	
 }
 
