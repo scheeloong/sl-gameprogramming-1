@@ -50,25 +50,38 @@ public:
 		// This function handles everything, it is used to run the whole game. 
 		// the game loop is contained in here
 		// Keyboard NOTE: delete keyboard at end.
+
+		//Checks
 		if(!al_init())										//initialize Allegro
 			return -1;
 		display = al_create_display(WIDTH, HEIGHT);
 		if(!display)										
 			exit (-1);
-		event_queue = al_create_event_queue();
-		al_register_event_source(event_queue, al_get_display_event_source(display));
 
-		
-
+		//Install
 		al_install_keyboard();
 		al_init_image_addon();
-		al_register_event_source(event_queue, al_get_keyboard_event_source());
 
-		//if(MapLoad("50x50.fmp", 1))
-			//return(-5); 
+		//Create
+		event_queue = al_create_event_queue();
 		clocker = al_create_timer(1.0/FPS);
 		srand(time(NULL));
+
+		//Load
+		if(MapLoad("50x50.FMP", 1))
+			return(-5); 
+		ALLEGRO_BITMAP *BabyMario;
+		BabyMario = al_load_bitmap("BabyMario 120.png");
+		//Register
+		al_register_event_source(event_queue, al_get_display_event_source(display));
+		al_register_event_source(event_queue, al_get_keyboard_event_source());		
 		al_register_event_source(event_queue, al_get_timer_event_source(clocker));
+
+		//Object Initialization
+		player->Init(0, HEIGHT, 10, 10, 1, 1, BabyMario);
+		
+
+		//Let's start it up!
 		al_start_timer(clocker);
 		while(!done)
 		{
@@ -76,6 +89,8 @@ public:
 			al_wait_for_event(event_queue, &ev);
 			timer->updateTimer(&ev);
 			keyboard->updateKeyboard(&ev);
+			//This will be replaced by the updating member of database.
+			player->update();
 			screen->updateDisplay(event_queue, &ev);
 			// GAME LOOP
 		}

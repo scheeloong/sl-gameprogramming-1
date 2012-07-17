@@ -2,24 +2,21 @@
 // Defining Methods
 GameObject::GameObject()
 {
-	//temporary, custom for player
-	ID = 1;
-	species = 1;
-	//////////////
 	x = 0, y = 0; 
 	velX = 10, velY = 10;
 	dirX = 0, dirY = 0; 
 	alive = true; 
 	render = true; 
 	collidable = true; 
-	State::State(); // call State's class default constructor which initializes to normal
+//	State::State(); // call State's class default constructor which initializes to normal
 //	Collision::Collision();
-	image = NULL; 
+	image = NULL;
+
+	
 }
 
 // Initializing
-void GameObject::Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image,/* State state, Collision col,*/
-		bool alive, bool render)
+void GameObject::Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image/*, State state, Collision col,*/)
 {
 	setX(x); 
 	setY(y); 
@@ -30,8 +27,8 @@ void GameObject::Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLE
 	setImage(image);  
 	//state; 
 	//col; 
-	setAlive(alive); 
-	setRender(render); 
+	//setAlive(alive); 
+	//setRender(render); 
 }
 
 /*

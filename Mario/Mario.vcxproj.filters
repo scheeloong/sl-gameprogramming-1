@@ -18,7 +18,10 @@
     <None Include="Arial.ttf">
       <Filter>Resource Files</Filter>
     </None>
-    <None Include="50x50.FMP">
+    <None Include="Abc.FMP">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="BabyMario 120.png">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

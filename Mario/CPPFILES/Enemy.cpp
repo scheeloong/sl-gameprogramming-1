@@ -20,7 +20,7 @@ Enemy::Enemy(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMA
 	Collision col,*/ bool alive,bool render, int lives)
 {
 	// call parent constructor
-	 GameObject::Init( x, y, velX, velY, dirX, dirY, image, alive, render); 
+	 GameObject::Init( x, y, velX, velY, dirX, dirY, image); 
 	 // set lives
 	 lives = 0;
 	 addLife(lives); 

@@ -34,8 +34,6 @@ void Display::displayMessage(int posx, int posy, string message) // Display mess
 	al_draw_textf(font18, al_map_rgb(255, 255, 255), posx, posy, 0, "%s", message);
 }
 
-
-
 void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 {
 	if(ev->type == ALLEGRO_EVENT_DISPLAY_CLOSE)
@@ -53,8 +51,9 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 			{
 			//Draw Mario here, currently a STUB
 			//TODO: insert sprite animations for all GameObjects. currently displays a white box for Mario.
-				al_draw_filled_rectangle(player->getX() - 10, player->getY() - 10, 
-					player->getX() + 10,player->getY() + 10, al_map_rgb(255, 255, 255));
+				/*al_draw_filled_rectangle(player->getX() - 10, player->getY() - 10, 
+					player->getX() + 10,player->getY() + 10, al_map_rgb(255, 255, 255));*/
+				player->draw();
 			}
 			else
 			{
