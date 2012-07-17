@@ -19,6 +19,8 @@ class Player : public GameObject
 		void moveDown() {y += velY;}
 		void moveLeft() {facing = WALKLEFT; x -= velX;}
 		void moveRight() {facing = WALKRIGHT; x += velX;}
+		// Changes curFrame to the last frame at index 3 (JUMPMODE)
+		void jumpGlide() {curFrame = JUMPMODE;}
 		void resetAnimation() {curFrame = 0;}
 
 		// Methods

@@ -128,7 +128,7 @@ static enum GAMESTATES{INTRO, MENU, PLAY, GAMEOVER};
 static enum KEYS{UP, DOWN, LEFT, RIGHT, SPACE};
 //For the animations of all sprites.
 //LEFT means walking to the left, RIGHT means walking to the right.
-static enum FACING{WALKLEFT = -1, WALKRIGHT = 1};
+static enum FACING{WALKLEFT = -1, WALKRIGHT = 1, JUMPMODE = 3};
 
 
 #endif CLASSES_H
