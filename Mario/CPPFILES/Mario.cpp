@@ -10,6 +10,7 @@ public:
 	Keyboard *keyboard;
 	//Database *database; 
 	Player *player;
+	Goomba *goomba;
 	Background *background;
 	Collision *collision;
 	// Constructor
@@ -20,11 +21,12 @@ public:
 		//done = false;
 
 		player = new Player();
-		timer = new Timer(player);
-		screen = new Display(player);
+		goomba = new Goomba();
+		timer = new Timer(player, goomba);
+		screen = new Display(player, goomba);
 		keyboard = new Keyboard();
 		background = new Background();
-		collision = new Collision(player);
+		collision = new Collision(player, goomba);
 	}
 	// Methods
 	int run() 
@@ -68,12 +70,15 @@ public:
 		event_queue = al_create_event_queue();
 		clocker = al_create_timer(1.0/FPS);
 		srand(time(NULL));
-
+		
 		//Load
 		if(MapLoad("50x50.FMP", 1))
 			return(-5); 
 		ALLEGRO_BITMAP *BabyMario;
+		ALLEGRO_BITMAP *Goomba;
+		
 		BabyMario = al_load_bitmap("BabyMario 120.png");
+		Goomba = al_load_bitmap("Goomba 120.png");
 
 		//Register
 		al_register_event_source(event_queue, al_get_display_event_source(display));
@@ -82,7 +87,7 @@ public:
 
 		//Object Initialization
 		player->Init(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, BabyMario);
-		
+		goomba->Init(WIDTH/2, HEIGHT/2, -2, 0, 1, 1, Goomba);
 
 		//Let's start it up!
 		al_start_timer(clocker);
@@ -91,15 +96,17 @@ public:
 			ALLEGRO_EVENT ev;
 			al_wait_for_event(event_queue, &ev);
 			timer->updateTimer(&ev);
-			collision->checkTileCollision();
+			collision->checkCollision();
 			keyboard->updateKeyboard(&ev);
 			//This will be replaced by the updating member of database.
 			player->update();
+			goomba->update();
 			screen->updateDisplay(event_queue, &ev);
 			// GAME LOOP
 		}
 		
 		player->destroy();
+		goomba->destroy();
 		al_destroy_event_queue(event_queue);
 		timer->destroyTimer(clocker);
 		//THIS LINE WILL CAUSE CRASH! Because the bitmap was 
@@ -110,6 +117,7 @@ public:
 		screen->destroyFont();
 		MapFreeMem();
 		delete player;
+		delete goomba;
 		delete timer; 
 		delete keyboard;
 		delete screen;		

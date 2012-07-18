@@ -80,6 +80,7 @@
     <None Include="Abc.FMP" />
     <None Include="Arial.ttf" />
     <None Include="BabyMario 120.png" />
+    <None Include="Goomba 120.png" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CPPFILES\cheatsheet.cpp" />
@@ -89,6 +90,7 @@
     <ClCompile Include="CPPFILES\Display.cpp" />
     <ClCompile Include="CPPFILES\Enemy.cpp" />
     <ClCompile Include="CPPFILES\GameObject.cpp" />
+    <ClCompile Include="CPPFILES\Goomba.cpp" />
     <ClCompile Include="CPPFILES\Keyboard.cpp" />
     <ClCompile Include="CPPFILES\mappy_A5.c" />
     <ClCompile Include="CPPFILES\Mario.cpp" />
@@ -108,6 +110,7 @@
     <ClInclude Include="CPPFILES\HFILES\Display.h" />
     <ClInclude Include="CPPFILES\HFILES\Enemy.h" />
     <ClInclude Include="CPPFILES\HFILES\GameObject.h" />
+    <ClInclude Include="CPPFILES\HFILES\Goomba.h" />
     <ClInclude Include="CPPFILES\HFILES\Keyboard.h" />
     <ClInclude Include="CPPFILES\HFILES\mappy_A5.h" />
     <ClInclude Include="CPPFILES\HFILES\Mario.h" />

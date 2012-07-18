@@ -14,6 +14,7 @@ GameObject::GameObject()
 
 	//positive for going down
 	gravity = 1;
+	halffire = 0;
 	
 }
 
