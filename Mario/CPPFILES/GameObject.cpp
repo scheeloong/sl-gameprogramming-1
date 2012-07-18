@@ -3,7 +3,7 @@
 GameObject::GameObject()
 {
 	x = 0, y = 0; 
-	velX = 10, velY = 10;
+	velX = 10, velY = 0;
 	dirX = 0, dirY = 0; 
 	alive = true; 
 	render = true; 
@@ -12,6 +12,7 @@ GameObject::GameObject()
 //	Collision::Collision();
 	image = NULL;
 
+	//positive for going down
 	gravity = 1;
 	
 }

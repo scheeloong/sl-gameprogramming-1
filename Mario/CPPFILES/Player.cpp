@@ -34,9 +34,10 @@ void Player::Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_
 		//addLife(lives); I don't know why this is here.
 }
 
-//Update animations
+//Update animations and velocity
 void Player::update()
 {
+	moveVertically();
 	if(curFrame == JUMPMODE); //TODO: Mario needs to hold his jump position until
 	// he hits the ground again. 
 
@@ -70,12 +71,32 @@ void Player::draw()
 {
 	int fx = (curFrame % animationColumns) * frameWidth;
 	int fy = animationRow * frameHeight;
-	if (animationDirection == 1)
+	//if (animationDirection == 1)
 
+	//The trailing added numbers after frameWidth/2 etc. are all arbitrary.
+	//The spritesheet in this case was a little crooked and those numbers
+	//help recenter the sprite to be drawn.
 	if (facing == WALKRIGHT)
 	al_draw_bitmap_region(image, fx, fy, frameWidth,
-		frameHeight, x - frameWidth / 2, y - frameHeight /2, 0);
+		frameHeight, x - frameWidth / 2 + 10, y - frameHeight /2 + 10, 0);
 	else if (facing == WALKLEFT)
 	al_draw_bitmap_region(image, fx, fy, frameWidth,
-		frameHeight, x - frameWidth / 2, y - frameHeight /2, ALLEGRO_FLIP_HORIZONTAL);
+		frameHeight, x - frameWidth / 2 - 10, y - frameHeight /2 + 10, ALLEGRO_FLIP_HORIZONTAL);
+	//This tests the bounding box dimensions.
+	al_draw_filled_rectangle(x-13, y-25, x+13, y+25, al_map_rgba(255, 0, 255, 100));
+}
+
+void Player::startLeap() 
+{
+	//Start the jump only if the object is NOT onAir, aka on the ground
+	if(!onAir)
+	{
+		setVelY(maxSpeed);
+		//Every time the speed is changed, moveVertically must be called
+		//to change the object's position slightly. Otherwise, the 
+		//Collision class keeps it in a stuck mode.
+		moveVertically();
+		//Because it's been movedVertically, it is now in the air.
+		onAir = true;
+	}
 }
