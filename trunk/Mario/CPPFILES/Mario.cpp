@@ -81,7 +81,7 @@ public:
 		al_register_event_source(event_queue, al_get_timer_event_source(clocker));
 
 		//Object Initialization
-		player->Init(0, HEIGHT, 5, 5, 1, 1, BabyMario);
+		player->Init(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, BabyMario);
 		
 
 		//Let's start it up!

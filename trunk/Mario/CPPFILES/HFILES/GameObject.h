@@ -12,6 +12,8 @@ protected:
 	// Can't remember why we needed species. Assuming state will handle all this...
 	// int species;
 
+	// DO NOT CHANGE int TYPE to float for position and velocity.
+	// WILL CAUSE CRASH in Collision class
 	// Positions
 	int x; 
 	int y; 
@@ -29,7 +31,7 @@ protected:
     // Collision col; 
 	bool collidable; // if it is collidable, set collidable to true
 
-	// Alive and Draw
+	// Alive and Draw, currently unused
 	bool alive; 
 	bool render; 
 
@@ -86,9 +88,25 @@ public:
 	int getID() {return ID;}
 	/*void setSpecies(int spec) {species = spec;}
 	int getSpecies() {return species;}*/
+	
+	//===================================
+	// Moving the Object
+	//===================================
+	//since velY fluxes between + and - values, and the objects 
+	//can't normally move down, this function is sufficient
+	void moveVertically() {y += velY;}
+	void moveDown() {y -= velY;} //unused atm.
 
-	// Methods
-	bool checkCollision(GameObject *object2);   // Returns true if there is collision
+	//facing lets the object know which way it is facing, so
+	//draw will use the ALLEGRO REFLECT flag as necessary (see Player::draw())
+	void moveLeft() {facing = WALKLEFT; x -= velX;}
+	void moveRight() {facing = WALKRIGHT; x += velX;}
+	void accelerate() {velY += gravity;}
+
+	//TODO: modify this to accommodate for velX reverses as well (for enemies)
+	void reverseDirection() {if(onAir && velY <= 0) {velY = 0; moveVertically();}}
+
+	bool checkCollision(GameObject *object2);   //unlikely to be used
 
 	virtual void update() //;
 	{

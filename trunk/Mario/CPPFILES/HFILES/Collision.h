@@ -34,7 +34,7 @@ public:
 	Collision(Player *player)  
 	{
 		Collision::player = player;
-		insertObjectBounds(PLAYER, 10, 15);
+		insertObjectBounds(PLAYER, 13, 25);
 	}
 
 	//Adds new GameObject bounds to the two vectors. 
@@ -67,10 +67,10 @@ public:
 		//Check 4 corners of object1's bound box.
 		
 		//Underfeet check
-		if (isTileCollidable(x, y + by)) lock[DOWN] = true;
-		else lock[DOWN] = false;
+		if (!isTileCollidable(x, y + by)) {lock[DOWN] = false; onAir = true;}
+		else {lock[DOWN] = true; onAir = false; player->setVelY(0); player->resetAnimation();}
 		//Overhead check
-		if (isTileCollidable(x, y - by)) lock[UP] = true;
+		if (isTileCollidable(x, y - by)) {lock[UP] = true; player->reverseDirection();}
 		else lock[UP] = false;
 		//Rightside check
 		if (isTileCollidable(x + bx, y)) lock[RIGHT] = true;
