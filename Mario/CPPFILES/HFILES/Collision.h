@@ -34,7 +34,7 @@ public:
 	Collision(Player *player)  
 	{
 		Collision::player = player;
-		insertObjectBounds(PLAYER, 13, 25);
+		insertObjectBounds(PLAYER, 13, 23);
 	}
 
 	//Adds new GameObject bounds to the two vectors. 
@@ -64,40 +64,42 @@ public:
 		int bx = boundX[player->getID()];
 		int by = boundY[player->getID()];
 
+		//If Mario jumps above the visible screen, tile collisions won't be checked.
+		if(y > 0)
 		//Check 4 corners of object1's bound box.
-		
 		//Underfeet check
-		if (!isTileCollidable(x, y + by)) {lock[DOWN] = false; onAir = true;}
-		else {lock[DOWN] = true; onAir = false; player->setVelY(0); player->resetAnimation();}
-		//Overhead check
-		if (isTileCollidable(x, y - by)) {lock[UP] = true; player->reverseDirection();}
-		else lock[UP] = false;
-		//Rightside check
-		if (isTileCollidable(x + bx, y)) lock[RIGHT] = true;
-		else lock[RIGHT] = false;
-		//Leftside check
-		if (isTileCollidable(x - bx, y)) lock[LEFT] = true;
-		else lock[LEFT] = false;
-
-		//TODO: modify to check every side of body.
-		if(isTileSpecial(x, y))
 		{
-			if(isQuestionTile(x, y))
+			if (!isTileCollidable(x, y + by)) {lock[DOWN] = false; onAir = true;}
+			else {lock[DOWN] = true; onAir = false; player->setVelY(0); player->resetAnimation();}
+			//Overhead check
+			if (isTileCollidable(x, y - by)) {lock[UP] = true; player->reverseDirection();}
+			else lock[UP] = false;
+			//Rightside check
+			if (isTileCollidable(x + bx, y)) lock[RIGHT] = true;
+			else lock[RIGHT] = false;
+			//Leftside check
+			if (isTileCollidable(x - bx, y)) lock[LEFT] = true;
+			else lock[LEFT] = false;
+
+			//TODO: modify to check every side of body.
+			if(isTileSpecial(x, y))
 			{
-				//do stuff
-			}
-			else if(isCoinTile(x, y))
-			{
-				//do stuff
-			}
-			else if(isBrickTile(x, y))
-			{
-				//do stuff
+				if(isQuestionTile(x, y))
+				{
+					//do stuff
+				}
+				else if(isCoinTile(x, y))
+				{
+					//do stuff
+				}
+				else if(isBrickTile(x, y))
+				{
+					//do stuff
 		
+				}
 			}
 		}
 	}
-
 	inline bool isTileCollidable(int x, int y)
 	{
 		BLKSTR *blockdata;
