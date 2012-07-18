@@ -41,9 +41,9 @@ void Player::update()
 	if(curFrame == JUMPMODE); //TODO: Mario needs to hold his jump position until
 	// he hits the ground again. 
 
-	//Allows the mario sprite to move fluently through
-	//his 3 positions: Stand, Step, and Land
-	//1 2 3 2 1 2 3 2 1 instead of 1 2 3 1 2 3 1 2 3
+	// Allows the mario sprite to move fluently through
+	// his 3 positions: Stand, Step, and Land
+	// 1 2 3 2 1 2 3 2 1 instead of 1 2 3 1 2 3 1 2 3
 	else if(++frameCount >= frameDelay && (keys[RIGHT]||keys[LEFT]))
 	{
 		// Go forward through the sprite sheet (LtoR)
@@ -89,7 +89,7 @@ void Player::draw()
 void Player::startLeap() 
 {
 	//Start the jump only if the object is NOT onAir, aka on the ground
-	if(!onAir)
+	if(!getonAir())
 	{
 		setVelY(maxSpeed);
 		//Every time the speed is changed, moveVertically must be called
@@ -97,6 +97,6 @@ void Player::startLeap()
 		//Collision class keeps it in a stuck mode.
 		moveVertically();
 		//Because it's been movedVertically, it is now in the air.
-		onAir = true;
+		setonAir(true);
 	}
 }

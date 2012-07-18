@@ -125,9 +125,6 @@ extern int xOff;
 extern int yOff;
 // This fluxes between 0 and 1, to decrease the effect of gravity in
 // updateTimer. 
-extern int halffire;
-extern bool onAir;
-extern bool leapInitialized;
 // To be updated later
 static enum ID{PLAYER, ENEMY, BULLET, BORDER, MISC, EXPLOSION};
 static enum GAMESTATES{INTRO, MENU, PLAY, GAMEOVER};

@@ -26,15 +26,19 @@ private:
 	vector<int> boundX;
 	vector<int> boundY;
 	Player *player;
+	Enemy *enemy;
 
 public:
 		
 		// Constructor
 	//Collision() : boundX(0), boundY(0) {}
-	Collision(Player *player)  
+	Collision(Player *player, Enemy *enemy)  
 	{
 		Collision::player = player;
+		Collision::enemy = enemy;
 		insertObjectBounds(PLAYER, 13, 23);
+		// Enemy only refers to Goomba as of now.
+		insertObjectBounds(ENEMY, 22, 27);
 	}
 
 	//Adds new GameObject bounds to the two vectors. 
@@ -55,8 +59,37 @@ public:
 		//boundY = GameObject.y + 20; 
 	}
 
-	//TODO: modify parameter to pass in three lists.
-	void checkTileCollision()
+	//This function gets called in the big while loop. It sums up all of class Collision.
+	void checkCollision()
+	{
+		checkTileCollision(player);
+		checkTileCollision(enemy);
+	}
+
+	void checkTileCollision(Enemy *enemy)
+	{
+		float x = enemy->getX();
+		float y = enemy->getY();
+
+		int bx = boundX[enemy->getID()];
+		int by = boundY[enemy->getID()];
+
+		//Underfeet check. Due to some strange logic, we first have to check if it's onAir,
+		//if not then check if it's on the ground. 
+		if (!isTileCollidable(x, y + by)) {enemy->setonAir(true);}
+		//reset animation isn't extremely important here.
+		else {enemy->setonAir(false); enemy->setVelY(0); enemy->resetAnimation();}
+		//Overhead check - won't really happen with enemies
+		if (isTileCollidable(x, y - by)) {}
+		//Rightside check. Only reverseDirection if the dude is currently TRYING TO WALKRIGHT && hitting a tile on the right!
+		if (isTileCollidable(x + bx, y) && enemy->getfacing() == WALKRIGHT) 
+			enemy->reverseDirection(); 
+	
+		//Leftside check. Only reverseDirection if the dude is currently TRYING TO WALKLEFT && hitting a tile on the left!
+		if (isTileCollidable(x - bx, y) && enemy->getfacing() == WALKLEFT) 
+			enemy->reverseDirection(); 
+	}
+	void checkTileCollision(Player *player)
 	{
 		float x = player->getX();
 		float y = player->getY();
@@ -69,8 +102,8 @@ public:
 		//Check 4 corners of object1's bound box.
 		//Underfeet check
 		{
-			if (!isTileCollidable(x, y + by)) {lock[DOWN] = false; onAir = true;}
-			else {lock[DOWN] = true; onAir = false; player->setVelY(0); player->resetAnimation();}
+			if (!isTileCollidable(x, y + by)) {lock[DOWN] = false; player->setonAir(true);}
+			else {lock[DOWN] = true; player->setonAir(false); player->setVelY(0); player->resetAnimation();}
 			//Overhead check
 			if (isTileCollidable(x, y - by)) {lock[UP] = true; player->reverseDirection();}
 			else lock[UP] = false;

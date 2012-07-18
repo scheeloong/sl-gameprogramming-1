@@ -24,6 +24,9 @@
     <None Include="BabyMario 120.png">
       <Filter>Resource Files</Filter>
     </None>
+    <None Include="Goomba 120.png">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CPPFILES\Score.cpp">
@@ -77,6 +80,9 @@
     <ClCompile Include="CPPFILES\Classes.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CPPFILES\Goomba.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPPFILES\HFILES\Enemy.h">
@@ -125,6 +131,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CPPFILES\HFILES\GameObject.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPPFILES\HFILES\Goomba.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

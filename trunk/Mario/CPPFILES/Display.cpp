@@ -3,20 +3,18 @@
 bool done = false;
 bool redraw = false;
 bool isGameOver = false;
-bool leapInitialized = false;
-bool onAir = false;
 bool keys[] = {false, false, false, false, false};
 bool lock[] = {false, false, false, false, false};
 const float PI = 3.14159;
 int xOff = 0;
 int yOff = 0;
-int halffire = 0;
 
-Display::Display(Player *player)
+Display::Display(Player *player, Enemy *enemy)
 {
 	//kill this soon
 	al_init_primitives_addon();
 	Display::player = player;
+	Display::enemy = enemy;
 	al_init_font_addon();
 	al_init_ttf_addon();
 	font18 = al_load_font("arial.ttf", 18, 0);
@@ -63,6 +61,7 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 				/*al_draw_filled_rectangle(player->getX() - 10, player->getY() - 10, 
 					player->getX() + 10,player->getY() + 10, al_map_rgb(255, 255, 255));*/
 				player->draw();
+				enemy->draw();
 			}
 			else
 			{

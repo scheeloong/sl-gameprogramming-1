@@ -55,6 +55,10 @@ protected:
 
 	int gravity;
 
+	bool onAir;
+	// See Timer::isItFlying(object)
+	int halffire;
+
 public:
 	// Constructor
 	GameObject();
@@ -86,6 +90,12 @@ public:
 	void setImage(ALLEGRO_BITMAP *im) { image = im; }
 	void setID(int id) { ID = id; } 
 	int getID() {return ID;}
+	bool getonAir() {return onAir;}
+	void setonAir(bool onAir) {GameObject::onAir = onAir;}
+	int getfacing() {return facing;}
+	void setfacing(int facing) {GameObject::facing = facing;}
+	bool gethalffire() {return halffire;}
+	void sethalffire(int halffire) {GameObject::halffire = halffire;}
 	/*void setSpecies(int spec) {species = spec;}
 	int getSpecies() {return species;}*/
 	
@@ -99,12 +109,23 @@ public:
 
 	//facing lets the object know which way it is facing, so
 	//draw will use the ALLEGRO REFLECT flag as necessary (see Player::draw())
-	void moveLeft() {facing = WALKLEFT; x -= velX;}
-	void moveRight() {facing = WALKRIGHT; x += velX;}
+	void moveLeft() {x -= velX;}
+	void moveRight() {x += velX;}
 	void accelerate() {velY += gravity;}
 
 	//TODO: modify this to accommodate for velX reverses as well (for enemies)
-	void reverseDirection() {if(onAir && velY <= 0) {velY = 0; moveVertically();}}
+	void reverseDirection() 
+	{
+		//This will be called for the player when they hit something overhead.
+		if(getID() == PLAYER)
+			if(getonAir() && velY <= 0) {velY = 0; moveVertically();}
+		if(getID() == ENEMY)
+		{
+			// setfacing to the opposite. ie. WALKRIGHT to WALKLEFT and vice versa
+			velX *= -1;
+			setfacing(getfacing() * -1);
+		}
+	}
 
 	bool checkCollision(GameObject *object2);   //unlikely to be used
 
@@ -113,6 +134,7 @@ public:
 		printf("Gameobject Update");
 	}
 
+	virtual void resetAnimation() {}
 	virtual void draw() {}
 	// update GameObject's position, vel, dir, image etc..
 	// Virtual cause different objects have different update methods

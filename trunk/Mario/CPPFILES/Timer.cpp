@@ -1,23 +1,31 @@
 #pragma once
 #include "HFILES/Timer.h"
 
+// This function checks if the object is flying, and if yes,
+// ensures that it accelerates at the right rate.
+bool Timer::isItFlying(GameObject *object)
+{
+	if (object->getonAir() == true) //object is in the air
+	{	//halffire ensures we accelerate 
+		// every other loop through update timer.
+		// essentially making gravity = 0.5
+		if(object->gethalffire())
+		{
+			object->accelerate();
+			object->sethalffire(0);
+		}
+		else object->sethalffire(1);
+		return true;
+	}
+	return false;
+}
 void Timer::updateTimer(ALLEGRO_EVENT *ev)
 {
 	MapUpdateAnims();
 	if(ev->type == ALLEGRO_EVENT_TIMER)
 		{
 			redraw = true;
-			if (onAir) //object is in the air
-			{	//halffire (see Classes.h) ensures we accelerate 
-				// every other loop through update timer.
-				// essentially making gravity = 0.5
-				if(halffire)
-				{
-					player->accelerate();
-					halffire--;
-				}
-				else halffire++;
-			}
+			if(isItFlying(player)) {}
 			else if(keys[UP] && !lock[UP])
 			{	
 				// UNIQUE to PLAYER: gives player the initial velocity
@@ -39,8 +47,8 @@ void Timer::updateTimer(ALLEGRO_EVENT *ev)
 
 			if(!isGameOver)
 			{
-				//if(player->getLife() <= 0)
-					//isGameOver = true;
+				isItFlying(enemy); //if(player->getLife() <= 0)
+									//isGameOver = true;
 			}
 		}
 }

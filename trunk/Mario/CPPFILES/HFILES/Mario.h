@@ -4,6 +4,8 @@
 //#pragma once
 #include "HFILES\Classes.h"
 #include "HFILES\Player.h"
+#include "HFILES\Enemy.h"
+#include "HFILES\Goomba.h"
 #include "HFILES\Timer.h"
 #include "HFILES\Display.h"
 #include "HFILES\Keyboard.h"

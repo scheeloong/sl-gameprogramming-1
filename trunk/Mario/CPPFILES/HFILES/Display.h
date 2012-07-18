@@ -5,6 +5,7 @@
 //#pragma once
 #include "HFILES/Classes.h"
 #include "HFILES/Player.h"
+#include "HFILES/Enemy.h"
 
 //only truified when player lives are over.
 // Main class (Mario) will have an instance of Display
@@ -15,6 +16,7 @@ class Display
 		//ALLEGRO_DISPLAY *display; 
 		ALLEGRO_FONT *font18;
 		Player *player;
+		Enemy *enemy;
 		// font
 		// background images? 
 		// Mappy? 
@@ -24,7 +26,7 @@ class Display
 
 	public:
 		// Constructor
-		Display(Player *player = NULL);
+		Display(Player *player = NULL, Enemy *enemy = NULL);
 		void Init(); // Gets actor's name
 		// Methods
 		void displayMessage(int posx, int posy, string message);
