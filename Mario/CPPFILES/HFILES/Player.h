@@ -19,7 +19,7 @@ class Player : public GameObject
 		// The Init function CANNOT be a constructor because the ALLEGRO_BITMAP *image is not 
 		// initialized when the constructor is called. This must be called after the object is constructed.
 		// This function also initializes the animation data.
-		void Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image);
+		void Init(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image);
 		
 		// Animation Helpers
 		// Changes curFrame to the last frame at index 3 (JUMPMODE)

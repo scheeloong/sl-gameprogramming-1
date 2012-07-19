@@ -5,7 +5,7 @@
 // ensures that it accelerates at the right rate.
 bool Timer::isItFlying(GameObject *object)
 {
-	if (object->getonAir() == true) //object is in the air
+	if (object->getonAir() == true && object->getAlive()) //object is in the air and alive
 	{	//halffire ensures we accelerate 
 		// every other loop through update timer.
 		// essentially making gravity = 0.5
@@ -21,6 +21,7 @@ bool Timer::isItFlying(GameObject *object)
 }
 void Timer::updateTimer(ALLEGRO_EVENT *ev)
 {
+	
 	MapUpdateAnims();
 	if(ev->type == ALLEGRO_EVENT_TIMER)
 		{

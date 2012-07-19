@@ -10,7 +10,7 @@ class Goomba : public Enemy
 private:
 public:
 	Goomba() : Enemy () {}
-	void Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image);
+	void Init(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image);
 	void draw();
 };
 

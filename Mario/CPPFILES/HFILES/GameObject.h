@@ -66,7 +66,7 @@ public:
 	// Method for constructor (more specific) 
 	// This Init function is expected to be called ONCE for each GameObject, so some parameters 
 	// might never need to be updated. (state, col..?)
-	void Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image/*, State state, Collision col,*/); 
+	void Init(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image/*, State state, Collision col,*/); 
 
 	//===============================
 	// Set & Get
