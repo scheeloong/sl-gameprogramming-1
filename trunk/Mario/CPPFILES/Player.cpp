@@ -13,9 +13,9 @@ void Player::addLife (int i)
 	lives += i; 
 }
 
-void Player::Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image /*, State state, Collision col,*/)
+void Player::Init(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image /*, State state, Collision col,*/)
 {
-		GameObject::Init(x, y, velX, velY, dirX, dirY, image/*, state, col,*/);
+		GameObject::Init(x, y, velX, velY, dirX, dirY, alive, image/*, state, col,*/);
 		//array indexing, so 2 frames.
 		maxFrame = 1;
 		curFrame = 0;

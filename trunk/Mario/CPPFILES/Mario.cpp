@@ -86,9 +86,8 @@ public:
 		al_register_event_source(event_queue, al_get_timer_event_source(clocker));
 
 		//Object Initialization
-		player->Init(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, BabyMario);
-		goomba->Init(WIDTH/2, HEIGHT/2, -2, 0, 1, 1, Goomba);
-
+		player->Init(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true, BabyMario);
+		goomba->Init(WIDTH/2, HEIGHT/2, -3, 0, 1, 1, false, Goomba);
 		//Let's start it up!
 		al_start_timer(clocker);
 		while(!done)
@@ -117,7 +116,6 @@ public:
 		screen->destroyFont();
 		MapFreeMem();
 		delete player;
-		delete goomba;
 		delete timer; 
 		delete keyboard;
 		delete screen;		

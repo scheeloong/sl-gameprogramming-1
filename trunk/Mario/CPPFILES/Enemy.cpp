@@ -28,29 +28,32 @@ void Enemy::addLife(int i) // add i to lives (may not be needed)
 
 void Enemy::update()
 {
-	//the enemy moves on its own, so calling arbitrary move function.
-	moveRight();
-	moveVertically();
-	if(++frameCount >= frameDelay)
+	if(getAlive())
 	{
-		// Go forward through the sprite sheet (LtoR)
-		if(rewind == 1)
+		//the enemy moves on its own, so calling arbitrary move function.
+		moveRight();
+		moveVertically();
+		if(++frameCount >= frameDelay)
 		{
-			if(curFrame >= maxFrame)
+			// Go forward through the sprite sheet (LtoR)
+			if(rewind == 1)
 			{
-				rewind = -1;
+				if(curFrame >= maxFrame)
+				{
+					rewind = -1;
+				}
 			}
-		}
-		// Go backward through the sprite sheet (RtoL);
-		else if(rewind == -1)
-		{
-			if(curFrame <= 0)
+			// Go backward through the sprite sheet (RtoL);
+			else if(rewind == -1)
 			{
-				rewind = 1;
+				if(curFrame <= 0)
+				{
+					rewind = 1;
+				}
 			}
+			curFrame += rewind;
+			frameCount = 0;
 		}
-		curFrame += rewind;
-		frameCount = 0;
 	}
 }
 

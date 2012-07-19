@@ -68,26 +68,31 @@ public:
 
 	void checkTileCollision(Enemy *enemy)
 	{
-		float x = enemy->getX();
-		float y = enemy->getY();
+		if(enemy->getAlive())
+		{
+			cout << "We are live!" << endl;
+			float x = enemy->getX();
+			float y = enemy->getY();
 
-		int bx = boundX[enemy->getID()];
-		int by = boundY[enemy->getID()];
+			int bx = boundX[enemy->getID()];
+			int by = boundY[enemy->getID()];
 
-		//Underfeet check. Due to some strange logic, we first have to check if it's onAir,
-		//if not then check if it's on the ground. 
-		if (!isTileCollidable(x, y + by)) {enemy->setonAir(true);}
-		//reset animation isn't extremely important here.
-		else {enemy->setonAir(false); enemy->setVelY(0); enemy->resetAnimation();}
-		//Overhead check - won't really happen with enemies
-		if (isTileCollidable(x, y - by)) {}
-		//Rightside check. Only reverseDirection if the dude is currently TRYING TO WALKRIGHT && hitting a tile on the right!
-		if (isTileCollidable(x + bx, y) && enemy->getfacing() == WALKRIGHT) 
-			enemy->reverseDirection(); 
+			//Underfeet check. Due to some strange logic, we first have to check if it's onAir,
+			//if not then check if it's on the ground. 
+			if (!isTileCollidable(x, y + by)) {enemy->setonAir(true);}
+			//reset animation isn't extremely important here.
+			else {enemy->setonAir(false); enemy->setVelY(0); enemy->resetAnimation();}
+			//Overhead check - won't really happen with enemies
+			if (isTileCollidable(x, y - by)) {}
+			//Rightside check. Only reverseDirection if the dude is currently TRYING TO WALKRIGHT && hitting a tile on the right!
+			if (isTileCollidable(x + bx, y) && enemy->getfacing() == WALKRIGHT) 
+				enemy->reverseDirection(); 
 	
-		//Leftside check. Only reverseDirection if the dude is currently TRYING TO WALKLEFT && hitting a tile on the left!
-		if (isTileCollidable(x - bx, y) && enemy->getfacing() == WALKLEFT) 
-			enemy->reverseDirection(); 
+			//Leftside check. Only reverseDirection if the dude is currently TRYING TO WALKLEFT && hitting a tile on the left!
+			if (isTileCollidable(x - bx, y) && enemy->getfacing() == WALKLEFT) 
+				enemy->reverseDirection(); 
+		}
+
 	}
 	void checkTileCollision(Player *player)
 	{
@@ -131,6 +136,11 @@ public:
 		
 				}
 			}
+			if(isTriggerTile(x, y))
+			{
+				//Eventually, Init will be needed here, to load a new enemy into the list.
+				enemy->setAlive(true);
+			}
 		}
 	}
 	inline bool isTileCollidable(int x, int y)
@@ -166,6 +176,13 @@ public:
 		BLKSTR *blockdata;
 		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
 		return blockdata->tr;
+	}
+
+	inline bool isTriggerTile(int x, int y)
+	{
+		BLKSTR *blockdata;
+		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
+		return blockdata->user3;
 	}
 };
 
