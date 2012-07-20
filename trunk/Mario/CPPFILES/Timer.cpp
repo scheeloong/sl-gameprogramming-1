@@ -24,32 +24,37 @@ void Timer::updateTimer(ALLEGRO_EVENT *ev)
 	
 	MapUpdateAnims();
 	if(ev->type == ALLEGRO_EVENT_TIMER)
+	{
+		redraw = true;
+		for(database->iterP = database->getPlayersBegin(); database->iterP != database->getPlayersEnd(); database->iterP++)
 		{
-			redraw = true;
-			if(isItFlying(player)) {}
+			if(isItFlying(*(database->iterP))) {}
+		
 			else if(keys[UP] && !lock[UP])
 			{	
 				// UNIQUE to PLAYER: gives player the initial velocity
-				player->startLeap();
+				(*(database->iterP))->startLeap();
 				// changes curFrame to JUMPMODE
-				player->jumpGlide();
+				(*database->iterP)->jumpGlide();
 			}
 			else if(keys[DOWN] && !lock[DOWN])
-				player->moveDown();
-
+				(*(database->iterP))->moveDown();
+	
 			if(keys[LEFT] && !lock[LEFT])
-				player->moveLeft();
+				(*(database->iterP))->moveLeft();
 			else if(keys[RIGHT] && !lock[RIGHT])
-				player->moveRight();
+				(*(database->iterP))->moveRight();
 
 			//animation only goes back to frame 0 when all keys are released.
 			if(!keys[UP] && !keys[DOWN] && !keys[LEFT] && !keys[RIGHT])
-				player->resetAnimation();
+				(*(database->iterP))->resetAnimation();
 
 			if(!isGameOver)
 			{
-				isItFlying(enemy); //if(player->getLife() <= 0)
-									//isGameOver = true;
+				for(database->iterE = database->getEnemiesBegin(); database->iterE != database->getEnemiesEnd(); database->iterE++)
+					isItFlying(*database->iterE); //if(player->getLife() <= 0)
+								//isGameOver = true;
 			}
 		}
+	}
 }

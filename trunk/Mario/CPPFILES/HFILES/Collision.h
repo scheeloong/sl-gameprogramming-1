@@ -6,6 +6,8 @@
 #include "Classes.h"
 #include "GameObject.h"
 #include "Player.h"
+#include "Enemy.h"
+#include "Database.h"
 
 
 class Collision
@@ -25,17 +27,15 @@ private:
 	//Change this to include all types of creatures.
 	vector<int> boundX;
 	vector<int> boundY;
-	Player *player;
-	Enemy *enemy;
+	Database *database;
 
 public:
 		
 		// Constructor
 	//Collision() : boundX(0), boundY(0) {}
-	Collision(Player *player, Enemy *enemy)  
+	Collision(Database *database)  
 	{
-		Collision::player = player;
-		Collision::enemy = enemy;
+		Collision::database = database;
 		insertObjectBounds(PLAYER, 13, 23);
 		// Enemy only refers to Goomba as of now.
 		insertObjectBounds(ENEMY, 22, 27);
@@ -62,84 +62,92 @@ public:
 	//This function gets called in the big while loop. It sums up all of class Collision.
 	void checkCollision()
 	{
-		checkTileCollision(player);
-		checkTileCollision(enemy);
+		checkPlayerTileCollision(database->iterP);
+		checkEnemyTileCollision(database->iterE);
 	}
 
-	void checkTileCollision(Enemy *enemy)
+	void checkEnemyTileCollision(list<Enemy *>::iterator iter)
 	{
-		if(enemy->getAlive())
+		for(iter = database->getEnemiesBegin(); iter != database->getEnemiesEnd(); iter++)
 		{
-			cout << "We are live!" << endl;
-			float x = enemy->getX();
-			float y = enemy->getY();
+			if((*iter)->getAlive())
+			{
+				float x = (*iter)->getX();
+				float y = (*iter)->getY();
 
-			int bx = boundX[enemy->getID()];
-			int by = boundY[enemy->getID()];
-
-			//Underfeet check. Due to some strange logic, we first have to check if it's onAir,
-			//if not then check if it's on the ground. 
-			if (!isTileCollidable(x, y + by)) {enemy->setonAir(true);}
-			//reset animation isn't extremely important here.
-			else {enemy->setonAir(false); enemy->setVelY(0); enemy->resetAnimation();}
-			//Overhead check - won't really happen with enemies
-			if (isTileCollidable(x, y - by)) {}
-			//Rightside check. Only reverseDirection if the dude is currently TRYING TO WALKRIGHT && hitting a tile on the right!
-			if (isTileCollidable(x + bx, y) && enemy->getfacing() == WALKRIGHT) 
-				enemy->reverseDirection(); 
+				int bx = boundX[(*iter)->getID()];
+				int by = boundY[(*iter)->getID()];
 	
-			//Leftside check. Only reverseDirection if the dude is currently TRYING TO WALKLEFT && hitting a tile on the left!
-			if (isTileCollidable(x - bx, y) && enemy->getfacing() == WALKLEFT) 
-				enemy->reverseDirection(); 
+				//Underfeet check. Due to some strange logic, we first have to check if it's onAir,
+				//if not then check if it's on the ground. 
+				if (!isTileCollidable(x, y + by)) {(*iter)->setonAir(true);}
+				//reset animation isn't extremely important here.
+				else {(*iter)->setonAir(false); (*iter)->setVelY(0); (*iter)->resetAnimation();}
+				//Overhead check - won't really happen with enemies
+				if (isTileCollidable(x, y - by)) {}
+				//Rightside check. Only reverseDirection if the dude is currently TRYING TO WALKRIGHT && hitting a tile on the right!
+				if (isTileCollidable(x + bx, y) && (*iter)->getfacing() == WALKRIGHT) 
+					{(*iter)->reverseDirection();}
+	
+				//Leftside check. Only reverseDirection if the dude is currently TRYING TO WALKLEFT && hitting a tile on the left!
+				if (isTileCollidable(x - bx, y) && (*iter)->getfacing() == WALKLEFT) 
+					{(*iter)->reverseDirection();}
+		
+			}
 		}
 
 	}
-	void checkTileCollision(Player *player)
+	void checkPlayerTileCollision(list<Player *>::iterator iter)
 	{
-		float x = player->getX();
-		float y = player->getY();
-
-		int bx = boundX[player->getID()];
-		int by = boundY[player->getID()];
-
-		//If Mario jumps above the visible screen, tile collisions won't be checked.
-		if(y > 0)
-		//Check 4 corners of object1's bound box.
-		//Underfeet check
+		for(iter = database->getPlayersBegin(); iter != database->getPlayersEnd(); iter++)
 		{
-			if (!isTileCollidable(x, y + by)) {lock[DOWN] = false; player->setonAir(true);}
-			else {lock[DOWN] = true; player->setonAir(false); player->setVelY(0); player->resetAnimation();}
-			//Overhead check
-			if (isTileCollidable(x, y - by)) {lock[UP] = true; player->reverseDirection();}
-			else lock[UP] = false;
-			//Rightside check
-			if (isTileCollidable(x + bx, y)) lock[RIGHT] = true;
-			else lock[RIGHT] = false;
-			//Leftside check
-			if (isTileCollidable(x - bx, y)) lock[LEFT] = true;
-			else lock[LEFT] = false;
+			float x = (*iter)->getX();
+			float y = (*iter)->getY();
 
-			//TODO: modify to check every side of body.
-			if(isTileSpecial(x, y))
+			int bx = boundX[(*iter)->getID()];
+			int by = boundY[(*iter)->getID()];
+
+			//If Mario jumps above the visible screen, tile collisions won't be checked.
+			if(y > 0)
+			//Check 4 corners of object1's bound box.
+			//Underfeet check
 			{
-				if(isQuestionTile(x, y))
+				if (!isTileCollidable(x, y + by)) {lock[DOWN] = false; (*iter)->setonAir(true);}
+				else {lock[DOWN] = true; (*iter)->setonAir(false); (*iter)->setVelY(0); (*iter)->resetAnimation();}
+				//Overhead check
+				if (isTileCollidable(x, y - by)) {lock[UP] = true; (*iter)->reverseDirection();}
+				else lock[UP] = false;
+				//Rightside check
+				if (isTileCollidable(x + bx, y)) lock[RIGHT] = true;
+				else lock[RIGHT] = false;
+				//Leftside check
+				if (isTileCollidable(x - bx, y)) lock[LEFT] = true;
+				else lock[LEFT] = false;
+
+				//TODO: modify to check every side of body.
+				if(isTileSpecial(x, y))
 				{
-					//do stuff
-				}
-				else if(isCoinTile(x, y))
-				{
-					//do stuff
-				}
-				else if(isBrickTile(x, y))
-				{
-					//do stuff
+					if(isQuestionTile(x, y))
+					{
+						//do stuff
+					}
+					else if(isCoinTile(x, y))
+					{
+						//do stuff
+					}
+					else if(isBrickTile(x, y))
+					{
+						//do stuff
 		
+					}
 				}
-			}
-			if(isTriggerTile(x, y))
-			{
-				//Eventually, Init will be needed here, to load a new enemy into the list.
-				enemy->setAlive(true);
+				if(isTriggerTile(x, y))
+				{
+					//Eventually, Init will be needed here, to load a new enemy into the list.
+					cout<<"Making enemy!" << endl;
+					database->makeEnemy(WIDTH/2, HEIGHT/2, -3, 0, 1, 1, true);
+					killTriggerTile(x, y);
+				}
 			}
 		}
 	}
@@ -183,6 +191,12 @@ public:
 		BLKSTR *blockdata;
 		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
 		return blockdata->user3;
+	}
+	inline void killTriggerTile(int x, int y)
+	{
+		BLKSTR *blockdata;
+		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
+		blockdata->user3 = 0;
 	}
 };
 

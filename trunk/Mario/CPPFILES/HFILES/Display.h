@@ -4,8 +4,9 @@
 #define DISPLAY_H
 //#pragma once
 #include "HFILES/Classes.h"
-#include "HFILES/Player.h"
+#include "HFILES/Player.h" //delete these soon
 #include "HFILES/Enemy.h"
+#include "HFILES/Database.h"
 
 //only truified when player lives are over.
 // Main class (Mario) will have an instance of Display
@@ -15,8 +16,7 @@ class Display
 		//string name; // keeps track of name of actor playing. 
 		//ALLEGRO_DISPLAY *display; 
 		ALLEGRO_FONT *font18;
-		Player *player;
-		Enemy *enemy;
+		Database *database;
 		// font
 		// background images? 
 		// Mappy? 
@@ -26,7 +26,7 @@ class Display
 
 	public:
 		// Constructor
-		Display(Player *player = NULL, Enemy *enemy = NULL);
+		Display(Database *database = NULL);
 		void Init(); // Gets actor's name
 		// Methods
 		void displayMessage(int posx, int posy, string message);

@@ -13,20 +13,21 @@ public:
 	Goomba *goomba;
 	Background *background;
 	Collision *collision;
+	Database *database;
 	// Constructor
 	Mario()
 	{
 		//clocker = NULL;
 		//event_queue = NULL;
 		//done = false;
-
-		player = new Player();
-		goomba = new Goomba();
-		timer = new Timer(player, goomba);
-		screen = new Display(player, goomba);
+		database = new Database();
+		/*player = new Player(); obscelete due to database implementation
+		goomba = new Goomba();*/
+		timer = new Timer(database);
+		screen = new Display(database);
 		keyboard = new Keyboard();
 		background = new Background();
-		collision = new Collision(player, goomba);
+		collision = new Collision(database);
 	}
 	// Methods
 	int run() 
@@ -65,6 +66,7 @@ public:
 		//Install
 		al_install_keyboard();
 		al_init_image_addon();
+		al_init_primitives_addon();
 
 		//Create
 		event_queue = al_create_event_queue();
@@ -72,11 +74,10 @@ public:
 		srand(time(NULL));
 		
 		//Load
+		ALLEGRO_BITMAP *BabyMario = NULL;
+		ALLEGRO_BITMAP *Goomba = NULL;
 		if(MapLoad("50x50.FMP", 1))
 			return(-5); 
-		ALLEGRO_BITMAP *BabyMario;
-		ALLEGRO_BITMAP *Goomba;
-		
 		BabyMario = al_load_bitmap("BabyMario 120.png");
 		Goomba = al_load_bitmap("Goomba 120.png");
 
@@ -84,10 +85,9 @@ public:
 		al_register_event_source(event_queue, al_get_display_event_source(display));
 		al_register_event_source(event_queue, al_get_keyboard_event_source());		
 		al_register_event_source(event_queue, al_get_timer_event_source(clocker));
-
 		//Object Initialization
-		player->Init(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true, BabyMario);
-		goomba->Init(WIDTH/2, HEIGHT/2, -3, 0, 1, 1, false, Goomba);
+		database->InitImages(BabyMario, Goomba);
+		database->makePlayer(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true);
 		//Let's start it up!
 		al_start_timer(clocker);
 		while(!done)
@@ -97,15 +97,12 @@ public:
 			timer->updateTimer(&ev);
 			collision->checkCollision();
 			keyboard->updateKeyboard(&ev);
-			//This will be replaced by the updating member of database.
-			player->update();
-			goomba->update();
+			database->update();
 			screen->updateDisplay(event_queue, &ev);
 			// GAME LOOP
 		}
 		
-		player->destroy();
-		goomba->destroy();
+		database->destroy();
 		al_destroy_event_queue(event_queue);
 		timer->destroyTimer(clocker);
 		//THIS LINE WILL CAUSE CRASH! Because the bitmap was 
@@ -115,7 +112,7 @@ public:
 		//screen->destroyDisplay();
 		screen->destroyFont();
 		MapFreeMem();
-		delete player;
+		delete database;
 		delete timer; 
 		delete keyboard;
 		delete screen;		

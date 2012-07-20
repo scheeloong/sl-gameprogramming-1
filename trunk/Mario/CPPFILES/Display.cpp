@@ -9,12 +9,11 @@ const float PI = 3.14159;
 int xOff = 0;
 int yOff = 0;
 
-Display::Display(Player *player, Enemy *enemy)
+Display::Display(Database *database)
 {
 	//kill this soon
 	al_init_primitives_addon();
-	Display::player = player;
-	Display::enemy = enemy;
+	Display::database = database;
 	al_init_font_addon();
 	al_init_ttf_addon();
 	font18 = al_load_font("arial.ttf", 18, 0);
@@ -60,8 +59,7 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 			//TODO: insert sprite animations for all GameObjects. currently displays a white box for Mario.
 				/*al_draw_filled_rectangle(player->getX() - 10, player->getY() - 10, 
 					player->getX() + 10,player->getY() + 10, al_map_rgb(255, 255, 255));*/
-				player->draw();
-				enemy->draw();
+				database->draw();
 			}
 			else
 			{
