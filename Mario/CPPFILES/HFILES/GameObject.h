@@ -136,6 +136,9 @@ public:
 
 	virtual void resetAnimation() {}
 	virtual void draw() {}
+	//The next 2 are only for Class Player.
+	virtual void startLeap() {}
+	virtual void jumpGlide() {}
 	// update GameObject's position, vel, dir, image etc..
 	// Virtual cause different objects have different update methods
 	// Destructor (will need to handle in some special way due to multiple inheritance) 

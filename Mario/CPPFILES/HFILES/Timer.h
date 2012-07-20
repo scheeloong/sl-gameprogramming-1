@@ -5,16 +5,17 @@
 #include "HFILES/Classes.h"
 #include "HFILES/Player.h"
 #include "HFILES/Enemy.h"
+#include "HFILES/Database.h"
 
 class Timer
 {
 private:
 	
-	Player *player;
-	Enemy *enemy;
-
+	/*Player *player;
+	Enemy *enemy;*/
+	Database *database;
 public:
-	Timer(Player *player, Enemy *enemy) {Timer::player = player; Timer::enemy = enemy;}
+	Timer(Database *database) { Timer::database = database;}
 	bool isItFlying(GameObject *object);
 	void updateTimer(ALLEGRO_EVENT *ev);
 	void destroyTimer(ALLEGRO_TIMER *timer) {al_destroy_timer(timer);}
