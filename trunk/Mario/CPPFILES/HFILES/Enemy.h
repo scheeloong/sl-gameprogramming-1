@@ -19,7 +19,7 @@ class Enemy : public GameObject
 		/*void Init(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, State state, Collision col, bool alive,
 			bool render, int lives); */
 		void update();
-		void destroy() {al_destroy_bitmap(image);}
+		void destroy() {cout << "destroy is good" << endl; setAlive(false);}
 		// Methods
 		void takeLife(int i); // Minus i from lives
 		void addLife(int i); // add i to lives (may not be needed) 

@@ -110,9 +110,12 @@ void Database::destroyList(list<Enemy *> object_list, list<Enemy *>::iterator it
 	}
 }*/
 
-void destroyEnemy()
+list<Enemy *>::iterator Database::destroyEnemy(list<Enemy *>::iterator iter)
 {
-
+	(*iter)->destroy();
+	cout << "we're in destroy" << endl;
+	iter = enemies.erase(iter);
+	return iter;
 }
 
 /*void destroyPowerUps()

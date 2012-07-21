@@ -33,124 +33,13 @@ public:
 		
 		// Constructor
 	//Collision() : boundX(0), boundY(0) {}
-	Collision(Database *database)  
-	{
-		Collision::database = database;
-		insertObjectBounds(PLAYER, 13, 23);
-		// Enemy only refers to Goomba as of now.
-		insertObjectBounds(ENEMY, 22, 27);
-	}
-
-	//Adds new GameObject bounds to the two vectors. 
-	//The ID is just a stub, so you see what you're adding.
-	//It's not used in the function at all. The ID should be 
-	// the index of the added bounds.
-	void insertObjectBounds(int ID, int boundX, int boundY)
-	{
-		Collision::boundX.push_back(boundX);
-		Collision::boundY.push_back(boundY);
-	}
-
-	// Methods
-	void updateBounds(GameObject GameObject)
-	{
-		// May need to check somewhere the type of GameObject, can use dynamic cast or simple ID to check
-		//boundX = meObject.x + 20; 
-		//boundY = GameObject.y + 20; 
-	}
-
-	//This function gets called in the big while loop. It sums up all of class Collision.
-	void checkCollision()
-	{
-		checkPlayerTileCollision(database->iterP);
-		checkEnemyTileCollision(database->iterE);
-	}
-
-	void checkEnemyTileCollision(list<Enemy *>::iterator iter)
-	{
-		for(iter = database->getEnemiesBegin(); iter != database->getEnemiesEnd(); iter++)
-		{
-			if((*iter)->getAlive())
-			{
-				float x = (*iter)->getX();
-				float y = (*iter)->getY();
-
-				int bx = boundX[(*iter)->getID()];
-				int by = boundY[(*iter)->getID()];
-	
-				//Underfeet check. Due to some strange logic, we first have to check if it's onAir,
-				//if not then check if it's on the ground. 
-				if (!isTileCollidable(x, y + by)) {(*iter)->setonAir(true);}
-				//reset animation isn't extremely important here.
-				else {(*iter)->setonAir(false); (*iter)->setVelY(0); (*iter)->resetAnimation();}
-				//Overhead check - won't really happen with enemies
-				if (isTileCollidable(x, y - by)) {}
-				//Rightside check. Only reverseDirection if the dude is currently TRYING TO WALKRIGHT && hitting a tile on the right!
-				if (isTileCollidable(x + bx, y) && (*iter)->getfacing() == WALKRIGHT) 
-					{(*iter)->reverseDirection();}
-	
-				//Leftside check. Only reverseDirection if the dude is currently TRYING TO WALKLEFT && hitting a tile on the left!
-				if (isTileCollidable(x - bx, y) && (*iter)->getfacing() == WALKLEFT) 
-					{(*iter)->reverseDirection();}
-		
-			}
-		}
-
-	}
-	void checkPlayerTileCollision(list<Player *>::iterator iter)
-	{
-		for(iter = database->getPlayersBegin(); iter != database->getPlayersEnd(); iter++)
-		{
-			float x = (*iter)->getX();
-			float y = (*iter)->getY();
-
-			int bx = boundX[(*iter)->getID()];
-			int by = boundY[(*iter)->getID()];
-
-			//If Mario jumps above the visible screen, tile collisions won't be checked.
-			if(y > 0)
-			//Check 4 corners of object1's bound box.
-			//Underfeet check
-			{
-				if (!isTileCollidable(x, y + by)) {lock[DOWN] = false; (*iter)->setonAir(true);}
-				else {lock[DOWN] = true; (*iter)->setonAir(false); (*iter)->setVelY(0); (*iter)->resetAnimation();}
-				//Overhead check
-				if (isTileCollidable(x, y - by)) {lock[UP] = true; (*iter)->reverseDirection();}
-				else lock[UP] = false;
-				//Rightside check
-				if (isTileCollidable(x + bx, y)) lock[RIGHT] = true;
-				else lock[RIGHT] = false;
-				//Leftside check
-				if (isTileCollidable(x - bx, y)) lock[LEFT] = true;
-				else lock[LEFT] = false;
-
-				//TODO: modify to check every side of body.
-				if(isTileSpecial(x, y))
-				{
-					if(isQuestionTile(x, y))
-					{
-						//do stuff
-					}
-					else if(isCoinTile(x, y))
-					{
-						//do stuff
-					}
-					else if(isBrickTile(x, y))
-					{
-						//do stuff
-		
-					}
-				}
-				if(isTriggerTile(x, y))
-				{
-					//Eventually, Init will be needed here, to load a new enemy into the list.
-					cout<<"Making enemy!" << endl;
-					database->makeEnemy(WIDTH/2, HEIGHT/2, -3, 0, 1, 1, true);
-					killTriggerTile(x, y);
-				}
-			}
-		}
-	}
+	Collision(Database *database);
+	void insertObjectBounds(int ID, int boundX, int boundY);
+	void updateBounds(GameObject GameObject);
+	void checkCollision();
+	void checkEnemyTileCollision();
+	void checkPlayerTileCollision();
+	void checkPlayerEnemyCollision();
 	inline bool isTileCollidable(int x, int y)
 	{
 		BLKSTR *blockdata;
