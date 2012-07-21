@@ -76,8 +76,8 @@ class Database
 		void destroyList(list<Player *> object_list, list<Player *>::iterator iter);
 		void destroyList(list<Enemy *> object_list, list<Enemy *>::iterator iter);
 		
-		//These aren't really necessary with destroyList.
-		void destroyEnemy(); 
+		// Destroys a specific enemy.
+		list<Enemy *>::iterator destroyEnemy(list<Enemy *>::iterator iter); 
 	//	void destroyPowerUps(); 
 };
 

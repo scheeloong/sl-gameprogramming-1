@@ -117,6 +117,7 @@ public:
 		delete keyboard;
 		delete screen;		
 		delete collision;
+		al_destroy_bitmap(Goomba);
 		al_destroy_display(display);
 		return 0;
 	}	
