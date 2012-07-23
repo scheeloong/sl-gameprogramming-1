@@ -4,19 +4,17 @@
 #define DISPLAY_H
 //#pragma once
 #include "HFILES/Classes.h"
-#include "HFILES/Player.h" //delete these soon
-#include "HFILES/Enemy.h"
 #include "HFILES/Database.h"
-
-//only truified when player lives are over.
+#include "State.h"
 // Main class (Mario) will have an instance of Display
 class Display
 {
 	private:
 		//string name; // keeps track of name of actor playing. 
 		//ALLEGRO_DISPLAY *display; 
-		ALLEGRO_FONT *font18;
+		ALLEGRO_FONT *font;
 		Database *database;
+		State *state;
 		// font
 		// background images? 
 		// Mappy? 
@@ -26,13 +24,13 @@ class Display
 
 	public:
 		// Constructor
-		Display(Database *database = NULL);
-		void Init(); // Gets actor's name
+		Display(Database *database = NULL, State *state = NULL);
+		void initFont(ALLEGRO_FONT *font) {Display::font = font;} // Gets actor's name
 		// Methods
 		void displayMessage(int posx, int posy, string message);
 		void inputName(); // Get's actor's name and inputs into game for high score. 
 		void updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev);
-		void destroyFont() {al_destroy_font(font18);}
+		void destroyFont() {al_destroy_font(font);}
 		//void destroyDisplay() {al_destroy_display(display);}
 };
 

@@ -26,35 +26,58 @@ void Timer::updateTimer(ALLEGRO_EVENT *ev)
 	if(ev->type == ALLEGRO_EVENT_TIMER)
 	{
 		redraw = true;
-		for(database->iterP = database->getPlayersBegin(); database->iterP != database->getPlayersEnd(); database->iterP++)
+		if(state->getState() == PLAYING)
 		{
-			if(isItFlying(*(database->iterP))) {}
-		
-			else if(keys[UP] && !lock[UP])
-			{	
-				// UNIQUE to PLAYER: gives player the initial velocity
-				(*(database->iterP))->startLeap();
-				// changes curFrame to JUMPMODE
-				(*database->iterP)->jumpGlide();
-			}
-			else if(keys[DOWN] && !lock[DOWN])
-				(*(database->iterP))->moveDown();
-	
-			if(keys[LEFT] && !lock[LEFT])
-				(*(database->iterP))->moveLeft();
-			else if(keys[RIGHT] && !lock[RIGHT])
-				(*(database->iterP))->moveRight();
-
-			//animation only goes back to frame 0 when all keys are released.
-			if(!keys[UP] && !keys[DOWN] && !keys[LEFT] && !keys[RIGHT])
-				(*(database->iterP))->resetAnimation();
-
-			if(!isGameOver)
+			for(database->iterP = database->getPlayersBegin(); database->iterP != database->getPlayersEnd(); database->iterP++)
 			{
-				for(database->iterE = database->getEnemiesBegin(); database->iterE != database->getEnemiesEnd(); database->iterE++)
-					isItFlying(*database->iterE); //if(player->getLife() <= 0)
+				if(isItFlying(*(database->iterP))) {}
+		
+				else if(keys[UP] && !lock[UP])
+			{		
+					// UNIQUE to PLAYER: gives player the initial velocity
+					(*(database->iterP))->startLeap();
+					// changes curFrame to JUMPMODE
+					(*database->iterP)->jumpGlide();
+				}
+				else if(keys[DOWN] && !lock[DOWN])
+					(*(database->iterP))->moveDown();
+	
+				if(keys[LEFT] && !lock[LEFT])
+					(*(database->iterP))->moveLeft();
+				else if(keys[RIGHT] && !lock[RIGHT])
+					(*(database->iterP))->moveRight();
+
+				//animation only goes back to frame 0 when all keys are released.
+				if(!keys[UP] && !keys[DOWN] && !keys[LEFT] && !keys[RIGHT])
+					(*(database->iterP))->resetAnimation();
+			
+					for(database->iterE = database->getEnemiesBegin(); database->iterE != database->getEnemiesEnd(); database->iterE++)
+						isItFlying(*database->iterE); //if(player->getLife() <= 0)
 								//isGameOver = true;
+					if(keys[ESC]) {keys[ESC] = false; state->setState(PAUSE);}
+				}
+		}
+		else if(state->getState() == PAUSE)
+		{
+			if(keys[R]) state->setState(PLAYING);
+			else if(keys[ESC]) 
+			{
+				state->setState(GAMEOVER);
+				keys[ESC] = false;
 			}
+		}
+
+		else if(state->getState() == GAMEOVER)
+		{
+			if(keys[R])
+			{
+				// reset database!
+				// reload map
+				database->resetDatabase();
+				state->setState(PLAYING);
+			}
+			else if(keys[ESC]) done = true;
 		}
 	}
 }
+

@@ -1,6 +1,7 @@
 // This is the main class that handles all the execution of the game
 	// The actual main function will be defined in MarioApp.cpp
 #include "HFILES\Mario.h"
+#include <allegro5/allegro_acodec.h>
 
 class Mario
 {
@@ -11,9 +12,11 @@ public:
 	//Database *database; 
 	Player *player;
 	Goomba *goomba;
+	State *state;
 	Background *background;
 	Collision *collision;
 	Database *database;
+	bool reloadedMap;
 	// Constructor
 	Mario()
 	{
@@ -21,11 +24,12 @@ public:
 		//event_queue = NULL;
 		//done = false;
 		database = new Database();
+		state = new State();
 		/*player = new Player(); obscelete due to database implementation
 		goomba = new Goomba();*/
-		timer = new Timer(database);
-		screen = new Display(database);
-		keyboard = new Keyboard();
+		timer = new Timer(database, state);
+		screen = new Display(database, state);
+		keyboard = new Keyboard(state);
 		background = new Background();
 		collision = new Collision(database);
 	}
@@ -67,6 +71,9 @@ public:
 		al_install_keyboard();
 		al_init_image_addon();
 		al_init_primitives_addon();
+		al_init_font_addon();
+		al_init_ttf_addon();
+	
 
 		//Create
 		event_queue = al_create_event_queue();
@@ -76,10 +83,12 @@ public:
 		//Load
 		ALLEGRO_BITMAP *BabyMario = NULL;
 		ALLEGRO_BITMAP *Goomba = NULL;
+		ALLEGRO_FONT *font18 = NULL;
 		if(MapLoad("50x50.FMP", 1))
-			return(-5); 
+			exit(-5); 
 		BabyMario = al_load_bitmap("BabyMario 120.png");
 		Goomba = al_load_bitmap("Goomba 120.png");
+		font18 = al_load_font("Arial.ttf", 18, 0);
 
 		//Register
 		al_register_event_source(event_queue, al_get_display_event_source(display));
@@ -88,6 +97,7 @@ public:
 		//Object Initialization
 		database->InitImages(BabyMario, Goomba);
 		database->makePlayer(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true);
+		screen->initFont(font18);
 		//Let's start it up!
 		al_start_timer(clocker);
 		while(!done)
@@ -97,8 +107,10 @@ public:
 			timer->updateTimer(&ev);
 			collision->checkCollision();
 			keyboard->updateKeyboard(&ev);
-			database->update();
+			// only update state of database if we're in play mode.
+			if(state->getState() == PLAYING) {database->update(); reloadedMap = false;}
 			screen->updateDisplay(event_queue, &ev);
+			if(state->getState() == GAMEOVER && !reloadedMap) reloadMap();
 			// GAME LOOP
 		}
 		
@@ -117,8 +129,17 @@ public:
 		delete keyboard;
 		delete screen;		
 		delete collision;
+		al_destroy_bitmap(BabyMario);
 		al_destroy_bitmap(Goomba);
 		al_destroy_display(display);
 		return 0;
 	}	
+
+	void reloadMap()
+	{
+		MapFreeMem();
+		if(MapLoad("50x50.FMP", 1))
+			exit(-5); 
+		reloadedMap = true;
+	}
 }; 

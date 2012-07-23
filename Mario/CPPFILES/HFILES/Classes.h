@@ -127,8 +127,9 @@ extern int yOff;
 // updateTimer. 
 // To be updated later
 static enum ID{PLAYER, ENEMY, BULLET, BORDER, MISC, EXPLOSION};
-static enum GAMESTATES{INTRO, MENU, PLAY, GAMEOVER};
-static enum KEYS{UP, DOWN, LEFT, RIGHT, SPACE};
+static enum species{GOOMBA, KOOPA_TROOPA, PIRANHA_PLANT}; // add to this for PowerUps
+static enum GAMESTATES{INTRO, MENU, PLAYING, PAUSE, GAMEOVER};
+static enum KEYS{UP, DOWN, LEFT, RIGHT, SPACE, R, ESC};
 //For the animations of all sprites.
 //LEFT means walking to the left, RIGHT means walking to the right.
 static enum FACING{WALKLEFT = -1, WALKRIGHT = 1, JUMPMODE = 3};

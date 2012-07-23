@@ -9,30 +9,16 @@ const float PI = 3.14159;
 int xOff = 0;
 int yOff = 0;
 
-Display::Display(Database *database)
+Display::Display(Database *database, State *state)
 {
-	//kill this soon
-	al_init_primitives_addon();
 	Display::database = database;
-	al_init_font_addon();
-	al_init_ttf_addon();
-	font18 = al_load_font("arial.ttf", 18, 0);
-}
-//
-
-void Display::Init()
-{
-	cout << "DISPLAY INIT";
-//modify this to print to display. 
-//	cout << "Please enter your name: " << endl;
-//	cin >> name;
-//	cout << "Hi, " << name << " !" << endl;
+	Display::state = state;
 }
 
 void Display::displayMessage(int posx, int posy, string message) // Display message at x and y position of screen
 {
 	//why does this work? try message..c_str()
-	al_draw_textf(font18, al_map_rgb(255, 255, 255), posx, posy, 0, "%s", message);
+	al_draw_textf(font, al_map_rgb(255, 255, 255), posx, posy, 0, "%s", message);
 }
 
 void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
@@ -53,17 +39,28 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 			MapDrawBG(xOff, yOff, 0, 0, WIDTH, HEIGHT);
 			MapChangeLayer(0);
 			redraw = false;
-			if(!isGameOver)
+			if(state->getState() == PLAYING)
 			{
-			//Draw Mario here, currently a STUB
-			//TODO: insert sprite animations for all GameObjects. currently displays a white box for Mario.
-				/*al_draw_filled_rectangle(player->getX() - 10, player->getY() - 10, 
-					player->getX() + 10,player->getY() + 10, al_map_rgb(255, 255, 255));*/
 				database->draw();
 			}
-			else
+			else if(state->getState() == PAUSE)
 			{
-			//When Mario dies, execute here.
+				// Still draw a still image of gameplay in the back.
+				database->draw();
+				// display gray screen with options.
+				al_draw_filled_rectangle(0, 0, WIDTH, HEIGHT, al_map_rgba(100, 0, 100, 100));
+				al_draw_textf(font, al_map_rgb(0, 0, 255), WIDTH/2, HEIGHT/2 - 30, ALLEGRO_ALIGN_CENTRE, 
+					"Resume? [R]");
+				al_draw_textf(font, al_map_rgb(0, 0, 255), WIDTH/2, HEIGHT/2 + 30, ALLEGRO_ALIGN_CENTRE, 
+					"Stop Playing? [ESC]");
+			}
+			else if(state->getState() == GAMEOVER)
+			{
+				al_draw_filled_rectangle(0, 0, WIDTH, HEIGHT, al_map_rgb(100, 0, 100));
+				al_draw_textf(font, al_map_rgb(0, 0, 255), WIDTH/2, HEIGHT/2 - 30, ALLEGRO_ALIGN_CENTRE, 
+					"Restart? [R]");
+				al_draw_textf(font, al_map_rgb(0, 0, 255), WIDTH/2, HEIGHT/2 + 30, ALLEGRO_ALIGN_CENTRE, 
+					"Exit? [ESC]");
 			}
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0,0,0));

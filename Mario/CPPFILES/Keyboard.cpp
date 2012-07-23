@@ -7,7 +7,7 @@ void Keyboard::updateKeyboard(ALLEGRO_EVENT *ev)
 		switch(ev->keyboard.keycode)
 		{
 		case ALLEGRO_KEY_ESCAPE:
-			done = true;
+			keys[ESC] = true;
 			break;
 		case ALLEGRO_KEY_LEFT:
 			keys[LEFT] = true;
@@ -24,6 +24,9 @@ void Keyboard::updateKeyboard(ALLEGRO_EVENT *ev)
 		case ALLEGRO_KEY_SPACE:
 			keys[SPACE] = true;
 			break;
+		case ALLEGRO_KEY_R:
+			keys[R] = true;
+			break;
 		}
 	}
 	else if(ev->type == ALLEGRO_EVENT_KEY_UP)
@@ -31,7 +34,7 @@ void Keyboard::updateKeyboard(ALLEGRO_EVENT *ev)
 		switch(ev->keyboard.keycode)
 		{
 		case ALLEGRO_KEY_ESCAPE:
-			done = true;
+			keys[ESC] = false;
 			break;
 		case ALLEGRO_KEY_LEFT:
 			keys[LEFT] = false;
@@ -47,6 +50,9 @@ void Keyboard::updateKeyboard(ALLEGRO_EVENT *ev)
 			break;
 		case ALLEGRO_KEY_SPACE:
 			keys[SPACE] = false;
+			break;
+		case ALLEGRO_KEY_R:
+			keys[R] = false;
 			break;
 		}
 	}
