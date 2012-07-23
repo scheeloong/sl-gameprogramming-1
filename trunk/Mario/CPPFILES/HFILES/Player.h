@@ -12,9 +12,10 @@ class Player : public GameObject
 		int lives; // number of lives
 		//maxSpeed is for when player jumps up. Therefore is negative.
 		int maxSpeed;
+		int score;
 	public: 
 		// Constructor (automatically calls parent's no-argument constructor by default) 
-		Player() : GameObject() {ID = PLAYER; lives = 3; maxSpeed = -12;}
+		Player() : GameObject() {ID = PLAYER; lives = 3; maxSpeed = -12; score = 0;}
 		
 		// The Init function CANNOT be a constructor because the ALLEGRO_BITMAP *image is not 
 		// initialized when the constructor is called. This must be called after the object is constructed.
@@ -31,12 +32,13 @@ class Player : public GameObject
 
 		// Methods
 		int getLife() {return lives;}
-		void takeLife (int i); // Minus lives by i
-		void addLife (int i); // Add lives by i
+		void incrementLife ();
+		void decrementLife ();
+		void addScore(int ID_Harvested);
 		void startLeap();
 		void update();
 		void draw();
-		void destroy() {al_destroy_bitmap(image);}
+		void destroy() {}
 };
 
 #endif PLAYER_H

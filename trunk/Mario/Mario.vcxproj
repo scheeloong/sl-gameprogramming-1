@@ -78,9 +78,9 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <None Include="Abc.FMP" />
-    <None Include="Arial.ttf" />
     <None Include="BabyMario 120.png" />
     <None Include="Goomba 120.png" />
+    <None Include="RESOURCES\Arial.ttf" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CPPFILES\cheatsheet.cpp" />

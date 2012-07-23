@@ -110,7 +110,6 @@ void Collision::checkPlayerTileCollision()
 			}
 			if(isTriggerTile(x, y))
 			{
-				cout<<"Making enemy!" << endl;
 				database->makeEnemy(WIDTH/2, HEIGHT/2, -3, 0, 1, 1, true);
 				killTriggerTile(x, y);
 			}
@@ -160,8 +159,6 @@ void Collision::checkPlayerEnemyCollision()
 					continue;
 				}
 			}
-			// If the iterator did not change, increment it.
-
 			database->iterE++;
 		}
 	}

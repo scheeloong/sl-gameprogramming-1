@@ -1,18 +1,21 @@
-// This class deals with handling the game states of the objects
+// This class deals with handling the present game state.
 
 #ifndef STATE_H
 #define STATE_H
 
 //#pragma once
 
-#include "Classes.h"
+#include "HFILES/Classes.h"
 
 class State
 {
 private: 
-	int i;
+	int state;
 public:
-	State() : i(0) {}
+	State() {state = PLAYING;}
+	int getState() {return state;}
+	void setState(int state) {State::state = state;}
+
 	
 
 /*

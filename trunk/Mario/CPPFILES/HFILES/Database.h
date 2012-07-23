@@ -48,34 +48,45 @@ class Database
 		void makeEnemy(int x, int y, int velX, int velY, int dirX, int dirY, bool alive); 
 	//	void makePowerUps(); 
 
-	
+		void updatePlayerList();
+		void updateEnemyList();
+		// void updatePowerUpList();
 		void update()
 		{
-			updateList(players, iterP);
-			updateList(enemies, iterE);
-			//updateList(powerUps, iterPU);
+			updatePlayerList();
+			updateEnemyList();
+			// updatePowerUpList();
 		}
+		
 		//is there a better way to do this? I can't convert list<Player *> to list<GameObject *>
-		void updateList(list<Player*> &object_list, list<Player *>::iterator iter);
-		void updateList(list<Enemy*> &object_list, list<Enemy *>::iterator iter);
+
+		void drawPlayerList();
+		void drawEnemyList();
+		void drawPowerUpList();
 		void draw()
 		{
-			drawList(players, iterP);
-			drawList(enemies, iterE);
-			//drawList(powerUps, iterPU);
+			drawPlayerList();
+			drawEnemyList();
+			//drawPowerUpList();
 		}
 
-		void drawList(list<Player *> object_list, list<Player *>::iterator iter);
-		void drawList(list<Enemy *> object_list, list<Enemy *>::iterator iter);
+		void destroyPlayerList();
+		void destroyEnemyList();
+		void destroyPowerUpList();
 		void destroy()
 		{
-			destroyList(players, iterP);
-			destroyList(enemies, iterE);
-			//destroyList(powerUps, iterPU);
+			destroyPlayerList();
+			destroyEnemyList();
+			//destroyPowerUpList(powerUps, iterPU);
 		}
-		void destroyList(list<Player *> object_list, list<Player *>::iterator iter);
-		void destroyList(list<Enemy *> object_list, list<Enemy *>::iterator iter);
 		
+		void resetDatabase();
+
+		// setAlive(false) for every object in players list 
+		void killPlayers();
+		void killEnemies();
+		void killPowerUps();
+
 		// Destroys a specific enemy.
 		list<Enemy *>::iterator destroyEnemy(list<Enemy *>::iterator iter); 
 	//	void destroyPowerUps(); 

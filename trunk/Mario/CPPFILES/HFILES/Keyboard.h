@@ -5,11 +5,13 @@
 //#pragma once
 
 #include "HFILES\Classes.h"
-
+#include "State.h"
 class Keyboard
 {
+private:
+	State *state;
 public:
-	//Keyboard();
+	Keyboard(State *state) {Keyboard::state = state;}
 	void updateKeyboard(ALLEGRO_EVENT *ev);
 };
 

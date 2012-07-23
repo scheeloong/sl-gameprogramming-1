@@ -15,9 +15,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <None Include="Arial.ttf">
-      <Filter>Resource Files</Filter>
-    </None>
     <None Include="Abc.FMP">
       <Filter>Resource Files</Filter>
     </None>
@@ -25,6 +22,9 @@
       <Filter>Resource Files</Filter>
     </None>
     <None Include="Goomba 120.png">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="RESOURCES\Arial.ttf">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>

@@ -3,14 +3,18 @@
 //Player::Player() : lives(3) {}
 
 // Methods
-void Player::takeLife (int i)
+void Player::decrementLife ()
 {
-	lives -= i; 
+	lives--; 
 }
-
-void Player::addLife (int i)
+void Player::incrementLife ()
 {
-	lives += i; 
+	lives++;
+}
+void Player::addScore(int ID_Harvested)
+{
+	if(ID_Harvested == ENEMY) 
+		score += 100;
 }
 
 void Player::Init(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image /*, State state, Collision col,*/)
