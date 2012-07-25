@@ -87,6 +87,7 @@ public:
 	bool getAlive() { return alive; }
 	void setRender (bool ren) { render = ren; }
 	bool getRender() { return render; }
+	ALLEGRO_BITMAP *getImage() {return image;}
 	void setImage(ALLEGRO_BITMAP *im) { image = im; }
 	void setID(int id) { ID = id; } 
 	int getID() {return ID;}

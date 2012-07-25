@@ -7,10 +7,13 @@ Database::Database()
 	// enemies and powerups remain empty before tileblock sets it
 }
 
-void Database::InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba)
+void Database::InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALLEGRO_BITMAP *deadQuestion, ALLEGRO_BITMAP *sky, ALLEGRO_BITMAP *deadBrick)
 {
 	Database::BabyMario = BabyMario;
 	Database::GoombaPic = Goomba;
+	Database::deadQuestion = deadQuestion;
+	Database::sky = sky;
+	Database::deadBrick = deadBrick;
 }
 		
 void Database::makePlayer(int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
@@ -19,6 +22,7 @@ void Database::makePlayer(int x, int y, int velX, int velY, int dirX, int dirY, 
 	player->Init(x, y, velX, velY, dirX, dirY, alive, BabyMario);
 	players.push_back(player);
 }
+// Will need to indicate species with the introduction of KOOPATROOPAS!
 void Database::makeEnemy(int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
 	Goomba *goomba = new Goomba(); 
@@ -30,6 +34,20 @@ void Database::makeEnemy(int x, int y, int velX, int velY, int dirX, int dirY, b
 	PowerUp *pu = new PowerUp(); 
 	powerUps.push_back(pu); 
 }*/
+void Database::makeBounceBlock(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, int species)
+{
+	BounceBlock *bblock = new BounceBlock();
+	if(species == DEAD_QUESTION)
+	{	
+		bblock->Init(x, y, velX, velY, dirX, dirY, alive, deadQuestion, y, species);
+	}
+	else if(species == SKY)
+		bblock->Init(x, y, velX, velY, dirX, dirY, alive, sky, y, species);
+	else if(species == DEAD_BRICK)
+		bblock->Init(x, y, velX, velY, dirX, dirY, alive, deadBrick, y, species);
+
+	bounceBlocks.push_back(bblock);
+}
 
 void Database::updatePlayerList()
 {
@@ -45,6 +63,24 @@ void Database::updateEnemyList()
 		(*iterE)->update();
 	}
 }
+void Database::updateBounceBlockList()
+{
+	for( iterB = bounceBlocks.begin(); iterB != bounceBlocks.end(); )
+	{
+		if((*iterB)->getAlive())
+		{
+			(*iterB)->update();
+			iterB++;
+		}
+		else
+		{
+			cout << "Erasing" << endl;
+			//(*iterB)->destroy();
+			delete (*iterB);
+			iterB = bounceBlocks.erase(iterB);
+		}
+	}
+}
 
 void Database::drawPlayerList()
 {
@@ -58,6 +94,13 @@ void Database::drawEnemyList()
 	for( iterE = enemies.begin(); iterE != enemies.end(); iterE++)
 	{
 		(*iterE)->draw();
+	}
+}
+void Database::drawBounceBlockList()
+{
+	for (iterB = bounceBlocks.begin(); iterB != bounceBlocks.end(); iterB++)
+	{
+		(*iterB)->draw();
 	}
 }
 
@@ -93,14 +136,40 @@ void Database::destroyEnemyList()
 			iterE++;
 	}
 }
+void Database::destroyBounceBlockList()
+{
+	for( iterB = bounceBlocks.begin(); iterB != bounceBlocks.end(); )
+	{
+		if(! (*iterB)->getAlive())
+		{
+			//Call native destroy on the object.
+			(*iterB)->destroy();
+			//Destroy object.
+			delete (*iterB);
+			iterB = bounceBlocks.erase(iterB);
+		}
+		else
+			iterB++;
+	}
+}
 
 void Database::resetDatabase()
 {
 	killPlayers();
 	killEnemies();
 	//killPowerUps();
+	killBounceBlocks();
 	destroy();
 	makePlayer(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true);
+}
+
+void Database::deleteDatabase()
+{
+	killPlayers();
+	killEnemies();
+	//killPowerUps();
+	killBounceBlocks();
+	destroy();
 }
 
 void Database::killPlayers()
@@ -112,6 +181,11 @@ void Database::killEnemies()
 {
 	for( iterE = enemies.begin(); iterE != enemies.end(); iterE ++)
 		(*iterE)->setAlive(false);
+}
+void Database::killBounceBlocks()
+{
+	for( iterB = bounceBlocks.begin(); iterB != bounceBlocks.end(); iterB ++)
+		(*iterB)->setAlive(false);
 }
 list<Enemy *>::iterator Database::destroyEnemy(list<Enemy *>::iterator iter)
 {

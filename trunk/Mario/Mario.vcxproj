@@ -81,8 +81,10 @@
     <None Include="BabyMario 120.png" />
     <None Include="Goomba 120.png" />
     <None Include="RESOURCES\Arial.ttf" />
+    <None Include="RESOURCES\DeadQuestion 50x100.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CPPFILES\BounceBlock.cpp" />
     <ClCompile Include="CPPFILES\cheatsheet.cpp" />
     <ClCompile Include="CPPFILES\Classes.cpp" />
     <ClCompile Include="CPPFILES\Collision.cpp" />
@@ -104,6 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPPFILES\HFILES\Background.h" />
+    <ClInclude Include="CPPFILES\HFILES\BounceBlock.h" />
     <ClInclude Include="CPPFILES\HFILES\Classes.h" />
     <ClInclude Include="CPPFILES\HFILES\Collision.h" />
     <ClInclude Include="CPPFILES\HFILES\Database.h" />

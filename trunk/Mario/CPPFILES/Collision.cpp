@@ -40,8 +40,8 @@ void Collision::checkEnemyTileCollision()
 		//This check might not be necessary.
 		if((*(database->iterE))->getAlive())
 		{
-			float x = (*(database->iterE))->getX();
-			float y = (*(database->iterE))->getY();
+			int x = (*(database->iterE))->getX();
+			int y = (*(database->iterE))->getY();
 
 			int bx = boundX[(*(database->iterE))->getID()];
 			int by = boundY[(*(database->iterE))->getID()];
@@ -69,8 +69,8 @@ void Collision::checkPlayerTileCollision()
 {
 	for(database->iterP = database->getPlayersBegin(); database->iterP != database->getPlayersEnd(); database->iterP++)
 	{
-		float x = (*(database->iterP))->getX();
-		float y = (*(database->iterP))->getY();
+		int x = (*(database->iterP))->getX();
+		int y = (*(database->iterP))->getY();
 
 		int bx = boundX[(*(database->iterP))->getID()];
 		int by = boundY[(*(database->iterP))->getID()];
@@ -93,19 +93,24 @@ void Collision::checkPlayerTileCollision()
 			else lock[LEFT] = false;
 
 			//TODO: modify to check every side of body.
-			if(isTileSpecial(x, y))
+			if(isTileSpecial(x, y - 25))
 			{
-				if(isQuestionTile(x, y))
+				if(isQuestionTile(x, y - 25))
 				{
-					//do stuff
+					cout << "Hitting a Question Tile" << endl;
+					database->makeBounceBlock((x/mapblockwidth) * 50, ((y-25)/mapblockheight) * 50, 0, -5, 1, 1, true, DEAD_QUESTION);
+					killSpecialTile(x, y - 25);
 				}
 				else if(isCoinTile(x, y))
 				{
+					cout << "Coin!" << endl;
 					//do stuff
 				}
-				else if(isBrickTile(x, y))
+				else if(isBrickTile(x, y - 25))
 				{
-					//do stuff
+					database->makeBounceBlock((x/mapblockwidth) * 50, ((y-25)/mapblockheight) * 50, 0, -4, 1, 1, true, DEAD_BRICK);
+					cout << "A new one!" << endl;
+					killSpecialTile(x, y - 25);
 				}
 			}
 			if(isTriggerTile(x, y))
@@ -121,16 +126,16 @@ void Collision::checkPlayerEnemyCollision()
 {
 	for(database->iterP = database->getPlayersBegin(); database->iterP != database->getPlayersEnd(); database->iterP++)
 	{
-		float Px = (*(database->iterP))->getX();
-		float Py = (*(database->iterP))->getY();
+		int Px = (*(database->iterP))->getX();
+		int Py = (*(database->iterP))->getY();
 
 		int Pbx = boundX[(*(database->iterP))->getID()];
 		int Pby = boundY[(*(database->iterP))->getID()];
 
 		for(database->iterE = database->getEnemiesBegin(); database->iterE != database->getEnemiesEnd();)
 		{
-			float Ex = (*(database->iterE))->getX();
-			float Ey = (*(database->iterE))->getY();
+			int Ex = (*(database->iterE))->getX();
+			int Ey = (*(database->iterE))->getY();
 
 			int Ebx = boundX[(*(database->iterE))->getID()];
 			int Eby = boundY[(*(database->iterE))->getID()];
@@ -155,7 +160,7 @@ void Collision::checkPlayerEnemyCollision()
 
 				{
 					// TODO: decrease Mario's life! currently an infinite loop.
-					cout << "Mario's Life--" << endl;
+					//*(database->iterP)->decrementLife();
 					continue;
 				}
 			}

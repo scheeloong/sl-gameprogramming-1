@@ -87,7 +87,7 @@ void Player::draw()
 	al_draw_bitmap_region(image, fx, fy, frameWidth,
 		frameHeight, x - frameWidth / 2 - 10, y - frameHeight /2 + 10, ALLEGRO_FLIP_HORIZONTAL);
 	//This tests the bounding box dimensions.
-	al_draw_filled_rectangle(x-13, y-23, x+13, y+23, al_map_rgba(255, 0, 255, 100));
+	al_draw_filled_rectangle(x, y, x+13, y+23, al_map_rgba(255, 0, 255, 100));
 }
 
 void Player::startLeap() 

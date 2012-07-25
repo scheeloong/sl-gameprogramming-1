@@ -83,11 +83,18 @@ public:
 		//Load
 		ALLEGRO_BITMAP *BabyMario = NULL;
 		ALLEGRO_BITMAP *Goomba = NULL;
+		ALLEGRO_BITMAP *DeadQuestion = NULL;
+		ALLEGRO_BITMAP *Sky = NULL;
+		ALLEGRO_BITMAP *DeadBrick = NULL;
 		ALLEGRO_FONT *font18 = NULL;
 		if(MapLoad("50x50.FMP", 1))
 			exit(-5); 
+		//The images below MUST be stored in the Mario folder, and NOT in Resources.
 		BabyMario = al_load_bitmap("BabyMario 120.png");
 		Goomba = al_load_bitmap("Goomba 120.png");
+		DeadQuestion = al_load_bitmap("DeadQuestion 50x100.png");
+		Sky = al_load_bitmap("Sky 50x100.png");
+		DeadBrick = al_load_bitmap("DeadBrick 50x100.png");
 		font18 = al_load_font("Arial.ttf", 18, 0);
 
 		//Register
@@ -95,7 +102,7 @@ public:
 		al_register_event_source(event_queue, al_get_keyboard_event_source());		
 		al_register_event_source(event_queue, al_get_timer_event_source(clocker));
 		//Object Initialization
-		database->InitImages(BabyMario, Goomba);
+		database->InitImages(BabyMario, Goomba, DeadQuestion, Sky, DeadBrick);
 		database->makePlayer(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true);
 		screen->initFont(font18);
 		//Let's start it up!
@@ -114,7 +121,7 @@ public:
 			// GAME LOOP
 		}
 		
-		database->destroy();
+		database->deleteDatabase();
 		al_destroy_event_queue(event_queue);
 		timer->destroyTimer(clocker);
 		//THIS LINE WILL CAUSE CRASH! Because the bitmap was 
@@ -131,6 +138,9 @@ public:
 		delete collision;
 		al_destroy_bitmap(BabyMario);
 		al_destroy_bitmap(Goomba);
+		al_destroy_bitmap(DeadQuestion);
+		al_destroy_bitmap(Sky);
+		al_destroy_bitmap(DeadBrick);
 		al_destroy_display(display);
 		return 0;
 	}	
