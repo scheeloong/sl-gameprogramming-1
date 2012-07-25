@@ -1,17 +1,16 @@
 //
-#include "HFILES/Enemy.h"
+#include "HFILES/Autobot.h"
 
-//Enemy::Enemy() : lives(1) {}; // normal enemy has 1 live only 
-Enemy::Enemy(int lives) : lives(lives) {}; // Boss enemy has >1 live 
+Autobot::Autobot(int lives) : lives(lives) {}; // Boss enemy has >1 live 
 
 // Methods
 // Minus i from lives
-void Enemy::takeLife(int i)
+void Autobot::takeLife(int i)
 {
 	lives -= i; 
 }
 
-void Enemy::addLife(int i) // add i to lives (may not be needed) 
+void Autobot::addLife(int i) // add i to lives (may not be needed) 
 {
 	lives += i; 
 }
@@ -26,7 +25,7 @@ void Enemy::addLife(int i) // add i to lives (may not be needed)
 	 addLife(lives); 
 }*/
 
-void Enemy::update()
+void Autobot::update()
 {
 	if(getAlive())
 	{
