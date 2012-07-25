@@ -126,8 +126,10 @@ extern int yOff;
 // This fluxes between 0 and 1, to decrease the effect of gravity in
 // updateTimer. 
 // To be updated later
-static enum ID{PLAYER, ENEMY, BULLET, BORDER, MISC, EXPLOSION};
-static enum species{GOOMBA, KOOPA_TROOPA, PIRANHA_PLANT, DEAD_QUESTION, SKY, DEAD_BRICK}; // add to this for PowerUps
+static enum ID{PLAYER, ENEMY, POWERUP, BULLET, BORDER, MISC, EXPLOSION};
+static enum enemySpecies{GOOMBA, KOOPA_TROOPA, PIRANHA_PLANT};
+static enum blockSpecies{DEAD_QUESTION, SKY, DEAD_BRICK};
+static enum powerUpSpecies{SUPER_MUSHROOM, FIRE_FLOWER, STAR};
 static enum GAMESTATES{INTRO, MENU, PLAYING, PAUSE, GAMEOVER};
 static enum KEYS{UP, DOWN, LEFT, RIGHT, SPACE, R, ESC};
 //For the animations of all sprites.

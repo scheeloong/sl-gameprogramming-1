@@ -98,7 +98,7 @@ void Collision::checkPlayerTileCollision()
 				if(isQuestionTile(x, y - 25))
 				{
 					cout << "Hitting a Question Tile" << endl;
-					database->makeBounceBlock((x/mapblockwidth) * 50, ((y-25)/mapblockheight) * 50, 0, -5, 1, 1, true, DEAD_QUESTION);
+					database->makeBounceBlock(DEAD_QUESTION, (x/mapblockwidth) * 50, ((y-25)/mapblockheight) * 50, 0, -5, 1, 1, true);
 					killSpecialTile(x, y - 25);
 				}
 				else if(isCoinTile(x, y))
@@ -108,14 +108,14 @@ void Collision::checkPlayerTileCollision()
 				}
 				else if(isBrickTile(x, y - 25))
 				{
-					database->makeBounceBlock((x/mapblockwidth) * 50, ((y-25)/mapblockheight) * 50, 0, -4, 1, 1, true, DEAD_BRICK);
+					database->makeBounceBlock(DEAD_BRICK, (x/mapblockwidth) * 50, ((y-25)/mapblockheight) * 50, 0, -4, 1, 1, true);
 					cout << "A new one!" << endl;
 					killSpecialTile(x, y - 25);
 				}
 			}
 			if(isTriggerTile(x, y))
 			{
-				database->makeEnemy(WIDTH/2, HEIGHT/2, -3, 0, 1, 1, true);
+				database->makeEnemy(WIDTH/2, HEIGHT/2, -3, 0, 1, 1, true, GOOMBA);
 				killTriggerTile(x, y);
 			}
 		}

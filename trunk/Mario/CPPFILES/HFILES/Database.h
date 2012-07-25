@@ -8,7 +8,7 @@
 #include "HFILES/GameObject.h"
 #include "HFILES/PowerUp.h"
 #include "HFILES/Player.h"
-#include "HFILES/Enemy.h"
+#include "HFILES/Autobot.h"
 #include "HFILES/Goomba.h"
 #include "HFILES/BounceBlock.h"
 
@@ -18,7 +18,7 @@ class Database
 		// Create generic double linked list of GameObjects used
 		// using type GameObject * because it's more general. For destroy list.
 		list<Player *> players; // create a double linked list of players 
-		list<Enemy *> enemies; 
+		list<Autobot *> enemies; 
 		list<PowerUp *> powerUps; 
 		list<BounceBlock *> bounceBlocks;
 
@@ -36,16 +36,16 @@ class Database
 		void InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALLEGRO_BITMAP *deadQuestion, ALLEGRO_BITMAP *sky, ALLEGRO_BITMAP *deadBrick);
 		//These don't modify the lists on their own, so safer and more convenient to be public.
 		list<Player *>::iterator iterP; 
-		list<Enemy *>::iterator iterE; 
+		list<Autobot *>::iterator iterE; 
 		list<PowerUp *>::iterator iterPU; 
 		list<BounceBlock *>::iterator iterB;
 
 		list<Player *>::iterator getPlayersBegin() {return players.begin();}
-		list<Enemy *>::iterator getEnemiesBegin() {return enemies.begin();}
+		list<Autobot *>::iterator getEnemiesBegin() {return enemies.begin();}
 		list<PowerUp *>::iterator getPowerUpsBegin() {return powerUps.begin();}
 		list<BounceBlock *>::iterator getBounceBlocksBegin() {return bounceBlocks.begin();}
 		list<Player *>::iterator getPlayersEnd() {return players.end();}
-		list<Enemy *>::iterator getEnemiesEnd() {return enemies.end();}
+		list<Autobot *>::iterator getEnemiesEnd() {return enemies.end();}
 		list<PowerUp *>::iterator getPowerUpsEnd() {return powerUps.end();}
 		list<BounceBlock *>::iterator getBounceBlocksEnd() {return bounceBlocks.end();}
 		int getEnemiesSize() {return ((int) enemies.size());}
@@ -53,9 +53,9 @@ class Database
 		// Methods
 		void makePlayer(int x, int y, int velX, int velY, int dirX, int dirY, bool alive);  
 		//we need makeGoomba, makeTurtle, etcetc
-		void makeEnemy(int x, int y, int velX, int velY, int dirX, int dirY, bool alive); 
+		void makeEnemy(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive); 
 	//	void makePowerUps(); 
-		void makeBounceBlock(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, int species);
+		void makeBounceBlock(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive);
 
 		void updatePlayerList();
 		void updateEnemyList();
@@ -107,7 +107,7 @@ class Database
 		void killBounceBlocks();
 
 		// Destroys a specific enemy.
-		list<Enemy *>::iterator destroyEnemy(list<Enemy *>::iterator iter); 
+		list<Autobot *>::iterator destroyEnemy(list<Autobot *>::iterator iter); 
 	//	void destroyPowerUps(); 
 };
 

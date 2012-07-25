@@ -23,18 +23,21 @@ void Database::makePlayer(int x, int y, int velX, int velY, int dirX, int dirY, 
 	players.push_back(player);
 }
 // Will need to indicate species with the introduction of KOOPATROOPAS!
-void Database::makeEnemy(int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
+void Database::makeEnemy(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
-	Goomba *goomba = new Goomba(); 
-	goomba->Init(x, y, velX, velY, dirX, dirY, alive, GoombaPic);
-	enemies.push_back(goomba); 
+	if(species == GOOMBA)
+	{
+		Goomba *goomba = new Goomba(); 
+		goomba->Init(ENEMY, x, y, velX, velY, dirX, dirY, alive, GoombaPic);
+		enemies.push_back(goomba);
+	}
 }
 /*void Database::makePowerUps()
 {
 	PowerUp *pu = new PowerUp(); 
 	powerUps.push_back(pu); 
 }*/
-void Database::makeBounceBlock(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, int species)
+void Database::makeBounceBlock(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
 	BounceBlock *bblock = new BounceBlock();
 	if(species == DEAD_QUESTION)
@@ -187,7 +190,7 @@ void Database::killBounceBlocks()
 	for( iterB = bounceBlocks.begin(); iterB != bounceBlocks.end(); iterB ++)
 		(*iterB)->setAlive(false);
 }
-list<Enemy *>::iterator Database::destroyEnemy(list<Enemy *>::iterator iter)
+list<Autobot *>::iterator Database::destroyEnemy(list<Autobot *>::iterator iter)
 {
 	(*iter)->destroy();
 	iter = enemies.erase(iter);

@@ -90,7 +90,7 @@
     <ClCompile Include="CPPFILES\Collision.cpp" />
     <ClCompile Include="CPPFILES\Database.cpp" />
     <ClCompile Include="CPPFILES\Display.cpp" />
-    <ClCompile Include="CPPFILES\Enemy.cpp" />
+    <ClCompile Include="CPPFILES\Autobot.cpp" />
     <ClCompile Include="CPPFILES\GameObject.cpp" />
     <ClCompile Include="CPPFILES\Goomba.cpp" />
     <ClCompile Include="CPPFILES\Keyboard.cpp" />
@@ -111,7 +111,7 @@
     <ClInclude Include="CPPFILES\HFILES\Collision.h" />
     <ClInclude Include="CPPFILES\HFILES\Database.h" />
     <ClInclude Include="CPPFILES\HFILES\Display.h" />
-    <ClInclude Include="CPPFILES\HFILES\Enemy.h" />
+    <ClInclude Include="CPPFILES\HFILES\Autobot.h" />
     <ClInclude Include="CPPFILES\HFILES\GameObject.h" />
     <ClInclude Include="CPPFILES\HFILES\Goomba.h" />
     <ClInclude Include="CPPFILES\HFILES\Keyboard.h" />
