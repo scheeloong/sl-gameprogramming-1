@@ -25,7 +25,7 @@ class Player : public GameObject
 		// Animation Helpers
 		// Changes curFrame to the last frame at index 3 (JUMPMODE)
 		void jumpGlide() {curFrame = JUMPMODE;}
-		void resetAnimation() {curFrame = 0;}
+		void resetAnimation() {if(curFrame == JUMPMODE) curFrame = 0;}
 
 		void moveLeft() {GameObject::moveLeft(); setfacing(WALKLEFT);}
 		void moveRight() {GameObject::moveRight(); setfacing(WALKRIGHT);}

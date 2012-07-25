@@ -21,10 +21,10 @@ void Player::Init(int x, int y, int velX, int velY, int dirX, int dirY, bool ali
 {
 		GameObject::Init(PLAYER, x, y, velX, velY, dirX, dirY, alive, image);
 		//array indexing, so 2 frames.
-		maxFrame = 1;
+		maxFrame = 2;
 		curFrame = 0;
-		frameCount = 4;
-		frameDelay = 10;
+		frameCount = 0;
+		frameDelay = 5;
 		frameWidth = 120;
 		frameHeight = 120;
 		animationColumns = 4;
@@ -66,8 +66,8 @@ void Player::update()
 				rewind = 1;
 			}
 		}
-		curFrame += rewind;
 		frameCount = 0;
+		curFrame += rewind;
 	}
 }
 
@@ -87,7 +87,7 @@ void Player::draw()
 	al_draw_bitmap_region(image, fx, fy, frameWidth,
 		frameHeight, x - frameWidth / 2 - 10, y - frameHeight /2 + 10, ALLEGRO_FLIP_HORIZONTAL);
 	//This tests the bounding box dimensions.
-	al_draw_filled_rectangle(x, y, x+13, y+23, al_map_rgba(255, 0, 255, 100));
+	//al_draw_filled_rectangle(x, y, x+13, y+23, al_map_rgba(255, 0, 255, 100));
 }
 
 void Player::startLeap() 

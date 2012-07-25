@@ -83,6 +83,7 @@ public:
 		//Load
 		ALLEGRO_BITMAP *BabyMario = NULL;
 		ALLEGRO_BITMAP *Goomba = NULL;
+		ALLEGRO_BITMAP *SuperMushroom = NULL;
 		ALLEGRO_BITMAP *DeadQuestion = NULL;
 		ALLEGRO_BITMAP *Sky = NULL;
 		ALLEGRO_BITMAP *DeadBrick = NULL;
@@ -92,6 +93,7 @@ public:
 		//The images below MUST be stored in the Mario folder, and NOT in Resources.
 		BabyMario = al_load_bitmap("BabyMario 120.png");
 		Goomba = al_load_bitmap("Goomba 120.png");
+		SuperMushroom = al_load_bitmap("RedMushroom 50x50.png");
 		DeadQuestion = al_load_bitmap("DeadQuestion 50x100.png");
 		Sky = al_load_bitmap("Sky 50x100.png");
 		DeadBrick = al_load_bitmap("DeadBrick 50x100.png");
@@ -102,7 +104,7 @@ public:
 		al_register_event_source(event_queue, al_get_keyboard_event_source());		
 		al_register_event_source(event_queue, al_get_timer_event_source(clocker));
 		//Object Initialization
-		database->InitImages(BabyMario, Goomba, DeadQuestion, Sky, DeadBrick);
+		database->InitImages(BabyMario, Goomba, SuperMushroom, DeadQuestion, Sky, DeadBrick);
 		database->makePlayer(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true);
 		screen->initFont(font18);
 		//Let's start it up!
@@ -138,6 +140,7 @@ public:
 		delete collision;
 		al_destroy_bitmap(BabyMario);
 		al_destroy_bitmap(Goomba);
+		al_destroy_bitmap(SuperMushroom);
 		al_destroy_bitmap(DeadQuestion);
 		al_destroy_bitmap(Sky);
 		al_destroy_bitmap(DeadBrick);

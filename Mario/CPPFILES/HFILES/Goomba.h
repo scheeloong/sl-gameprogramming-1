@@ -9,8 +9,8 @@ class Goomba : public Autobot
 {
 private:
 public:
-	Goomba() : Autobot () {setSpecies(GOOMBA); setfacing(WALKLEFT);}
-	void Init(int ID, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image);
+	Goomba() : Autobot () {setfacing(WALKLEFT);}
+	void Init(int ID, int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image);
 	void draw();
 };
 
