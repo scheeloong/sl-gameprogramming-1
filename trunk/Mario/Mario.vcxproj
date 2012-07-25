@@ -98,10 +98,10 @@
     <ClCompile Include="CPPFILES\Mario.cpp" />
     <ClCompile Include="CPPFILES\MarioApp.cpp" />
     <ClCompile Include="CPPFILES\Player.cpp" />
-    <ClCompile Include="CPPFILES\PowerUp.cpp" />
     <ClCompile Include="CPPFILES\Score.cpp" />
     <ClCompile Include="CPPFILES\Sound.cpp" />
     <ClCompile Include="CPPFILES\State.cpp" />
+    <ClCompile Include="CPPFILES\SuperMushroom.cpp" />
     <ClCompile Include="CPPFILES\Timer.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -118,10 +118,10 @@
     <ClInclude Include="CPPFILES\HFILES\mappy_A5.h" />
     <ClInclude Include="CPPFILES\HFILES\Mario.h" />
     <ClInclude Include="CPPFILES\HFILES\Player.h" />
-    <ClInclude Include="CPPFILES\HFILES\PowerUp.h" />
     <ClInclude Include="CPPFILES\HFILES\Score.h" />
     <ClInclude Include="CPPFILES\HFILES\Sound.h" />
     <ClInclude Include="CPPFILES\HFILES\State.h" />
+    <ClInclude Include="CPPFILES\HFILES\SuperMushroom.h" />
     <ClInclude Include="CPPFILES\HFILES\Timer.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

@@ -120,7 +120,7 @@ public:
 		//This will be called for the player when they hit something overhead.
 		if(getID() == PLAYER)
 			if(getonAir() && velY <= 0) {velY = 0; moveVertically();}
-		if(getID() == ENEMY)
+		if(getID() == ENEMY || getID() == POWERUP)
 		{
 			// setfacing to the opposite. ie. WALKRIGHT to WALKLEFT and vice versa
 			velX *= -1;
@@ -132,7 +132,6 @@ public:
 
 	virtual void update() //;
 	{
-		printf("Gameobject Update");
 	}
 
 	virtual void resetAnimation() {}

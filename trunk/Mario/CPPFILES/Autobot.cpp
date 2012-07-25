@@ -27,34 +27,32 @@ void Autobot::addLife(int i) // add i to lives (may not be needed)
 
 void Autobot::update()
 {
-	if(getAlive())
+	//the enemy moves on its own, so calling arbitrary move function.
+	moveRight();
+	moveVertically();
+	if(++frameCount >= frameDelay)
 	{
-		//the enemy moves on its own, so calling arbitrary move function.
-		moveRight();
-		moveVertically();
-		if(++frameCount >= frameDelay)
+		// Go forward through the sprite sheet (LtoR)
+		if(rewind == 1)
 		{
-			// Go forward through the sprite sheet (LtoR)
-			if(rewind == 1)
+			if(curFrame >= maxFrame)
 			{
-				if(curFrame >= maxFrame)
-				{
-					rewind = -1;
-				}
+				rewind = -1;
 			}
-			// Go backward through the sprite sheet (RtoL);
-			else if(rewind == -1)
-			{
-				if(curFrame <= 0)
-				{
-					rewind = 1;
-				}
-			}
-			curFrame += rewind;
-			frameCount = 0;
 		}
+		// Go backward through the sprite sheet (RtoL);
+		else if(rewind == -1)
+		{
+			if(curFrame <= 0)
+			{
+				rewind = 1;
+			}
+		}
+		curFrame += rewind;
+		frameCount = 0;
 	}
 }
+
 
 
 //*/

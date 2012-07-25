@@ -1,8 +1,9 @@
 #include "HFILES/Goomba.h"
 
-void Goomba::Init(int ID, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
+void Goomba::Init(int ID, int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
 {
-	Autobot::Init(ID, x, y, velX, velY, dirX, dirY, alive, image);
+	Autobot::Init(ID, species, x, y, velX, velY, dirX, dirY, alive, image);
+
 	maxFrame = 1;
 	curFrame = 0;
 	frameCount = 3;
@@ -20,9 +21,6 @@ void Goomba::Init(int ID, int x, int y, int velX, int velY, int dirX, int dirY, 
 
 void Goomba::draw()
 {
-	//Draw only if Goomba is alive.
-	if(getAlive())
-	{
 		int fx = (curFrame % animationColumns) * frameWidth;
 		int fy = animationRow * frameHeight;
 		//if (animationDirection == 1)
@@ -35,5 +33,4 @@ void Goomba::draw()
 			frameHeight, x - frameWidth / 2 + 6, y - frameHeight /2 + 10, 0);
 		//This tests the bounding box dimensions.
 		al_draw_filled_rectangle(x-22, y-27, x+22, y+27, al_map_rgba(255, 0, 255, 100));
-	}
 }

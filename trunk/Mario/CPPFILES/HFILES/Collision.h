@@ -12,21 +12,17 @@
 
 class Collision
 {
-/*// TEMPORARY (start)
-private:
-	int i;
-public:
-	Collision() : i(0) {}
-
-//bool superCheckCollision(GameObject &object1, GameObject &object2); // may need to change to &object1 , &object2
-// TEMPORARY (end)*/
-
-//TODO: give this class 3 pointers to the 3 database arrays.
-
 private:
 	//Change this to include all types of creatures.
-	vector<int> boundX;
-	vector<int> boundY;
+	vector<int> playerBoundX;
+	vector<int> playerBoundY;
+	vector<int> enemyBoundX;
+	vector<int> enemyBoundY;
+	vector<int> powerUpBoundX;
+	vector<int> powerUpBoundY;
+	vector<int>::iterator iterX;
+	vector<int>::iterator iterY;
+	int counter;
 	Database *database;
 
 public:
@@ -34,12 +30,22 @@ public:
 		// Constructor
 	//Collision() : boundX(0), boundY(0) {}
 	Collision(Database *database);
-	void insertObjectBounds(int ID, int boundX, int boundY);
+	void insertObjectBounds(int ID, int species, int boundX, int boundY);
 	void updateBounds(GameObject GameObject);
-	void checkCollision();
-	void checkEnemyTileCollision();
+
 	void checkPlayerTileCollision();
+	void checkEnemyTileCollision();
+	void checkPowerUpTileCollision();
 	void checkPlayerEnemyCollision();
+
+	void checkCollision()
+	{
+		checkPlayerTileCollision();
+		checkEnemyTileCollision();
+		checkPowerUpTileCollision();
+		checkPlayerEnemyCollision();
+	}
+
 	inline bool isTileCollidable(int x, int y)
 	{
 		BLKSTR *blockdata;
@@ -52,6 +58,21 @@ public:
 		BLKSTR *blockdata;
 		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
 		return blockdata->user2;
+	}
+	
+	inline bool isTileBouncing(int x, int y)
+	{
+		BLKSTR *blockdata;
+		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
+		return blockdata->user7;
+	}
+
+	inline bool isTileDeath(int x, int y)
+	{
+		// user6 is death 
+		BLKSTR *blockdata;
+		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
+		return blockdata->user6;
 	}
 
 	inline bool isQuestionTile(int x, int y)
@@ -90,7 +111,9 @@ public:
 	// Replaces a special tile with a solid collidable tile.
 	inline void killSpecialTile(int x, int y)
 	{
-		MapSetBlock(x/mapblockwidth, y/mapblockheight, 455); 
+		// Tile #423 is a special replacement tile with User7 set as true.
+		// It is only activated when a block is currently being pushed from below.
+		MapSetBlock(x/mapblockwidth, y/mapblockheight, 423); 
 	}
 };
 

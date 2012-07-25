@@ -7,10 +7,12 @@ Database::Database()
 	// enemies and powerups remain empty before tileblock sets it
 }
 
-void Database::InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALLEGRO_BITMAP *deadQuestion, ALLEGRO_BITMAP *sky, ALLEGRO_BITMAP *deadBrick)
+void Database::InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALLEGRO_BITMAP *Mushroom,
+	                      ALLEGRO_BITMAP *deadQuestion, ALLEGRO_BITMAP *sky, ALLEGRO_BITMAP *deadBrick)
 {
 	Database::BabyMario = BabyMario;
 	Database::GoombaPic = Goomba;
+	Database::MushroomPic = Mushroom;
 	Database::deadQuestion = deadQuestion;
 	Database::sky = sky;
 	Database::deadBrick = deadBrick;
@@ -22,21 +24,24 @@ void Database::makePlayer(int x, int y, int velX, int velY, int dirX, int dirY, 
 	player->Init(x, y, velX, velY, dirX, dirY, alive, BabyMario);
 	players.push_back(player);
 }
-// Will need to indicate species with the introduction of KOOPATROOPAS!
 void Database::makeEnemy(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
 	if(species == GOOMBA)
 	{
 		Goomba *goomba = new Goomba(); 
-		goomba->Init(ENEMY, x, y, velX, velY, dirX, dirY, alive, GoombaPic);
+		goomba->Init(ENEMY, GOOMBA, x, y, velX, velY, dirX, dirY, alive, GoombaPic);
 		enemies.push_back(goomba);
 	}
 }
-/*void Database::makePowerUps()
+void Database::makePowerUp(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
-	PowerUp *pu = new PowerUp(); 
-	powerUps.push_back(pu); 
-}*/
+	if(species == SUPER_MUSHROOM)
+	{
+		SuperMushroom *mushroom = new SuperMushroom();
+		mushroom->Init(POWERUP, SUPER_MUSHROOM, x, y, velX, velY, dirX, dirY, alive, MushroomPic);
+		powerUps.push_back(mushroom); 
+	}
+}
 void Database::makeBounceBlock(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
 	BounceBlock *bblock = new BounceBlock();
@@ -66,6 +71,13 @@ void Database::updateEnemyList()
 		(*iterE)->update();
 	}
 }
+void Database::updatePowerUpList()
+{
+	for( iterPU = powerUps.begin(); iterPU != powerUps.end(); iterPU++)
+	{
+		(*iterPU)->update();
+	}
+}
 void Database::updateBounceBlockList()
 {
 	for( iterB = bounceBlocks.begin(); iterB != bounceBlocks.end(); )
@@ -77,8 +89,6 @@ void Database::updateBounceBlockList()
 		}
 		else
 		{
-			cout << "Erasing" << endl;
-			//(*iterB)->destroy();
 			delete (*iterB);
 			iterB = bounceBlocks.erase(iterB);
 		}
@@ -97,6 +107,13 @@ void Database::drawEnemyList()
 	for( iterE = enemies.begin(); iterE != enemies.end(); iterE++)
 	{
 		(*iterE)->draw();
+	}
+}
+void Database::drawPowerUpList()
+{
+	for( iterPU = powerUps.begin(); iterPU != powerUps.end(); iterPU++)
+	{
+		(*iterPU)->draw();
 	}
 }
 void Database::drawBounceBlockList()
@@ -139,6 +156,22 @@ void Database::destroyEnemyList()
 			iterE++;
 	}
 }
+void Database::destroyPowerUpList()
+{
+	for( iterPU = powerUps.begin(); iterPU != powerUps.end(); )
+	{
+		if(! (*iterPU)->getAlive())
+		{
+			//Call native destroy on the object.
+			(*iterPU)->destroy();
+			//Destroy object.
+			delete (*iterPU);
+			iterPU = powerUps.erase(iterPU);
+		}
+		else
+			iterPU++;
+	}
+}
 void Database::destroyBounceBlockList()
 {
 	for( iterB = bounceBlocks.begin(); iterB != bounceBlocks.end(); )
@@ -160,17 +193,16 @@ void Database::resetDatabase()
 {
 	killPlayers();
 	killEnemies();
-	//killPowerUps();
+	killPowerUps();
 	killBounceBlocks();
 	destroy();
 	makePlayer(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true);
 }
-
 void Database::deleteDatabase()
 {
 	killPlayers();
 	killEnemies();
-	//killPowerUps();
+	killPowerUps();
 	killBounceBlocks();
 	destroy();
 }
@@ -185,15 +217,27 @@ void Database::killEnemies()
 	for( iterE = enemies.begin(); iterE != enemies.end(); iterE ++)
 		(*iterE)->setAlive(false);
 }
+void Database::killPowerUps()
+{
+	for( iterPU = powerUps.begin(); iterPU != powerUps.end(); iterPU ++)
+		(*iterPU)->setAlive(false);
+}
 void Database::killBounceBlocks()
 {
 	for( iterB = bounceBlocks.begin(); iterB != bounceBlocks.end(); iterB ++)
 		(*iterB)->setAlive(false);
 }
+
 list<Autobot *>::iterator Database::destroyEnemy(list<Autobot *>::iterator iter)
 {
 	(*iter)->destroy();
 	iter = enemies.erase(iter);
+	return iter;
+}
+list<Autobot *>::iterator Database::destroyPowerUp(list<Autobot *>::iterator iter)
+{
+	(*iter)->destroy();
+	iter = powerUps.erase(iter);
 	return iter;
 }
 
