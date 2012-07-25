@@ -87,6 +87,11 @@ public:
 		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
 		blockdata->user3 = 0;
 	}
+	// Replaces a special tile with a solid collidable tile.
+	inline void killSpecialTile(int x, int y)
+	{
+		MapSetBlock(x/mapblockwidth, y/mapblockheight, 455); 
+	}
 };
 
 #endif

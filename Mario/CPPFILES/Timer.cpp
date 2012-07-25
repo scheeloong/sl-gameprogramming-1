@@ -6,7 +6,7 @@
 bool Timer::isItFlying(GameObject *object)
 {
 	if (object->getonAir() == true && object->getAlive()) //object is in the air and alive
-	{	//halffire ensures we accelerate 
+	{	// halffire ensures we accelerate 
 		// every other loop through update timer.
 		// essentially making gravity = 0.5
 		if(object->gethalffire())
@@ -50,12 +50,19 @@ void Timer::updateTimer(ALLEGRO_EVENT *ev)
 				//animation only goes back to frame 0 when all keys are released.
 				if(!keys[UP] && !keys[DOWN] && !keys[LEFT] && !keys[RIGHT])
 					(*(database->iterP))->resetAnimation();
+				if(keys[ESC]) {keys[ESC] = false; state->setState(PAUSE);}
 			
-					for(database->iterE = database->getEnemiesBegin(); database->iterE != database->getEnemiesEnd(); database->iterE++)
-						isItFlying(*database->iterE); //if(player->getLife() <= 0)
-								//isGameOver = true;
-					if(keys[ESC]) {keys[ESC] = false; state->setState(PAUSE);}
+				for(database->iterE = database->getEnemiesBegin(); database->iterE != database->getEnemiesEnd(); database->iterE++)
+					isItFlying(*database->iterE);
+				for(database->iterB = database->getBounceBlocksBegin(); database->iterB != database->getBounceBlocksEnd(); database->iterB++)
+				{
+					if((*database->iterB)->getY() < (*database->iterB)->getStartY())
+						isItFlying(*database->iterB);
+					else 
+						(*database->iterB)->setVelY(0);
 				}
+				//isItFlying(*database->iterB);
+			}
 		}
 		else if(state->getState() == PAUSE)
 		{
