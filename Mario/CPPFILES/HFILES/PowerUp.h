@@ -8,9 +8,9 @@
 #include "HFILES/GameObject.h"
 
 class PowerUp : public GameObject
-{/*
+{
 	private:
-		enum pTypes{COIN, POWER, HEART}; // Types of powerUps
+
 
 	public:
 		// Constructors
@@ -19,7 +19,7 @@ class PowerUp : public GameObject
 		bool render);
 		void update(); //TODO: make this.
 		void Init(); // Initialize powerup based on position and type
-		// Methods	*/
+		// Methods
 };
 
 #endif POWERUP_H

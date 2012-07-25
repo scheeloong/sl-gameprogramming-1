@@ -1,8 +1,8 @@
 #include "HFILES/Goomba.h"
 
-void Goomba::Init(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
+void Goomba::Init(int ID, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
 {
-	Enemy::Init(x, y, velX, velY, dirX, dirY, alive, image);
+	Autobot::Init(ID, x, y, velX, velY, dirX, dirY, alive, image);
 	maxFrame = 1;
 	curFrame = 0;
 	frameCount = 3;

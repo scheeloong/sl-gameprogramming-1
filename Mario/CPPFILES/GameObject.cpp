@@ -19,8 +19,9 @@ GameObject::GameObject()
 }
 
 // Initializing
-void GameObject::Init(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image/*, State state, Collision col,*/)
+void GameObject::Init(int ID, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image/*, State state, Collision col,*/)
 {
+	setID(ID);
 	setX(x); 
 	setY(y); 
 	setVelX(velX); 
