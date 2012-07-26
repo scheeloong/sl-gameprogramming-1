@@ -84,6 +84,7 @@ void Timer::updateTimer(ALLEGRO_EVENT *ev)
 
 		else if(state->getState() == GAMEOVER)
 		{
+			cout << "In timer's Gameover" << endl;
 			if(keys[R])
 			{
 				// reset database!

@@ -23,8 +23,8 @@ public:
 		//clocker = NULL;
 		//event_queue = NULL;
 		//done = false;
-		database = new Database();
 		state = new State();
+		database = new Database(state);
 		/*player = new Player(); obscelete due to database implementation
 		goomba = new Goomba();*/
 		timer = new Timer(database, state);
@@ -81,7 +81,7 @@ public:
 		srand(time(NULL));
 		
 		//Load
-		ALLEGRO_BITMAP *BabyMario = NULL;
+		ALLEGRO_BITMAP *Mario = NULL;
 		ALLEGRO_BITMAP *Goomba = NULL;
 		ALLEGRO_BITMAP *SuperMushroom = NULL;
 		ALLEGRO_BITMAP *DeadQuestion = NULL;
@@ -91,7 +91,7 @@ public:
 		if(MapLoad("50x50.FMP", 1))
 			exit(-5); 
 		//The images below MUST be stored in the Mario folder, and NOT in Resources.
-		BabyMario = al_load_bitmap("BabyMario 120.png");
+		Mario = al_load_bitmap("MarioGenerations 120.png");
 		Goomba = al_load_bitmap("Goomba 120.png");
 		SuperMushroom = al_load_bitmap("RedMushroom 50x50.png");
 		DeadQuestion = al_load_bitmap("DeadQuestion 50x100.png");
@@ -104,7 +104,7 @@ public:
 		al_register_event_source(event_queue, al_get_keyboard_event_source());		
 		al_register_event_source(event_queue, al_get_timer_event_source(clocker));
 		//Object Initialization
-		database->InitImages(BabyMario, Goomba, SuperMushroom, DeadQuestion, Sky, DeadBrick);
+		database->InitImages(Mario, Goomba, SuperMushroom, DeadQuestion, Sky, DeadBrick);
 		database->makePlayer(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true);
 		screen->initFont(font18);
 		//Let's start it up!
@@ -138,7 +138,7 @@ public:
 		delete keyboard;
 		delete screen;		
 		delete collision;
-		al_destroy_bitmap(BabyMario);
+		al_destroy_bitmap(Mario);
 		al_destroy_bitmap(Goomba);
 		al_destroy_bitmap(SuperMushroom);
 		al_destroy_bitmap(DeadQuestion);

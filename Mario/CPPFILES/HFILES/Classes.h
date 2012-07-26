@@ -123,10 +123,10 @@ extern bool keys[5];
 extern bool lock[5];
 extern int xOff;
 extern int yOff;
-// This fluxes between 0 and 1, to decrease the effect of gravity in
-// updateTimer. 
-// To be updated later
+// NILL and NALL are space holders that represent 0. This is important in score keeping.
 static enum ID{PLAYER, ENEMY, POWERUP, BULLET, BORDER, MISC, EXPLOSION};
+static enum TILES{BRICK, COIN};
+static enum playerSpecies{BABY, RED, WHITE};
 static enum enemySpecies{GOOMBA, KOOPA_TROOPA, PIRANHA_PLANT};
 static enum blockSpecies{DEAD_QUESTION, SKY, DEAD_BRICK};
 static enum powerUpSpecies{SUPER_MUSHROOM, FIRE_FLOWER, STAR};

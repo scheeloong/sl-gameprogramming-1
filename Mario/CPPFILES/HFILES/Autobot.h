@@ -15,7 +15,6 @@ class Autobot : public GameObject
 {
 	private:
 		int lives; // BOSS ENEMY has > 1 life
-		int species;
 	public:
 		// Constructor
 		Autobot() : GameObject() {lives = 1;} // normal enemy has 1 live only, WALKLEFT because it does so by default.
@@ -23,8 +22,6 @@ class Autobot : public GameObject
 		void Init(int ID, int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
 		{GameObject::Init(ID, x, y, velX, velY, dirX, dirY, alive, image); setSpecies(species);}
 		void InitImage(ALLEGRO_BITMAP *image) {setImage(image);}
-		int getSpecies() {return species;}
-		void setSpecies(int species) {Autobot::species = species;}
 		void update();
 		void destroy() {setAlive(false);}
 		// Methods

@@ -3,7 +3,9 @@
 Collision::Collision(Database *database)  
 {
 	Collision::database = database;
-	insertObjectBounds(PLAYER, 0, 13, 23);
+	insertObjectBounds(PLAYER, BABY, 13, 23);
+	insertObjectBounds(PLAYER, RED, 20, 43);
+	insertObjectBounds(PLAYER, WHITE, 20, 43);
 	// Enemy only refers to Goomba as of now.
 	insertObjectBounds(ENEMY, GOOMBA, 22, 27);
 	insertObjectBounds(POWERUP, SUPER_MUSHROOM, 22, 27);
@@ -17,13 +19,26 @@ Collision::Collision(Database *database)
 void Collision::insertObjectBounds(int ID, int species, int boundX, int boundY)
 {
 	if(ID == PLAYER)
-	{
-		playerBoundX.push_back(boundX);
-		playerBoundY.push_back(boundY);
+	{// determine the appropriate iterator position.
+		iterY = playerBoundY.begin();
+		for(iterX = playerBoundX.begin(); iterX != playerBoundX.end(); iterX++)
+		{
+			if(counter == species) 
+			{
+				counter = 0;
+				break;
+			}
+			else
+				counter++;
+			iterY++;
+		}
+		// and insert an element at that position.
+		playerBoundX.insert(iterX, boundX);
+		playerBoundY.insert(iterY, boundY);
 	}
 	else if(ID == ENEMY)
 	{
-		// determine the appropriate iterator position.
+		
 		iterY = powerUpBoundY.begin();
 		for(iterX = enemyBoundX.begin(); iterX != enemyBoundX.end(); iterX++)
 		{
@@ -36,7 +51,6 @@ void Collision::insertObjectBounds(int ID, int species, int boundX, int boundY)
 				counter++;
 			iterY++;
 		}
-		// and insert an element at that position.
 		enemyBoundX.insert(iterX, boundX);
 		enemyBoundY.insert(iterY, boundY);
 	}
@@ -75,8 +89,8 @@ void Collision::checkPlayerTileCollision()
 
 		// Player class does not have a species, so until we implement multiplayer mode, bx and by 
 		// will be stored at index 0, or PLAYER.
-		int bx = playerBoundX[(*(database->iterP))->getID()];
-		int by = playerBoundY[(*(database->iterP))->getID()];
+		int bx = playerBoundX[(*(database->iterP))->getSpecies()];
+		int by = playerBoundY[(*(database->iterP))->getSpecies()];
 
 		//If Mario jumps above the visible screen, tile collisions won't be checked.
 		if(y > 0)
@@ -88,9 +102,9 @@ void Collision::checkPlayerTileCollision()
 			{
 				lock[DOWN] = true; 
 				(*(database->iterP))->setonAir(false); 
-				// Sets player at ground level with VelY = 0 //
-				(*(database->iterP))->setVelY(0); 
-				(*(database->iterP))->setY(((y+by)/mapblockheight) * 50 - 22); 
+				// (y+by)/mapblockheight * 50 == (y+by)/50 * 50. It'll always be on some multiple of 50.
+				// The member function in class Player will be called here.
+				(*(database->iterP))->setToGroundLevel(((y+by)/mapblockheight) * 50 - by);
 				///////////////////////////////////////////////
 				(*(database->iterP))->resetAnimation();
 			}
@@ -105,23 +119,35 @@ void Collision::checkPlayerTileCollision()
 			else lock[LEFT] = false;
 
 			//TODO: modify to check every side of body.
-			if(isTileSpecial(x, y - 25))
+			if(isTileSpecial(x, y - by))
 			{
-				if(isQuestionTile(x, y - 25))
+				if(isQuestionTile(x, y - by))
 				{
-					database->makeBounceBlock(DEAD_QUESTION, (x/mapblockwidth) * 50, ((y-25)/mapblockheight) * 50, 0, -5, 1, 1, true);
-					database->makePowerUp(SUPER_MUSHROOM, (x/mapblockwidth) * 50 + 25, ((y-25)/mapblockheight) * 50 - 30, 2, -5, 1, 1, true);
-					killSpecialTile(x, y - 25);
+					cout << "IsQuestionTILING!" << endl;
+					database->makeBounceBlock(DEAD_QUESTION, (x/mapblockwidth) * 50, ((y-by)/mapblockheight) * 50, 0, -5, 1, 1, true);
+					database->makePowerUp(SUPER_MUSHROOM, (x/mapblockwidth) * 50 + 25, ((y-by)/mapblockheight) * 50 - 30, 2, -5, 1, 1, true);
+					killSpecialTile(x, y - by);
 				}
 				else if(isCoinTile(x, y))
 				{
-					cout << "Coin!" << endl;
-					//do stuff
+					(*(database->iterP))->addScore(COIN);
+					MapChangeLayer(1);
+					vapourizeTile(x, y);
+					MapChangeLayer(0);
+					vapourizeTile(x, y);
 				}
-				else if(isBrickTile(x, y - 25))
+				else if(isBrickTile(x, y - by))
 				{
-					database->makeBounceBlock(DEAD_BRICK, (x/mapblockwidth) * 50, ((y-25)/mapblockheight) * 50, 0, -4, 1, 1, true);
-					killSpecialTile(x, y - 25);
+					if((*(database->iterP))->getSpecies() == BABY)
+					{
+						database->makeBounceBlock(DEAD_BRICK, (x/mapblockwidth) * 50, ((y-by)/mapblockheight) * 50, 0, -4, 1, 1, true);
+						killSpecialTile(x, y - by);
+					}
+					else if ((*(database->iterP))->getSpecies() == RED || (*(database->iterP))->getSpecies() == WHITE)
+					{
+						(*(database->iterP))->addScore(BRICK);
+						vapourizeTile(x, y - by);
+					}
 				}
 			}
 			if(isTriggerTile(x, y))
@@ -160,7 +186,7 @@ void Collision::checkEnemyTileCollision()
 				else // Tile is bouncing
 				{
 					(*(database->iterE))->setVelY(-8);
-					// Goomba will bounce up and accelerate to bottom of screen. (Disables collidability);
+					// Goomba will bounce up and accelerate to bottom of screen. (COLLIDABILITY DISABLED FROM THIS POINT ON);
 					(*(database->iterE))->setAlive(false);
 					(*(database->iterE))->setonAir(true);
 				}
@@ -177,7 +203,6 @@ void Collision::checkEnemyTileCollision()
 				(*(database->iterE))->reverseDirection();
 			if(isTileDeath(x, y))
 				database->iterE = database->destroyEnemy(database->iterE);
-	
 		}
 	}
 }
@@ -247,7 +272,7 @@ void Collision::checkPlayerEnemyCollision()
 				if(((Px + Pbx) >= (Ex - Ebx) && (Px + Pbx) <= (Ex + Ebx)) || 
 				   ((Px - Pbx) >= (Ex - Ebx) && (Px + Pbx) <= (Ex + Ebx)))
 				{
-					//Increase Mario's score
+					(*(database->iterP))->addScore((*(database->iterE))->getSpecies());
 					database->iterE = database->destroyEnemy(database->iterE);
 					continue;
 				}
@@ -260,8 +285,8 @@ void Collision::checkPlayerEnemyCollision()
 				   (Py + Pby) >= (Ey - Eby) && (Py + Pby) <= (Ey + Eby))
 
 				{
-					// TODO: decrease Mario's life! currently an infinite loop.
-					//*(database->iterP)->decrementLife();
+					(*(database->iterP))->demotePlayer();
+					database->iterE = database->destroyEnemy(database->iterE);
 					continue;
 				}
 			}
@@ -269,3 +294,55 @@ void Collision::checkPlayerEnemyCollision()
 		}
 	}
 }
+void Collision::checkPlayerPowerUpCollision()
+{
+	for(database->iterP = database->getPlayersBegin(); database->iterP != database->getPlayersEnd(); database->iterP++)
+	{
+		int Px = (*(database->iterP))->getX();
+		int Py = (*(database->iterP))->getY();
+
+		int Pbx = playerBoundX[(*(database->iterP))->getSpecies()];
+		int Pby = playerBoundY[(*(database->iterP))->getSpecies()];
+
+		for(database->iterPU = database->getPowerUpsBegin(); database->iterPU != database->getPowerUpsEnd();)
+		{
+			int PUx = (*(database->iterPU))->getX();
+			int PUy = (*(database->iterPU))->getY();
+
+			int PUbx = powerUpBoundX[(*(database->iterPU))->getSpecies()];
+			int PUby = powerUpBoundY[(*(database->iterPU))->getSpecies()];
+
+			// If Mario lands on an powerup or touches power up.
+			// This chunk of code is separated just like in void checkPlayerEnemyCollision 
+			// even though the outcomes for both if and else if are the same.
+			// Reason being it is going to be impossible to debug if all the conditions are mashed together.
+			if((Py + Pby) <= PUy && (Py + Pby) >= (PUy - PUby)) 
+			{	// If one corner of his bound box is between the corners of his powerup's
+				if(((Px + Pbx) >= (PUx - PUbx) && (Px + Pbx) <= (PUx + PUbx)) || 
+				   ((Px - Pbx) >= (PUx - PUbx) && (Px + Pbx) <= (PUx + PUbx)))
+				{
+					(*(database->iterP))->promotePlayer();
+					database->iterPU = database->destroyPowerUp(database->iterPU);
+					continue;
+				}
+			}
+			// Player's left hits powerup's right || Player's right hits powerup's left
+			else if((Px - Pbx) >= (PUx - PUbx) && (Px - Pbx) <= (PUx + PUbx) ||
+				    (Px + Pbx) >= (PUx - PUbx) && (Px + Pbx) <= (PUx + PUbx))
+			{
+				if((Py - Pby) >= (PUy - PUby) && (Py - Pby) <= (PUy + PUby) ||
+				   (Py + Pby) >= (PUy - PUby) && (Py + Pby) <= (PUy + PUby))
+
+				{
+					cout << "Promoting" << endl;
+					(*(database->iterP))->promotePlayer();
+					database->iterPU = database->destroyPowerUp(database->iterPU);
+					continue;
+				}
+			}
+			database->iterPU++;
+		}
+	}
+}
+
+// HELPER function. 

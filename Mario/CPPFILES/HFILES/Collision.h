@@ -37,6 +37,8 @@ public:
 	void checkEnemyTileCollision();
 	void checkPowerUpTileCollision();
 	void checkPlayerEnemyCollision();
+	void checkPlayerPowerUpCollision();
+
 
 	void checkCollision()
 	{
@@ -44,6 +46,7 @@ public:
 		checkEnemyTileCollision();
 		checkPowerUpTileCollision();
 		checkPlayerEnemyCollision();
+		checkPlayerPowerUpCollision();
 	}
 
 	inline bool isTileCollidable(int x, int y)
@@ -114,6 +117,12 @@ public:
 		// Tile #423 is a special replacement tile with User7 set as true.
 		// It is only activated when a block is currently being pushed from below.
 		MapSetBlock(x/mapblockwidth, y/mapblockheight, 423); 
+	}
+
+	// Replaces a tile with sky tile
+	inline void vapourizeTile(int x, int y)
+	{
+		MapSetBlock(x/mapblockwidth, y/mapblockheight, 10);
 	}
 };
 

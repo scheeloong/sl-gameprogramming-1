@@ -3,9 +3,10 @@
 //Player::Player() : lives(3) {}
 
 // Methods
-void Player::decrementLife ()
+void Player::decrementLife()
 {
-	lives--; 
+	if(--lives < 0)
+		state->setState(GAMEOVER);
 }
 void Player::incrementLife ()
 {
@@ -13,29 +14,29 @@ void Player::incrementLife ()
 }
 void Player::addScore(int ID_Harvested)
 {
-	if(ID_Harvested == ENEMY) 
-		score += 100;
+	score += (ID_Harvested + 1) * 100;
 }
 
-void Player::Init(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image /*, State state, Collision col,*/)
+void Player::Init(State *state, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
 {
-		GameObject::Init(PLAYER, x, y, velX, velY, dirX, dirY, alive, image);
-		//array indexing, so 2 frames.
-		maxFrame = 2;
-		curFrame = 0;
-		frameCount = 0;
-		frameDelay = 5;
-		frameWidth = 120;
-		frameHeight = 120;
-		animationColumns = 4;
-		// animationDirection is currently not used by player objects.
-		// it might be the same as rewind.
-		animationDirection = 1;
+	Player::state = state;
+	GameObject::Init(PLAYER, x, y, velX, velY, dirX, dirY, alive, image);
+	//array indexing, so 2 frames.
+	maxFrame = 2;
+	curFrame = 0;
+	frameCount = 0;
+	frameDelay = 5;
+	frameWidth = 120;
+	frameHeight = 120;
+	animationColumns = 4;
+	// animationDirection is currently not used by player objects.
+	// it might be the same as rewind.
+	animationDirection = 1;
 
-		animationRow = 0;
-		rewind = 1;
-		facing = WALKRIGHT;
-		//addLife(lives); I don't know why this is here.
+	animationRow = 0;
+	rewind = 1;
+	facing = WALKRIGHT;
+	//addLife(lives); I don't know why this is here.
 }
 
 //Update animations and velocity
@@ -80,14 +81,28 @@ void Player::draw()
 	//The trailing added numbers after frameWidth/2 etc. are all arbitrary.
 	//The spritesheet in this case was a little crooked and those numbers
 	//help recenter the sprite to be drawn.
-	if (facing == WALKRIGHT)
-	al_draw_bitmap_region(image, fx, fy, frameWidth,
-		frameHeight, x - frameWidth / 2 + 10, y - frameHeight /2 + 10, 0);
-	else if (facing == WALKLEFT)
-	al_draw_bitmap_region(image, fx, fy, frameWidth,
-		frameHeight, x - frameWidth / 2 - 10, y - frameHeight /2 + 10, ALLEGRO_FLIP_HORIZONTAL);
-	//This tests the bounding box dimensions.
-	//al_draw_filled_rectangle(x, y, x+13, y+23, al_map_rgba(255, 0, 255, 100));
+	if(species == BABY) // used for bound box testing.
+	{
+		if (facing == WALKRIGHT)
+		al_draw_bitmap_region(image, fx, fy, frameWidth,
+			frameHeight, x - frameWidth / 2 + 10, y - frameHeight /2 + 10, 0);
+		else if (facing == WALKLEFT)
+		al_draw_bitmap_region(image, fx, fy, frameWidth,
+			frameHeight, x - frameWidth / 2 - 10, y - frameHeight /2 + 10, ALLEGRO_FLIP_HORIZONTAL);
+		//This tests the bounding box dimensions.
+		al_draw_filled_rectangle(x-13, y-23, x+13, y+23, al_map_rgba(255, 0, 255, 100));
+	}
+	else if(species == RED || species == WHITE)
+	{
+		if (facing == WALKRIGHT)
+		al_draw_bitmap_region(image, fx, fy, frameWidth,
+			frameHeight, x - frameWidth / 2 + 10, y - frameHeight /2 - 2, 0);
+		else if (facing == WALKLEFT)
+		al_draw_bitmap_region(image, fx, fy, frameWidth,
+			frameHeight, x - frameWidth / 2 - 10, y - frameHeight /2 - 2, ALLEGRO_FLIP_HORIZONTAL);
+		//This tests the bounding box dimensions.
+		al_draw_filled_rectangle(x-20, y-45, x+20, y+45, al_map_rgba(255, 0, 255, 100));
+	}
 }
 
 void Player::startLeap() 
