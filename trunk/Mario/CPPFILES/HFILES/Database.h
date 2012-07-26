@@ -11,10 +11,12 @@
 #include "HFILES/Autobot.h"
 #include "HFILES/Goomba.h"
 #include "HFILES/BounceBlock.h"
+#include "HFILES/State.h"
 
 class Database
 {
 	private:
+		State *state; // This is needed by player.
 		// Create generic double linked list of GameObjects used
 		// using type GameObject * because it's more general. For destroy list.
 		list<Player *> players; // create a double linked list of players 
@@ -42,7 +44,7 @@ class Database
 
 	public:
 		// Constructors
-		Database(); 
+		Database(State *state); 
 		void InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALLEGRO_BITMAP *Mushroom,
 			            ALLEGRO_BITMAP *deadQuestion, ALLEGRO_BITMAP *sky, ALLEGRO_BITMAP *deadBrick);
 		//These don't modify the lists on their own, so safer and more convenient to be public.

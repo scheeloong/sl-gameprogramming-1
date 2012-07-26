@@ -27,7 +27,7 @@ class Display
 		Display(Database *database = NULL, State *state = NULL);
 		void initFont(ALLEGRO_FONT *font) {Display::font = font;} // Gets actor's name
 		// Methods
-		void displayMessage(int posx, int posy, string message);
+		void displayScore(int x, int y);
 		void inputName(); // Get's actor's name and inputs into game for high score. 
 		void updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev);
 		void destroyFont() {al_destroy_font(font);}

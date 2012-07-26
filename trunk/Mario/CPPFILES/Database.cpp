@@ -1,8 +1,9 @@
 #include "HFILES/Database.h"
 
 // Defining Methods
-Database::Database()
+Database::Database(State *state)
 {
+	Database::state = state;
 	//makePlayer(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true); // make a player
 	// enemies and powerups remain empty before tileblock sets it
 }
@@ -21,7 +22,7 @@ void Database::InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALL
 void Database::makePlayer(int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
 	Player *player = new Player(); 
-	player->Init(x, y, velX, velY, dirX, dirY, alive, BabyMario);
+	player->Init(state, x, y, velX, velY, dirX, dirY, alive, BabyMario);
 	players.push_back(player);
 }
 void Database::makeEnemy(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive)

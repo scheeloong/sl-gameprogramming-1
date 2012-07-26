@@ -15,10 +15,10 @@ Display::Display(Database *database, State *state)
 	Display::state = state;
 }
 
-void Display::displayMessage(int posx, int posy, string message) // Display message at x and y position of screen
+void Display::displayScore(int posx, int posy) // Display message at x and y position of screen
 {
-	//why does this work? try message..c_str()
-	al_draw_textf(font, al_map_rgb(255, 255, 255), posx, posy, 0, "%s", message);
+	for(database->iterP = database->getPlayersBegin(); database->iterP != database->getPlayersEnd(); database->iterP++) 
+		al_draw_textf(font, al_map_rgb(0, 0, 0), 5, 5, 0, "Score: %i", (*(database->iterP))->getScore());
 }
 
 void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
@@ -42,6 +42,7 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 			if(state->getState() == PLAYING)
 			{
 				database->draw();
+				displayScore(5, 5);
 			}
 			else if(state->getState() == PAUSE)
 			{
@@ -53,6 +54,7 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 					"Resume? [R]");
 				al_draw_textf(font, al_map_rgb(0, 0, 255), WIDTH/2, HEIGHT/2 + 30, ALLEGRO_ALIGN_CENTRE, 
 					"Stop Playing? [ESC]");
+				displayScore(5, 5);
 			}
 			else if(state->getState() == GAMEOVER)
 			{
@@ -61,6 +63,7 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 					"Restart? [R]");
 				al_draw_textf(font, al_map_rgb(0, 0, 255), WIDTH/2, HEIGHT/2 + 30, ALLEGRO_ALIGN_CENTRE, 
 					"Exit? [ESC]");
+				displayScore(5, 5);
 			}
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(0,0,0));

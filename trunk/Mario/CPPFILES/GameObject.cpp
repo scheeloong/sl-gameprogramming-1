@@ -7,9 +7,6 @@ GameObject::GameObject()
 	dirX = 0, dirY = 0; 
 	alive = false; 
 	render = true; 
-	collidable = true; 
-//	State::State(); // call State's class default constructor which initializes to normal
-//	Collision::Collision();
 	image = NULL;
 
 	//positive for going down
@@ -19,7 +16,7 @@ GameObject::GameObject()
 }
 
 // Initializing
-void GameObject::Init(int ID, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image/*, State state, Collision col,*/)
+void GameObject::Init(int ID, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
 {
 	setID(ID);
 	setX(x); 
@@ -32,15 +29,4 @@ void GameObject::Init(int ID, int x, int y, int velX, int velY, int dirX, int di
 	//check if the image is true. setImage only if image exists.
 	if(image)
 		setImage(image);  
-	//state; 
-	//col; 
-	//setAlive(alive); 
-	//setRender(render); 
 }
-
-/*
-bool GameObject::checkCollision(GameObject *object2) 
-{
-	return col.superCheckCollision(this, object2); 
-}
-*/

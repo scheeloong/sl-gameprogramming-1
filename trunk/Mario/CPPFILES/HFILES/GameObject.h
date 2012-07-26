@@ -9,8 +9,7 @@ class GameObject
 protected: 
 	// Type of Game Object
 	int ID; 
-	// Can't remember why we needed species. Assuming state will handle all this...
-	// int species;
+	int species;
 
 	// DO NOT CHANGE int TYPE to float for position and velocity.
 	// WILL CAUSE CRASH in Collision class
@@ -20,16 +19,10 @@ protected:
 	// Velocities
 	int velX; 
 	int velY; 
-	// Direction of Movement
+	// Direction of Movement ABSOLUTELY USELESS
 	int dirX; 
 	int dirY; 
-	// Image
 	ALLEGRO_BITMAP *image; 
-
-	// State state; 
-	// Collision
-    // Collision col; 
-	bool collidable; // if it is collidable, set collidable to true
 
 	// Alive and Draw, currently unused
 	bool alive; 
@@ -66,11 +59,15 @@ public:
 	// Method for constructor (more specific) 
 	// This Init function is expected to be called ONCE for each GameObject, so some parameters 
 	// might never need to be updated. (state, col..?)
-	void Init(int ID, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image/*, State state, Collision col,*/); 
+	void Init(int ID, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image); 
 
 	//===============================
 	// Set & Get
 	//===============================
+	void setID(int id) { ID = id; } 
+	int getID() {return ID;}
+	int getSpecies() {return species;}
+	void setSpecies(int species) {GameObject::species = species;}
 	void setX(int i) {x = i;}
 	void setY(int i) {y = i;}
 	int getX() {return x;}
@@ -89,8 +86,25 @@ public:
 	bool getRender() { return render; }
 	ALLEGRO_BITMAP *getImage() {return image;}
 	void setImage(ALLEGRO_BITMAP *im) { image = im; }
-	void setID(int id) { ID = id; } 
-	int getID() {return ID;}
+	void setAnimationRow(int animationRow) {GameObject::animationRow = animationRow;}
+	// TODO: determine if we need a cap for this.
+	void incrementAnimationRow()
+	{
+		if(animationRow <= 2)
+			animationRow++;
+	}
+	// tries to decrement animationRow, returns true upon success.
+	// Becomes false if we try demoting baby mario.
+	bool decrementAnimationRow() 
+	{
+		if(animationRow <= 0) 
+			return false; 
+		else 
+		{
+			animationRow--; 
+			return true;
+		}
+	}
 	bool getonAir() {return onAir;}
 	void setonAir(bool onAir) {GameObject::onAir = onAir;}
 	int getfacing() {return facing;}
@@ -128,7 +142,11 @@ public:
 		}
 	}
 
-	bool checkCollision(GameObject *object2);   //unlikely to be used
+	void setToGroundLevel(int y)
+	{
+		setVelY(0);
+		setY(y);
+	}
 
 	virtual void update() //;
 	{
