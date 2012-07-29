@@ -22,11 +22,14 @@ class Autobot : public GameObject
 		void Init(int ID, int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
 		{GameObject::Init(ID, x, y, velX, velY, dirX, dirY, alive, image); setSpecies(species);}
 		void InitImage(ALLEGRO_BITMAP *image) {setImage(image);}
-		void update();
+		virtual void update();
 		void destroy() {setAlive(false);}
 		// Methods
 		void takeLife(int i); // Minus i from lives
 		void addLife(int i); // add i to lives (may not be needed) 
+		// This is SPECIFICALLY for KoopaTroopas
+		virtual void kickTurtle(int playerWalk) {}
+		virtual void specificFunction(){}
 };
 #endif AUTOBOT_H
 //*/

@@ -39,7 +39,7 @@
 // Mappy
 #include "HFILES/mappy_A5.h"
 #include <math.h>
-#include <vector>
+#include <list>
 
 //#include "HFILES/Database.h" // shifted from below in case order matters. 
 
@@ -127,14 +127,16 @@ extern int yOff;
 static enum ID{PLAYER, ENEMY, POWERUP, BULLET, BORDER, MISC, EXPLOSION};
 static enum TILES{BRICK, COIN};
 static enum playerSpecies{BABY, RED, WHITE};
-static enum enemySpecies{GOOMBA, KOOPA_TROOPA, PIRANHA_PLANT};
+// KOOPA_TROOPA_SHELL is inserted at end of enum to not hyperboost the scoring system.
+static enum enemySpecies{GOOMBA, KOOPA_TROOPA, PIRANHA_PLANT, KOOPA_TROOPA_SHELL};
+static enum koopaState{WALKING, INSHELL, GLIDING};
 static enum blockSpecies{DEAD_QUESTION, SKY, DEAD_BRICK};
 static enum powerUpSpecies{SUPER_MUSHROOM, FIRE_FLOWER, STAR};
 static enum GAMESTATES{INTRO, MENU, PLAYING, PAUSE, GAMEOVER};
 static enum KEYS{UP, DOWN, LEFT, RIGHT, SPACE, R, ESC};
 //For the animations of all sprites.
 //LEFT means walking to the left, RIGHT means walking to the right.
-static enum FACING{WALKLEFT = -1, WALKRIGHT = 1, JUMPMODE = 3};
+static enum FACING{WALKLEFT = -1, WALKRIGHT = 1, JUMPMODE = 3, CROUCH = 4};
 
 
 #endif CLASSES_H

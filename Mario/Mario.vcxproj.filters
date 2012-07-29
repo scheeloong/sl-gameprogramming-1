@@ -89,6 +89,9 @@
     <ClCompile Include="CPPFILES\SuperMushroom.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="CPPFILES\KoopaTroopa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CPPFILES\HFILES\Keyboard.h">
@@ -143,6 +146,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="CPPFILES\HFILES\SuperMushroom.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CPPFILES\HFILES\KoopaTroopa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

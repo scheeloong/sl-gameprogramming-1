@@ -8,68 +8,33 @@ Collision::Collision(Database *database)
 	insertObjectBounds(PLAYER, WHITE, 20, 43);
 	// Enemy only refers to Goomba as of now.
 	insertObjectBounds(ENEMY, GOOMBA, 22, 27);
+	insertObjectBounds(ENEMY, KOOPA_TROOPA, 22, 30);
+	insertObjectBounds(ENEMY, PIRANHA_PLANT, 20, 20);
+	insertObjectBounds(ENEMY, KOOPA_TROOPA_SHELL, 20, 20);
 	insertObjectBounds(POWERUP, SUPER_MUSHROOM, 22, 27);
-	counter = 0;
+	insertObjectBounds(POWERUP, FIRE_FLOWER, 22, 27);
 }
 
-//Adds new GameObject bounds to the two vectors. 
+//Adds new GameObject bounds to the two lists. 
 //The ID is just a stub, so you see what you're adding.
 //It's not used in the function at all. The ID should be 
 // the index of the added bounds.
 void Collision::insertObjectBounds(int ID, int species, int boundX, int boundY)
 {
 	if(ID == PLAYER)
-	{// determine the appropriate iterator position.
-		iterY = playerBoundY.begin();
-		for(iterX = playerBoundX.begin(); iterX != playerBoundX.end(); iterX++)
-		{
-			if(counter == species) 
-			{
-				counter = 0;
-				break;
-			}
-			else
-				counter++;
-			iterY++;
-		}
-		// and insert an element at that position.
-		playerBoundX.insert(iterX, boundX);
-		playerBoundY.insert(iterY, boundY);
+	{
+		playerBoundX[species] = boundX;
+		playerBoundY[species] = boundY;
 	}
 	else if(ID == ENEMY)
 	{
-		
-		iterY = powerUpBoundY.begin();
-		for(iterX = enemyBoundX.begin(); iterX != enemyBoundX.end(); iterX++)
-		{
-			if(counter == species) 
-			{
-				counter = 0;
-				break;
-			}
-			else
-				counter++;
-			iterY++;
-		}
-		enemyBoundX.insert(iterX, boundX);
-		enemyBoundY.insert(iterY, boundY);
+		enemyBoundX[species] = boundX;
+		enemyBoundY[species] = boundY;
 	}
 	else if(ID == POWERUP)
 	{
-		iterY = powerUpBoundY.begin();
-		for(iterX = powerUpBoundX.begin(); iterX != powerUpBoundX.end(); iterX++)
-		{
-			if(counter == species)
-			{
-				counter = 0;
-				break;
-			}
-			else 
-				counter++;
-			iterY++;
-		}
-		powerUpBoundX.insert(iterX, boundX);
-		powerUpBoundY.insert(iterY, boundY);
+		powerUpBoundX[species] = boundX;
+		powerUpBoundY[species] = boundY;
 	}
 
 }
@@ -106,7 +71,9 @@ void Collision::checkPlayerTileCollision()
 				// The member function in class Player will be called here.
 				(*(database->iterP))->setToGroundLevel(((y+by)/mapblockheight) * 50 - by);
 				///////////////////////////////////////////////
-				(*(database->iterP))->resetAnimation();
+				// Only reset animation when player isn't pressing the down key.
+				if(!keys[DOWN])
+					(*(database->iterP))->resetAnimation();
 			}
 			//Overhead check
 			if (isTileCollidable(x, y - by)) {lock[UP] = true; (*(database->iterP))->reverseDirection();}
@@ -123,12 +90,12 @@ void Collision::checkPlayerTileCollision()
 			{
 				if(isQuestionTile(x, y - by))
 				{
-					cout << "IsQuestionTILING!" << endl;
 					database->makeBounceBlock(DEAD_QUESTION, (x/mapblockwidth) * 50, ((y-by)/mapblockheight) * 50, 0, -5, 1, 1, true);
-					database->makePowerUp(SUPER_MUSHROOM, (x/mapblockwidth) * 50 + 25, ((y-by)/mapblockheight) * 50 - 30, 2, -5, 1, 1, true);
+					// The species of the powerup must match that of the player. 
+					database->makePowerUp((*(database->iterP))->getSpecies(), (x/mapblockwidth) * 50 + 25, ((y-by)/mapblockheight) * 50 - 30, 2, -5, 1, 1, true);
 					killSpecialTile(x, y - by);
 				}
-				else if(isCoinTile(x, y))
+				else if(isCoinTile(x, y - by))
 				{
 					(*(database->iterP))->addScore(COIN);
 					MapChangeLayer(1);
@@ -150,10 +117,15 @@ void Collision::checkPlayerTileCollision()
 					}
 				}
 			}
-			if(isTriggerTile(x, y))
+			if(isGoombaTriggerTile(x, y))
 			{
 				database->makeEnemy(GOOMBA, WIDTH/2, HEIGHT/2, -3, 0, 1, 1, true);
-				killTriggerTile(x, y);
+				killGoombaTriggerTile(x, y);
+			}
+			if(isKoopaTroopaTriggerTile(x, y))
+			{
+				database->makeEnemy(KOOPA_TROOPA, WIDTH/2, HEIGHT/2, -3, 0, 1, 1, true);
+				killKoopaTroopaTriggerTile(x, y);
 			}
 		}
 	}
@@ -173,21 +145,21 @@ void Collision::checkEnemyTileCollision()
 	
 			//Underfeet check. Due to some strange logic, we first have to check if it's onAir,
 			//if not then check if it's on the ground. 
-			if (!isTileCollidable(x, y + by)) {(*(database->iterE))->setonAir(true);}
+			if (!isTileCollidable(x, y + by)) {(*(database->iterE))->setonAir(true); }
 			else 
 			{
 				if(!isTileBouncing(x, y + by))
 				{
 					(*(database->iterE))->setonAir(false); 
 					// Sets enemy at ground level with VelY = 0 //
-					(*(database->iterE))->setVelY(0); 
-					(*(database->iterE))->setY(((y+by)/mapblockheight) * 50 - 22); 
+					(*(database->iterE))->setToGroundLevel(((y+by)/mapblockheight) * 50 - by); 
 				}
 				else // Tile is bouncing
 				{
 					(*(database->iterE))->setVelY(-8);
 					// Goomba will bounce up and accelerate to bottom of screen. (COLLIDABILITY DISABLED FROM THIS POINT ON);
 					(*(database->iterE))->setAlive(false);
+					(*(database->iterE))->setCollidable(false);
 					(*(database->iterE))->setonAir(true);
 				}
 				//////////////////////////////////////////////
@@ -200,7 +172,7 @@ void Collision::checkEnemyTileCollision()
 				(*(database->iterE))->reverseDirection();
 			//Leftside check. Only reverseDirection if the dude is currently TRYING TO WALKLEFT && hitting a tile on the left!
 			if (isTileCollidable(x - bx, y) && (*(database->iterE))->getfacing() == WALKLEFT) 
-				(*(database->iterE))->reverseDirection();
+			{(*(database->iterE))->reverseDirection();}
 			if(isTileDeath(x, y))
 				database->iterE = database->destroyEnemy(database->iterE);
 		}
@@ -255,43 +227,86 @@ void Collision::checkPlayerEnemyCollision()
 		int Px = (*(database->iterP))->getX();
 		int Py = (*(database->iterP))->getY();
 
-		int Pbx = playerBoundX[(*(database->iterP))->getID()];
-		int Pby = playerBoundY[(*(database->iterP))->getID()];
+		int Pbx = playerBoundX[(*(database->iterP))->getSpecies()];
+		int Pby = playerBoundY[(*(database->iterP))->getSpecies()];
 
 		for(database->iterE = database->getEnemiesBegin(); database->iterE != database->getEnemiesEnd();)
 		{
-			int Ex = (*(database->iterE))->getX();
-			int Ey = (*(database->iterE))->getY();
-
-			int Ebx = enemyBoundX[(*(database->iterE))->getSpecies()];
-			int Eby = enemyBoundY[(*(database->iterE))->getSpecies()];
-
-			// If Mario lands on an enemy. 
-			if((Py + Pby) <= Ey && (Py + Pby) >= (Ey - Eby)) 
-			{	// If one corner of his bound box is between the corners of his enemy's
-				if(((Px + Pbx) >= (Ex - Ebx) && (Px + Pbx) <= (Ex + Ebx)) || 
-				   ((Px - Pbx) >= (Ex - Ebx) && (Px + Pbx) <= (Ex + Ebx)))
-				{
-					(*(database->iterP))->addScore((*(database->iterE))->getSpecies());
-					database->iterE = database->destroyEnemy(database->iterE);
-					continue;
-				}
-			}
-			// Player's left hits Enemy's right || Player's right hits Enemy's left
-			else if((Px - Pbx) >= (Ex - Ebx) && (Px - Pbx) <= (Ex + Ebx) ||
-				    (Px + Pbx) >= (Ex - Ebx) && (Px + Pbx) <= (Ex + Ebx))
+			if((*(database->iterE))->getCollidable())
 			{
-				if((Py - Pby) >= (Ey - Eby) && (Py - Pby) <= (Ey + Eby) ||
-				   (Py + Pby) >= (Ey - Eby) && (Py + Pby) <= (Ey + Eby))
+				int Ex = (*(database->iterE))->getX();
+				int Ey = (*(database->iterE))->getY();
 
-				{
-					(*(database->iterP))->demotePlayer();
-					database->iterE = database->destroyEnemy(database->iterE);
-					continue;
+				int Ebx = enemyBoundX[(*(database->iterE))->getSpecies()];
+				int Eby = enemyBoundY[(*(database->iterE))->getSpecies()];
+
+				// If Mario lands on an enemy. 
+				if((Py + Pby) <= Ey && (Py + Pby) >= (Ey - Eby)) 
+				{	// If one corner of his bound box is between the corners of his enemy's
+					if(((Px + Pbx) >= (Ex - Ebx) && (Px + Pbx) <= (Ex + Ebx)) || 
+					   ((Px - Pbx) >= (Ex - Ebx) && (Px + Pbx) <= (Ex + Ebx)))
+					{
+						
+						if((*(database->iterE))->getSpecies() == GOOMBA)
+						{	
+							(*(database->iterP))->addScore((*(database->iterE))->getSpecies());
+							database->iterE = database->destroyEnemy(database->iterE);
+							continue;
+						}
+						
+						// 3 Mario lands on KOOPA_TROOPA's head scenarios: ////////////////////
+						// 1. Koopa is just walking around.
+						else if((*(database->iterE))->getSpecies() == KOOPA_TROOPA)
+						{
+							// Make player bounce upwards from the turtle
+							(*(database->iterP))->setY(Ey - Eby - Pby - 2);
+							(*(database->iterP))->setVelY(-5); 
+							(*(database->iterE))->kickTurtle(0);
+						}
+						// 2. Koopa is in his shell, stationary. Mario pushes the shell.
+						else if((*(database->iterE))->getSpecies() == KOOPA_TROOPA_SHELL &&
+							!((*(database->iterE))->getVelX()))
+						{
+							(*(database->iterE))->kickTurtle(1);
+							continue;
+						}
+						// 3. Koopa is in his shell, but zooming around. Mario dies.
+						else if((*(database->iterE))->getSpecies() == KOOPA_TROOPA_SHELL &&
+							((*(database->iterE))->getVelX()))
+						{
+							(*(database->iterP))->demotePlayer();
+							database->iterE = database->destroyEnemy(database->iterE);
+							continue;
+						}
+						///////////////////////////////////////////////////////////////////////
+					}
 				}
+
+				// Player's left hits Enemy's right || Player's right hits Enemy's left
+				else if((Px - Pbx) >= (Ex - Ebx) && (Px - Pbx) <= (Ex + Ebx) ||
+						(Px + Pbx) >= (Ex - Ebx) && (Px + Pbx) <= (Ex + Ebx))
+				{
+					if((Py - Pby) >= (Ey - Eby) && (Py - Pby) <= (Ey + Eby) ||
+					   (Py + Pby) >= (Ey - Eby) && (Py + Pby) <= (Ey + Eby))
+					{
+						// Koopa is in his shell, stationary. Mario pushes him.
+						if((*(database->iterE))->getSpecies() == KOOPA_TROOPA_SHELL && 
+							!(*(database->iterE))->getVelX())
+						{
+							(*(database->iterE))->kickTurtle((*(database->iterP))->getfacing());
+						}
+						else
+						{	
+							(*(database->iterP))->demotePlayer();
+							database->iterE = database->destroyEnemy(database->iterE);
+							continue;
+						}
+					}
+				}
+				
 			}
 			database->iterE++;
-		}
+		}	
 	}
 }
 void Collision::checkPlayerPowerUpCollision()
@@ -334,7 +349,6 @@ void Collision::checkPlayerPowerUpCollision()
 				   (Py + Pby) >= (PUy - PUby) && (Py + Pby) <= (PUy + PUby))
 
 				{
-					cout << "Promoting" << endl;
 					(*(database->iterP))->promotePlayer();
 					database->iterPU = database->destroyPowerUp(database->iterPU);
 					continue;
@@ -345,4 +359,4 @@ void Collision::checkPlayerPowerUpCollision()
 	}
 }
 
-// HELPER function. 
+// TODO: void Collision::checkEnemyEnemyCollision() for Koopa in shell hitting Goomba 

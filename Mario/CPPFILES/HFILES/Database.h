@@ -10,6 +10,7 @@
 #include "HFILES/Player.h"
 #include "HFILES/Autobot.h"
 #include "HFILES/Goomba.h"
+#include "HFILES/KoopaTroopa.h"
 #include "HFILES/BounceBlock.h"
 #include "HFILES/State.h"
 
@@ -28,7 +29,8 @@ class Database
 
 		ALLEGRO_BITMAP *BabyMario;
 		ALLEGRO_BITMAP *GoombaPic;
-		ALLEGRO_BITMAP *MushroomPic;
+		ALLEGRO_BITMAP *PowerUpsPic;
+		ALLEGRO_BITMAP *KoopaTroopaPic;
 		ALLEGRO_BITMAP *deadQuestion;
 		ALLEGRO_BITMAP *sky;
 		ALLEGRO_BITMAP *deadBrick;
@@ -45,7 +47,7 @@ class Database
 	public:
 		// Constructors
 		Database(State *state); 
-		void InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALLEGRO_BITMAP *Mushroom,
+		void InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALLEGRO_BITMAP *KoopaTroopa, ALLEGRO_BITMAP *PowerUps,
 			            ALLEGRO_BITMAP *deadQuestion, ALLEGRO_BITMAP *sky, ALLEGRO_BITMAP *deadBrick);
 		//These don't modify the lists on their own, so safer and more convenient to be public.
 		list<Player *>::iterator iterP; 

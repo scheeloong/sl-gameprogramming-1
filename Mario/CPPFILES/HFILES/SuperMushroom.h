@@ -1,4 +1,4 @@
-// This class deals with PowerUps
+// This class deals with NOT ONLY SUPERMUSHROOMS, but also FIREFLOWERS.
 
 #ifndef SUPERMUSROOM_H
 #define SUPERMUSHROOM_H

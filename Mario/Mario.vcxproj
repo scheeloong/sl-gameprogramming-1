@@ -94,6 +94,7 @@
     <ClCompile Include="CPPFILES\GameObject.cpp" />
     <ClCompile Include="CPPFILES\Goomba.cpp" />
     <ClCompile Include="CPPFILES\Keyboard.cpp" />
+    <ClCompile Include="CPPFILES\KoopaTroopa.cpp" />
     <ClCompile Include="CPPFILES\mappy_A5.c" />
     <ClCompile Include="CPPFILES\Mario.cpp" />
     <ClCompile Include="CPPFILES\MarioApp.cpp" />
@@ -115,6 +116,7 @@
     <ClInclude Include="CPPFILES\HFILES\GameObject.h" />
     <ClInclude Include="CPPFILES\HFILES\Goomba.h" />
     <ClInclude Include="CPPFILES\HFILES\Keyboard.h" />
+    <ClInclude Include="CPPFILES\HFILES\KoopaTroopa.h" />
     <ClInclude Include="CPPFILES\HFILES\mappy_A5.h" />
     <ClInclude Include="CPPFILES\HFILES\Mario.h" />
     <ClInclude Include="CPPFILES\HFILES\Player.h" />

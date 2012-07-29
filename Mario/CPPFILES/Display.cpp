@@ -59,6 +59,7 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 			else if(state->getState() == GAMEOVER)
 			{
 				al_draw_filled_rectangle(0, 0, WIDTH, HEIGHT, al_map_rgb(100, 0, 100));
+				al_draw_textf(font, al_map_rgb(255, 255, 255), WIDTH / 2, HEIGHT / 2 - 100, ALLEGRO_ALIGN_CENTRE, "GAME OVER!");
 				al_draw_textf(font, al_map_rgb(0, 0, 255), WIDTH/2, HEIGHT/2 - 30, ALLEGRO_ALIGN_CENTRE, 
 					"Restart? [R]");
 				al_draw_textf(font, al_map_rgb(0, 0, 255), WIDTH/2, HEIGHT/2 + 30, ALLEGRO_ALIGN_CENTRE, 

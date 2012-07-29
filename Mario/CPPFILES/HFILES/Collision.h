@@ -14,14 +14,13 @@ class Collision
 {
 private:
 	//Change this to include all types of creatures.
-	vector<int> playerBoundX;
-	vector<int> playerBoundY;
-	vector<int> enemyBoundX;
-	vector<int> enemyBoundY;
-	vector<int> powerUpBoundX;
-	vector<int> powerUpBoundY;
-	vector<int>::iterator iterX;
-	vector<int>::iterator iterY;
+	int playerBoundX[10];
+	int playerBoundY[10];
+	int enemyBoundX[10];
+	int enemyBoundY[10];
+	int powerUpBoundX[10];
+	int powerUpBoundY[10];
+	// counter is obscelete?
 	int counter;
 	Database *database;
 
@@ -99,17 +98,29 @@ public:
 		return blockdata->tr;
 	}
 
-	inline bool isTriggerTile(int x, int y)
+	inline bool isGoombaTriggerTile(int x, int y)
 	{
 		BLKSTR *blockdata;
 		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
 		return blockdata->user3;
 	}
-	inline void killTriggerTile(int x, int y)
+	inline bool isKoopaTroopaTriggerTile(int x, int y)
+	{
+		BLKSTR *blockdata;
+		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
+		return blockdata->user4;
+	}
+	inline void killGoombaTriggerTile(int x, int y)
 	{
 		BLKSTR *blockdata;
 		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
 		blockdata->user3 = 0;
+	}
+	inline void killKoopaTroopaTriggerTile(int x, int y)
+	{
+		BLKSTR *blockdata;
+		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
+		blockdata->user4 = 0;
 	}
 	// Replaces a special tile with a solid collidable tile.
 	inline void killSpecialTile(int x, int y)

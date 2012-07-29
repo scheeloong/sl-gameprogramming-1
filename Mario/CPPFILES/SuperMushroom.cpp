@@ -5,32 +5,34 @@ void SuperMushroom::Init(int ID, int species, int x, int y, int velX, int velY, 
 {
 	Autobot::Init(ID, species, x, y, velX, velY, dirX, dirY, alive, image);
 
-	/*maxFrame = 1;
+	// changes the animation row to match the species, moving down the png image.
+	animationRow = species;
+	//maxFrame = 1;
 	curFrame = 0;
-	frameCount = 3;
-	frameDelay = 15;
-	frameWidth = 120;
-	frameHeight = 120;
-	animationColumns = 4;
+	//frameCount = 3;
+	//frameDelay = 15;
+	frameWidth = 50;
+	frameHeight = 50;
+	if(species == FIRE_FLOWER)
+		setVelX(0);
+	//animationColumns = 1;
 	// animationDirection is currently not used
-	animationDirection = 1;
+	//animationDirection = 1;
 
-	animationRow = 0;
-	rewind = 1;*/
+	//animationRow = 0;
+	//rewind = 1;
 }
 
 void SuperMushroom::draw()
 {
 	if(getAlive())
 	{
-		/*int fx = (curFrame % animationColumns) * frameWidth;
+		int fx = 0;
 		int fy = animationRow * frameHeight;
 
 		al_draw_bitmap_region(image, fx, fy, frameWidth,
-			frameHeight, x - frameWidth / 2 + 6, y - frameHeight /2 + 10, 0);*/
+			frameHeight, x - frameWidth / 2, y - frameHeight /2, 0);
 
-		al_draw_bitmap(image, x - 25, y - 25, 0);
 		al_draw_filled_rectangle(x-22, y-27, x+22, y+27, al_map_rgba(255, 0, 255, 100));
 	}
 }
-
