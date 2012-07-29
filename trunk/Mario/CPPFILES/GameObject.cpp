@@ -7,6 +7,7 @@ GameObject::GameObject()
 	dirX = 0, dirY = 0; 
 	alive = false; 
 	render = true; 
+	collidable = true;
 	image = NULL;
 
 	//positive for going down

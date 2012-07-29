@@ -8,12 +8,13 @@ Database::Database(State *state)
 	// enemies and powerups remain empty before tileblock sets it
 }
 
-void Database::InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALLEGRO_BITMAP *Mushroom,
+void Database::InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALLEGRO_BITMAP *KoopaTroopa, ALLEGRO_BITMAP *PowerUps,
 	                      ALLEGRO_BITMAP *deadQuestion, ALLEGRO_BITMAP *sky, ALLEGRO_BITMAP *deadBrick)
 {
 	Database::BabyMario = BabyMario;
 	Database::GoombaPic = Goomba;
-	Database::MushroomPic = Mushroom;
+	Database::KoopaTroopaPic = KoopaTroopa;
+	Database::PowerUpsPic = PowerUps;
 	Database::deadQuestion = deadQuestion;
 	Database::sky = sky;
 	Database::deadBrick = deadBrick;
@@ -33,15 +34,18 @@ void Database::makeEnemy(int species, int x, int y, int velX, int velY, int dirX
 		goomba->Init(ENEMY, GOOMBA, x, y, velX, velY, dirX, dirY, alive, GoombaPic);
 		enemies.push_back(goomba);
 	}
+	else if(species == KOOPA_TROOPA)
+	{
+		KoopaTroopa *koopaTroopa = new KoopaTroopa();
+		koopaTroopa->Init(ENEMY, KOOPA_TROOPA, x, y, velX, velY, dirX, dirY, alive, KoopaTroopaPic);
+		enemies.push_back(koopaTroopa);
+	}
 }
 void Database::makePowerUp(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
-	if(species == SUPER_MUSHROOM)
-	{
 		SuperMushroom *mushroom = new SuperMushroom();
-		mushroom->Init(POWERUP, SUPER_MUSHROOM, x, y, velX, velY, dirX, dirY, alive, MushroomPic);
+		mushroom->Init(POWERUP, species, x, y, velX, velY, dirX, dirY, alive, PowerUpsPic);
 		powerUps.push_back(mushroom); 
-	}
 }
 void Database::makeBounceBlock(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
@@ -241,7 +245,6 @@ list<Autobot *>::iterator Database::destroyPowerUp(list<Autobot *>::iterator ite
 	iter = powerUps.erase(iter);
 	return iter;
 }
-
 /* This is an old template for destroy. Very general.
 void Database::destroyEnemyList(list<Enemy *> *object_list, list<Enemy *>::iterator iter)
 {

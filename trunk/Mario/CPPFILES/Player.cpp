@@ -28,7 +28,7 @@ void Player::Init(State *state, int x, int y, int velX, int velY, int dirX, int 
 	frameDelay = 5;
 	frameWidth = 120;
 	frameHeight = 120;
-	animationColumns = 4;
+	animationColumns = 5;
 	// animationDirection is currently not used by player objects.
 	// it might be the same as rewind.
 	animationDirection = 1;
@@ -45,6 +45,7 @@ void Player::update()
 	moveVertically();
 	if(curFrame == JUMPMODE); //TODO: Mario needs to hold his jump position until
 	// he hits the ground again. 
+	else if(curFrame == CROUCH);
 
 	// Allows the mario sprite to move fluently through
 	// his 3 positions: Stand, Step, and Land

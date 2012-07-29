@@ -27,6 +27,13 @@ protected:
 	// Alive and Draw, currently unused
 	bool alive; 
 	bool render; 
+	// This collidable var applies specifically to 
+	// inter-object collidability, not to tiles.
+	bool collidable;
+	// anchorX marks the original X position of the 
+	// object, to be used as a comparison for moving 
+	// it a certain distance before collidable is reset.
+	int anchorX;
 
 	// Animations
 	int maxFrame;
@@ -84,6 +91,10 @@ public:
 	bool getAlive() { return alive; }
 	void setRender (bool ren) { render = ren; }
 	bool getRender() { return render; }
+	void setCollidable(bool collidable) {GameObject::collidable = collidable;}
+	bool getCollidable(){return collidable;}
+	void setAnchorX(int anchorX) {GameObject::anchorX = anchorX;}
+	int getAnchorX() {return anchorX;}
 	ALLEGRO_BITMAP *getImage() {return image;}
 	void setImage(ALLEGRO_BITMAP *im) { image = im; }
 	void setAnimationRow(int animationRow) {GameObject::animationRow = animationRow;}
@@ -128,6 +139,12 @@ public:
 	void moveRight() {x += velX;}
 	void accelerate() {velY += gravity;}
 
+	// This function checks if the object has moved a certain
+	// distance away from an anchor point.
+	bool checkAnchorXDistance(int radius)
+	{
+		return (x - anchorX >= radius || x - anchorX <= -1*radius);
+	}
 	//TODO: modify this to accommodate for velX reverses as well (for enemies)
 	void reverseDirection() 
 	{
@@ -139,6 +156,7 @@ public:
 			// setfacing to the opposite. ie. WALKRIGHT to WALKLEFT and vice versa
 			velX *= -1;
 			setfacing(getfacing() * -1);
+			animationDirection *= -1;
 		}
 	}
 
@@ -157,9 +175,6 @@ public:
 	//The next 2 are only for Class Player.
 	virtual void startLeap() {}
 	virtual void jumpGlide() {}
-	// update GameObject's position, vel, dir, image etc..
-	// Virtual cause different objects have different update methods
-	// Destructor (will need to handle in some special way due to multiple inheritance) 
 	virtual void destroy() {}
 	
 	// Friend Class

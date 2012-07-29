@@ -33,15 +33,18 @@ void Timer::updateTimer(ALLEGRO_EVENT *ev)
 				if(isItFlying(*(database->iterP))) {}
 		
 				else if(keys[UP] && !lock[UP])
-			{		
+				{		
 					// UNIQUE to PLAYER: gives player the initial velocity
 					(*(database->iterP))->startLeap();
 					// changes curFrame to JUMPMODE
 					(*database->iterP)->jumpGlide();
 				}
-				else if(keys[DOWN] && !lock[DOWN])
-					(*(database->iterP))->moveDown();
-	
+				else if(keys[DOWN])
+				{
+					(*(database->iterP))->crouch();
+					 if(!lock[DOWN])
+						(*(database->iterP))->moveDown();
+				}
 				if(keys[LEFT] && !lock[LEFT])
 					(*(database->iterP))->moveLeft();
 				else if(keys[RIGHT] && !lock[RIGHT])
@@ -84,7 +87,6 @@ void Timer::updateTimer(ALLEGRO_EVENT *ev)
 
 		else if(state->getState() == GAMEOVER)
 		{
-			cout << "In timer's Gameover" << endl;
 			if(keys[R])
 			{
 				// reset database!

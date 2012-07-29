@@ -28,8 +28,12 @@ void Autobot::addLife(int i) // add i to lives (may not be needed)
 void Autobot::update()
 {
 	//the enemy moves on its own, so calling arbitrary move function.
+	/*if(!getCollidable() && checkAnchorXDistance(100))
+	{setCollidable(true);}*/
 	moveRight();
 	moveVertically();
+
+	// The below is a 1 2 3 2 1 2 3 2 1 animation
 	if(++frameCount >= frameDelay)
 	{
 		// Go forward through the sprite sheet (LtoR)
@@ -52,7 +56,3 @@ void Autobot::update()
 		frameCount = 0;
 	}
 }
-
-
-
-//*/
