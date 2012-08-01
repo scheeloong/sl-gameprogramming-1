@@ -12,34 +12,30 @@ void BounceBlock::Init(int x, int y, int velX, int velY, int dirX, int dirY, boo
 
 //------------------------------------------------------------------------------------------
 
-// This function ??
+// This function updates the position and properties of the block.
 void BounceBlock::update()
 {
-	/*if(isMoved)
-	{
-		cout << "inside" << endl;
-		x -= xOff;
-		isMoved = false;
-	}*/
-// if the block is back down to its starting height
+	x -= xOff;
+// If the block is back down to its starting height
 	if (getY() + getVelY() > startY - 3)
 	{   // Set the tile on Mappy back to brick
 		if(species == DEAD_QUESTION)
 		{
+			// set the tile's position y back down to starting height,
 			setY(startY);
-			// for some reason, the below is glitchy.
-			// screen flashes briefly and replaces the tile with a shrunken one.
 			MapChangeLayer(0);
-			// This sets the DeadQuestion tile to a piece of land with User1 as true.
+			// set the underlying block to a 4 sided collidable block with
+			// no special properties
 			MapSetBlockInPixels(getX(), getY() + 20, 407);
 		}
 		else if(species == DEAD_BRICK)
-		{	//Set the brick back.
+		{
 			MapChangeLayer(0);
+			// set the block back to a brick block, good as new.
+			// can be triggered again.
 			MapSetBlockInPixels(getX(), getY() + 20, 3);
 			setAlive(false);
 		}
-		// setAlive(false);
 	}
 	else 
 		moveVertically();

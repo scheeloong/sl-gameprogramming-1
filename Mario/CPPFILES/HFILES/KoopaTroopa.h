@@ -9,6 +9,16 @@ class KoopaTroopa : public Autobot
 {
 private:
 	int state;
+	// Upgrading Koopa --------------------
+	// This function changes the turtle's state from WALKING to INSHELL, sets his velX = 0
+	// and appropriately sets animation data associated with that.
+	void tuckShell();
+
+	// This function changes the turtle's state from INSHELL to GLIDING, sets initial velX
+	// and again sets animation data associated with that.
+	void moveTuckShell(int playerWalk);
+	// ------------------------------------
+
 public:
 	//===================
 	// Constructors
@@ -19,63 +29,28 @@ public:
 	//===================
 	// Set & Get
 	//===================
+	// Refers to private member, not class State.
 	int getState() {return state;}
 
 	//===================
 	// Methods
 	//===================
-	//TODO: CUT & PASTE these functions to CPP File later, Hfiles shouldn't be doing super long defines
-	// This function ...
-	void kickTurtle(int playerWalk = 0)
-	{
-		if(state == WALKING)
-			tuckShell();
-		else if(state == INSHELL)
-		{
-			setCollidable(false);
-			moveTuckShell(playerWalk);
-		}
-	}
+	// Upgrading Koopa -----------------------
 
+	// This function integrates tuckShell() and moveTuckShell() based on KoopaTroopa's current state.
+	// Parameters: playerFacing is the direction that the player faces when he kicks the turtle 
+	//			   (WALKRIGHT or WALKLEFT). 
+	//			   Needed to move the turtle in that direction.
+	void kickTurtle(int playerFacing);
 	//----------------------------------------
-	// This function ...
-	void tuckShell() 
-	{
-		incrementAnimationRow(); 
-		setVelX(0); 
-		setAnchorX(getX()); 
 
-		curFrame = 0;
-		maxFrame = 0; 
-		animationColumns = 5;
-		rewind = 0;
-		state = INSHELL; 
-		species = KOOPA_TROOPA_SHELL;
-	}
-	
-	//----------------------------------------
-	// This function ...
-	void moveTuckShell(int playerWalk) 
-	{
-		setVelX(playerWalk * 5);
-		setAnchorX(getX()); 
-
-		curFrame = 0;
-		maxFrame = 4;
-		rewind = 1;
-		frameDelay = 8;
-
-		state = GLIDING; 
-		playerWalk > 0 ? facing = WALKRIGHT : facing = WALKLEFT;
-		// species is already KOOPA_TROOPA_SHELL;
-	}
-
-	//----------------------------------------
-	// This function
+	// (@Override) This function draws Koopa based on his state. 
+	// Overrides purely because the png image is flipped, where the Koopa normally faces left
+	// and Mario faces right. so this the ALLEGRO_FLIP_HORIZONTAL flag is in a different place.
 	void draw();
 
 	//----------------------------------------
-	// This function
+	// This function updates Koopa's animations and moves Koopa, depending on his state.
 	void update();
 };
 

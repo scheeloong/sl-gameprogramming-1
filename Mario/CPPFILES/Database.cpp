@@ -6,8 +6,6 @@
 Database::Database(State *state)
 {
 	Database::state = state;
-	//makePlayer(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true); // make a player
-	// enemies and powerups remain empty before tileblock sets it
 }
 
 void Database::InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALLEGRO_BITMAP *KoopaTroopa, ALLEGRO_BITMAP *PowerUps,
@@ -82,7 +80,7 @@ void Database::makeBounceBlock(int species, int x, int y, int velX, int velY, in
 //======================================================================================================
 // Update
 //======================================================================================================
-// These functions ...
+// These functions call the elements' own update functions to update every element of the arrays.
 
 void Database::updatePlayerList()
 {

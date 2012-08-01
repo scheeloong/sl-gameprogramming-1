@@ -22,8 +22,11 @@ protected:
 	int velX; 
 	int velY;
 	// Direction of Movement (ABSOLUTELY USELESS) // CL:why?
+	// VL: Just never used. I don't intend on deleting it till the very end. 
+	// It might be useful :S.
 	int dirX; 
 	int dirY; 
+
 	// Alive and Draw  //(currently unused)
 	ALLEGRO_BITMAP *image; 
 	bool alive; 
@@ -39,7 +42,6 @@ protected:
 	int frameWidth;
 	int frameHeight;
 	int animationColumns;
-	// Unused by Player class atm.
 	int animationDirection;
 
 	// animationRow only needed for gridded sprite sheets
@@ -58,8 +60,6 @@ public:
 	//===================
 	GameObject();
 
-	// This Init function is expected to be called ONCE for each GameObject, so some parameters 
-	// might never need to be updated. (state, col..?)
 	void Init(int ID, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image); 
 
 	//===================
@@ -102,7 +102,7 @@ public:
 		if(animationRow <= 2)
 			animationRow++;
 	}
-	// tries to decrement animationRow, returns true upon success.
+	// This function tries to decrement animationRow, returns true upon success.
 	// Becomes false if we try demoting baby mario.
 	bool decrementAnimationRow() 
 	{
@@ -143,7 +143,7 @@ public:
 	{
 		return (x - anchorX >= radius || x - anchorX <= -1*radius);
 	}
-	//TODO: modify this to accommodate for velX reverses as well (for enemies)
+
 	void reverseDirection() 
 	{
 		//This will be called for the player when they hit something overhead.
@@ -164,9 +164,7 @@ public:
 		setY(y);
 	}
 
-	virtual void update() //;
-	{
-	}
+	virtual void update() {}
 
 	virtual void resetAnimation() {}
 	virtual void draw() {}
@@ -175,10 +173,6 @@ public:
 	virtual void jumpGlide() {}
 	virtual void destroy() {}
 	
-	//===================
-	// Friend Class
-	//===================
-//	friend class Collision; // Allow collision class to access private members of GameObject's data
 }; 
 
 #endif GAMEOBJECT_H

@@ -23,6 +23,7 @@ private:
 	int counter;
 	Database *database;
 
+
 public:
 	// Constructor
 	//Collision() : boundX(0), boundY(0) {}
@@ -34,14 +35,13 @@ public:
 	//====================
 	// Collision Methods
 	//====================
-	// CL: SHOULD THESE BE PRIVATE METHODS? SINCE (SEE 6 LINES BELOW)
+	
 	void checkPlayerTileCollision();
 	void checkEnemyTileCollision();
 	void checkPowerUpTileCollision();
 	void checkPlayerEnemyCollision();
 	void checkPlayerPowerUpCollision();
-	// THIS METHOD IS THE ONLY METHOD THAT NEEDS TO BE CALLED OUTSIDE THIS CLASS?
-	// This function checks the collision among the GameObject classes
+
 	void checkCollision()
 	{
 		checkPlayerTileCollision();
@@ -64,8 +64,30 @@ public:
 
 	//------------------------------------------------------------------------------------------
 	// Identifying Tiles
+	// VL: I'd like the functions below to be encapsulated inside a single function,
+	// so a single call can be made inside each collision class member.
+	// But this is tricky because it's all custom, which tiles need checking for 
+	// what collision check. TODO as of now.
 
-	// This function ... and returns ...
+	//==================
+	// Guide
+	// =================
+	//  User1 - collidable
+	//	User2 - special
+	//	User3 - trigger *** Layer 1 perhaps? Goomba
+	//	User4 - trigger Koopa Troopa
+	//	User5 -
+	//	User6 - death
+	//	User7 - bouncing
+
+	//	TL - question
+	//	BR - coin
+	//	TR - brick    
+	//===================
+
+	// All functions below return true if the Tile is X, false if not.
+	// where X is special, bouncing, death, etc.
+	// This function checks if a tile has special powers.
 	inline bool isTileSpecial(int x, int y)
 	{
 		BLKSTR *blockdata;
@@ -73,7 +95,7 @@ public:
 		return blockdata->user2;
 	}
 	
-	// This function ... and returns ...
+	// This function checks if a tile is currently bouncing.
 	inline bool isTileBouncing(int x, int y)
 	{
 		BLKSTR *blockdata;
@@ -81,7 +103,7 @@ public:
 		return blockdata->user7;
 	}
 
-	// This function ... and returns ...
+	// This function checks if the tile is a killer (ie. inside a pit)
 	inline bool isTileDeath(int x, int y)
 	{
 		// user6 is death 
@@ -90,7 +112,7 @@ public:
 		return blockdata->user6;
 	}
 
-	// This function ... and returns ...
+	// This function checks if tile is a Question mark gold tile.
 	inline bool isQuestionTile(int x, int y)
 	{
 		BLKSTR *blockdata;
@@ -98,7 +120,7 @@ public:
 		return blockdata->tl;
 	}
 
-	// This function ... and returns ...
+	// This function checks if the tile is a coin.
 	inline bool isCoinTile(int x, int y)
 	{
 		BLKSTR *blockdata;
@@ -106,7 +128,7 @@ public:
 		return blockdata->br;
 	}
 
-	// This function ... and returns ...
+	// This function checks if the tile is an overhead brick.
 	inline bool isBrickTile(int x, int y)
 	{
 		BLKSTR *blockdata;
@@ -117,7 +139,7 @@ public:
 	//------------------------------------------------------------------------------------------
 	// Trigger Tiles
 
-	// This function ... and returns ...
+	// This function checks if the tile triggers a Goomba.
 	inline bool isGoombaTriggerTile(int x, int y)
 	{
 		BLKSTR *blockdata;
@@ -125,7 +147,7 @@ public:
 		return blockdata->user3;
 	}
 
-	// This function ... and returns ...
+	// This function checks if the tile triggers a Koopa Troopa.
 	inline bool isKoopaTroopaTriggerTile(int x, int y)
 	{
 		BLKSTR *blockdata;
@@ -150,7 +172,8 @@ public:
 		MapSetBlock(x/mapblockwidth, y/mapblockheight, 10);
 	}
 
-	// This function ...?
+	// This function replaces an entire column of tiles (same x coordinate, different y coordinate)
+	// with sky tiles. Primary application, get rid of all trigger tiles in the vertical column.
 	inline void vapourizeTileColumn(int x)
 	{
 		for(int y = 0; y <= HEIGHT; y+=50)

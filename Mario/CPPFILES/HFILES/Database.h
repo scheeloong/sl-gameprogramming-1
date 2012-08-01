@@ -37,8 +37,23 @@ class Database
 		// Private method, not to be called outside this class.
 		// CL: You don't have to state it as private, it is understood as it is
 		// indented under the private column
+		// VL: LOL I don't think I commented that one.
 		
+		
+		// Draw
+		void drawPlayerList();
+		void drawEnemyList();
+		void drawPowerUpList();
+		void drawBounceBlockList();
+
+		// Destroy
+		void destroyPlayerList();
+		void destroyEnemyList();
+		void destroyPowerUpList();
+		void destroyBounceBlockList();
+
 		// This method cleans up all the linked list in the Database class.
+		// To be called by public destroy functions below.
 		void destroy()
 		{
 			destroyPlayerList();
@@ -85,10 +100,12 @@ class Database
 
 		//---------------------------------------------------------------------------------------------------
 		// Update
+		// VL: I don't know why this must be public. Apparently the next 4 functions must be.
 		void updatePlayerList();
 		void updateEnemyList();
 		void updatePowerUpList();
 		void updateBounceBlockList();
+
 		void update()
 		{
 			updatePlayerList();
@@ -100,10 +117,6 @@ class Database
 		//---------------------------------------------------------------------------------------------------
 		// Draw
 		// VL: is there a better way to do this? I can't convert list<Player *> to list<GameObject *>
-		void drawPlayerList();
-		void drawEnemyList();
-		void drawPowerUpList();
-		void drawBounceBlockList();
 		void draw()
 		{
 			drawBounceBlockList();
@@ -113,11 +126,6 @@ class Database
 		}
 
 		//---------------------------------------------------------------------------------------------------
-		// Destroy
-		void destroyPlayerList();
-		void destroyEnemyList();
-		void destroyPowerUpList();
-		void destroyBounceBlockList();
 		
 		// This function is for RESET purposes, for restarting the game.
 		void resetDatabase();

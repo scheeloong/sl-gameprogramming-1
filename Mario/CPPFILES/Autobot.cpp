@@ -6,7 +6,9 @@
 Autobot::Autobot(int lives) : lives(lives) {}; // Boss enemy has >1 live 
 
 // CL: SO HOW DO WE INITIALIZE IT?
+// VL: We'll use Init() as defined in Autobot.h. It just doesn't have the ALLEGRO_BITMAP *image, alive, render, etc as parameters.
 //This constructor won't work because the image won't have been initialized when it is called.
+// Kill the /*stuff*/ asap.
 /*Enemy::Enemy(int x, int y, int velX, int velY, int dirX, int dirY, ALLEGRO_BITMAP *image, alive,bool render, int lives)
 {
 	// call parent constructor
@@ -42,10 +44,7 @@ void Autobot::update()
 	//the enemy moves on its own, so calling arbitrary move function.
 	if(!getCollidable() && checkAnchorXDistance(100))
 		setCollidable(true);
-	//moveSideWays(velX + playerVelX);
 	moveSideWays(velX - deltaXOff);
-	//isMoved = false;
-	//	moveRight();
 	moveVertically();
 	cout << deltaXOff << " " << xOff << endl;
 	//=============================================

@@ -24,7 +24,9 @@ bool Timer::isItFlying(GameObject *object)
 	return false;
 }
 //--------------------------------------------------------
-// This function is ....
+// This function is called when the timer is fired : every 1/60 sec.
+// It calls for checks on keyboard input, reset animations, and gravity checks. 
+// It also manages the state of the game.
 void Timer::updateTimer(ALLEGRO_EVENT *ev)
 {
 	

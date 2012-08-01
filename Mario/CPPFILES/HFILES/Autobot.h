@@ -14,24 +14,35 @@
 class Autobot : public GameObject
 {
 	private:
+		// TODO: implement this
 		int lives; // BOSS ENEMY has > 1 life
 	public:
-		// Constructor
+		// Constructor... TODO: implement lives.
 		Autobot() : GameObject() {lives = 1;} // normal enemy has 1 live only, WALKLEFT because it does so by default.
-		Autobot(int lives); // Boss enemy has >1 live 
+		Autobot(int lives); // Boss enemy has >1 live
+
 		void Init(int ID, int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
-		{GameObject::Init(ID, x, y, velX, velY, dirX, dirY, alive, image); setSpecies(species);}
+			{GameObject::Init(ID, x, y, velX, velY, dirX, dirY, alive, image); setSpecies(species);}
 		void InitImage(ALLEGRO_BITMAP *image) {setImage(image);}
 		void moveSideWays(int newVelX) {x += newVelX;}
+		
 		virtual void update();
 		void destroy() {setAlive(false);}
-		// Methods
+		
+		// These may not be needed.
 		void takeLife(int i); // Minus i from lives
 		void addLife(int i); // add i to lives (may not be needed) 
+
 		// This is SPECIFICALLY for KoopaTroopas ,
 		 //  CL: THEN IT SHOULDN'T BE DEFINED HERE, IT SHOULD BE
 		    // DEFINED IN THE KOOPA TROOPA CLASS, if you call it virtual void
 			// every children class must implement(define the function) these functions
+		 //  VL: Unfortunately, I can't think of a better way to do this. 
+			// This will be called by the collision class inside function checkPlayerEnemyCollision, 
+			// which calls upon the database class. The entire enemy list in the database class is of type Autobot *.
+			// It DOES NOT KNOW if the pointer it's currently using is an instance of the KoopaTroopa or Goomba class.
+			// Apart from that, when a KoopaTroopa instance is stored as an Autobot instance, it doesn't have its own
+			// functions from the KoopaTroopa class defined.
 		virtual void kickTurtle(int playerWalk) {}
 		virtual void specificFunction(){}
 };

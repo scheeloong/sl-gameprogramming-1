@@ -89,7 +89,7 @@ void Player::update()
 }
 
 //------------------------------------------------------------------------
-// This function ...
+// This function draws the player.
 void Player::draw()
 {
 	int fx = (curFrame % animationColumns) * frameWidth;
@@ -124,7 +124,7 @@ void Player::draw()
 }
 
 //------------------------------------------------------------------------
-// This function ...
+// This function gives the player the initial speed to jump off into the air.
 void Player::startLeap() 
 {
 	//Start the jump only if the object is NOT onAir, aka on the ground

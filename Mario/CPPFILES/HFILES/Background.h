@@ -2,6 +2,10 @@
 #define BACKGROUND_H
 
 // CL: What happen to Background.cpp?
+// VL: With the introduction of the map, background is no longer used.
+//	   Turns out, the map from Mappy must be loaded inside the Mario.cpp file, 
+//	   inside the Mario class. Errors arise otherwise. This is still here 
+//	   in case parallax scrolling requires this stuff, etc.
 #include "Classes.h"
 #include "Player.h"
 //#include "mappy_A5.h"
