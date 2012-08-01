@@ -25,8 +25,7 @@ class Database
 		list<Autobot *> powerUps; 
 		list<BounceBlock *> bounceBlocks;
 
-		// Seperator iterators for cleaner code
-
+		// Images
 		ALLEGRO_BITMAP *BabyMario;
 		ALLEGRO_BITMAP *GoombaPic;
 		ALLEGRO_BITMAP *PowerUpsPic;
@@ -36,6 +35,10 @@ class Database
 		ALLEGRO_BITMAP *deadBrick;
 
 		// Private method, not to be called outside this class.
+		// CL: You don't have to state it as private, it is understood as it is
+		// indented under the private column
+		
+		// This method cleans up all the linked list in the Database class.
 		void destroy()
 		{
 			destroyPlayerList();
@@ -45,16 +48,22 @@ class Database
 		}
 
 	public:
+		//===================
 		// Constructors
+		//===================
 		Database(State *state); 
 		void InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALLEGRO_BITMAP *KoopaTroopa, ALLEGRO_BITMAP *PowerUps,
 			            ALLEGRO_BITMAP *deadQuestion, ALLEGRO_BITMAP *sky, ALLEGRO_BITMAP *deadBrick);
 		//These don't modify the lists on their own, so safer and more convenient to be public.
+		//Separate iterators for cleaner code
 		list<Player *>::iterator iterP; 
 		list<Autobot *>::iterator iterE; 
 		list<Autobot *>::iterator iterPU; 
 		list<BounceBlock *>::iterator iterB;
-
+		//====================
+		// Get & Set Methods
+		//====================
+		// (returns first and last objects in the linked list)
 		list<Player *>::iterator getPlayersBegin() {return players.begin();}
 		list<Autobot *>::iterator getEnemiesBegin() {return enemies.begin();}
 		list<Autobot *>::iterator getPowerUpsBegin() {return powerUps.begin();}
@@ -63,14 +72,19 @@ class Database
 		list<Autobot *>::iterator getEnemiesEnd() {return enemies.end();}
 		list<Autobot *>::iterator getPowerUpsEnd() {return powerUps.end();}
 		list<BounceBlock *>::iterator getBounceBlocksEnd() {return bounceBlocks.end();}
-		int getEnemiesSize() {return ((int) enemies.size());}
+		int getEnemiesSize() {return ((int) enemies.size());} // returns size of enemy
 
+		//===================
 		// Methods
+		//===================
+		// Create
 		void makePlayer(int x, int y, int velX, int velY, int dirX, int dirY, bool alive);  
 		void makeEnemy(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive); 
 		void makePowerUp(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive); 
 		void makeBounceBlock(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive);
 
+		//---------------------------------------------------------------------------------------------------
+		// Update
 		void updatePlayerList();
 		void updateEnemyList();
 		void updatePowerUpList();
@@ -82,9 +96,10 @@ class Database
 		    updatePowerUpList();
 			updateBounceBlockList();
 		}
-		
-		//is there a better way to do this? I can't convert list<Player *> to list<GameObject *>
 
+		//---------------------------------------------------------------------------------------------------
+		// Draw
+		// VL: is there a better way to do this? I can't convert list<Player *> to list<GameObject *>
 		void drawPlayerList();
 		void drawEnemyList();
 		void drawPowerUpList();
@@ -97,6 +112,8 @@ class Database
 			drawPowerUpList();
 		}
 
+		//---------------------------------------------------------------------------------------------------
+		// Destroy
 		void destroyPlayerList();
 		void destroyEnemyList();
 		void destroyPowerUpList();
@@ -117,6 +134,8 @@ class Database
 		list<Autobot *>::iterator destroyEnemy(list<Autobot *>::iterator iter); 
 		list<Autobot *>::iterator destroyPowerUp(list<Autobot *>::iterator iter);
 
+		//---------------------------------------------------------------------------------------------------
+		// State
 		void setState(int state)
 		{
 			Database::state->setState(state);

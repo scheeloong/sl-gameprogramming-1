@@ -1,9 +1,11 @@
 #include "HFILES/KoopaTroopa.h"
 
+//=================
+// Constructors
+//=================
 void KoopaTroopa::Init(int ID, int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
 {
 	Autobot::Init(ID, species, x, y, velX, velY, dirX, dirY, alive, image);
-
 	maxFrame = 1;
 	curFrame = 0;
 	frameCount = 3;
@@ -14,12 +16,15 @@ void KoopaTroopa::Init(int ID, int species, int x, int y, int velX, int velY, in
 	facing = WALKLEFT;
 	// animationDirection becomes critical when Koopa is in his shell and gliding 
 	animationDirection = facing;
-
 	animationRow = 0;
 	rewind = 1;
-	
 }
 
+//=================
+// Methods
+//=================
+
+// This function ...
 void KoopaTroopa::draw()
 {
 	int fx = (curFrame % animationColumns) * frameWidth;
@@ -48,6 +53,7 @@ void KoopaTroopa::draw()
 	}
 }
 
+// This function ...
 void KoopaTroopa::update()
 {
 	//the enemy moves on its own, so calling arbitrary move function.

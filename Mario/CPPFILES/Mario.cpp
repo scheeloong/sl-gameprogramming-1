@@ -6,6 +6,9 @@
 class Mario
 {
 public:
+	//=================
+	// Attributes
+	//=================
 	Timer *timer;
 	Display *screen; 
 	Keyboard *keyboard;
@@ -17,7 +20,10 @@ public:
 	Collision *collision;
 	Database *database;
 	bool reloadedMap;
+
+	//=================
 	// Constructor
+	//=================
 	Mario()
 	{
 		//clocker = NULL;
@@ -33,7 +39,9 @@ public:
 		background = new Background();
 		collision = new Collision(database);
 	}
+	//=================
 	// Methods
+	//=================
 	int run() 
 	{
 		
@@ -60,27 +68,34 @@ public:
 		// the game loop is contained in here
 		// Keyboard NOTE: delete keyboard at end.
 
-		//Checks
+		//=================
+		// Initialize
+		//=================
 		if(!al_init())										//initialize Allegro
 			return -1;
 		display = al_create_display(WIDTH, HEIGHT);
 		if(!display)										
 			exit (-1);
 
-		//Install
+		//=================
+		// Install
+		//=================
 		al_install_keyboard();
 		al_init_image_addon();
 		al_init_primitives_addon();
 		al_init_font_addon();
 		al_init_ttf_addon();
 	
-
-		//Create
+		//=================
+		// Create
+		//=================
 		event_queue = al_create_event_queue();
 		clocker = al_create_timer(1.0/FPS);
 		srand(time(NULL));
 		
-		//Load
+		//=================
+		// Load
+		//=================
 		ALLEGRO_BITMAP *Mario = NULL;
 		ALLEGRO_BITMAP *Goomba = NULL;
 		ALLEGRO_BITMAP *KoopaTroopa = NULL;
@@ -91,7 +106,8 @@ public:
 		ALLEGRO_FONT *font18 = NULL;
 		if(MapLoad("50x50.FMP", 1))
 			exit(-5); 
-		//The images below MUST be stored in the Mario folder, and NOT in Resources.
+
+		// Note: The images below MUST be stored in the Mario folder, and NOT in Resources.
 		Mario = al_load_bitmap("MarioGenerations 120.png");
 		Goomba = al_load_bitmap("Goomba 120.png");
 		KoopaTroopa = al_load_bitmap("KoopaTroopa 120.png");
@@ -101,15 +117,23 @@ public:
 		DeadBrick = al_load_bitmap("DeadBrick 50x100.png");
 		font18 = al_load_font("Arial.ttf", 18, 0);
 
-		//Register
+		//=================
+		// Register
+		//=================
 		al_register_event_source(event_queue, al_get_display_event_source(display));
 		al_register_event_source(event_queue, al_get_keyboard_event_source());		
 		al_register_event_source(event_queue, al_get_timer_event_source(clocker));
-		//Object Initialization
+
+		//=======================
+		// Object Initialization
+		//=======================
 		database->InitImages(Mario, Goomba, KoopaTroopa, PowerUps, DeadQuestion, Sky, DeadBrick);
 		database->makePlayer(WIDTH/2 - 200, HEIGHT/2, 5, 5, 1, 1, true);
 		screen->initFont(font18);
-		//Let's start it up!
+
+		//=======================
+		// Game Loop
+		//=======================
 		al_start_timer(clocker);
 		while(!done)
 		{
@@ -151,7 +175,11 @@ public:
 		al_destroy_display(display);
 		return 0;
 	}	
+	
+	//----------------------------------------------------------------------------------------------
 
+	// CL: What is this for?
+	// This function ...
 	void reloadMap()
 	{
 		MapFreeMem();

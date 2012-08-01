@@ -3,8 +3,59 @@
 
 //#pragma once
 
+// BEFORE YOU START DOING ANYTHING, PLEASE:
+// i) Try running, it should behave as it was in revision 72. (I was not able to run the file, probably some visual studio thingy)
+		// if you can't run, refer to CAN'T RUN
+// ii) spend 30mins-1 hour to fix up all comments (just look through every file and you will know what I mean.
+// iii) Read LATEST UPDATE before you do ii)
+// iv) Try running again to ensure that your commenting did accidentally spoil the code
+// v) If it runs, update to the latest revision. Now is revision 73 (my comments), revision 74 should include
+				// all the comments from you and no changes to the code performance.
+// vi) Message me when you're done=)
+
 //================================================================================================================
-// LATEST UPDATE: NO IDEA WHY SOMETIMES INCLUDE USING "HFILES/CLassname" whereas now needs "Classname" directly
+// CAN'T RUN
+// CL: IF YOU CAN'T RUN, ITS NOT ANYTHING TO DO WITH THE COMMENTS, I CHANGED THE WAY THE SOME HEADER FILES ARE INCLUDED,
+// EX: #include "HFILES/bla" instead of "bla" viceversa. Just change that to fix the problem.
+// it should run like how it should before I did anything.
+//================================================================================================================
+
+//================================================================================================================
+// LATEST UPDATE
+// All comments with CL: or VL: is specific for group communications. They are temporary comments that will be 
+// removed later. Example:
+// CL: Wtf is this? 
+// VL: A function to install the images
+// CL: (After understanding, deletes the previous 2 lines, and will help update comments
+//      to improve readability.)
+//----------------------------------------------------------------------------------------------------------------
+// Note: Companies require >= 1 person to review each other's code to ensure that it is readable.
+// Trust me, more comments is always better than no comments. Try svn checkout a new file from some website,
+// you won't understand what a simple line such as
+// xfactor++; 
+// does. Of course, you know it increases some variable xfactor by 1. But what's the point in doing so? 
+// that's when you have to always comment.
+//----------------------------------------------------------------------------------------------------------------
+// Next, above every function.( I prefer it in cpp files instead of hfiles though Prof.Pitt use to do it in hfiles)
+// Make sure you include its description (no matter how simply it is) EX: This function keeps track of a players lives.
+// And also include its PARAMETERS && RETURN values!! 
+// EX: It takes in the current x and y position of the player
+//     and returns the number of lives of the player or NULL if it is dead, it returns -1 in case of error.
+//----------------------------------------------------------------------------------------------------------------
+// Lastly, please learn to use more indentation for conditional and loops. 
+// if(), for(), while() etc..
+// DON'T DO THIS.
+// if(bla)
+// {bla;}
+// blabla;
+// Instead DO THIS
+// if(bla)
+//     bla; // (4 spaces (or a tab) is standard (NOT for all languages)
+// blabla; // This will automaticaly be understood as not being in the if statement since it wasn't indented.
+//================================================================================================================
+
+//================================================================================================================
+// NO IDEA WHY NEED TO ALTERNATE BETWEEN INCLUDE USING "HFILES/CLassname" OR "Classname" directly.
 // Suspecting error comes from the way pragma once is used. 
 // Trying out including files needed in each H File instead of here. 
 // FOr now, this class is for allegro includes and globals only 
@@ -82,7 +133,7 @@ using namespace std;
 //===================
 // Databases
 //===================
-#include <list> 
+#include <list> // CL: WHY DID YOU INCLUDE <LIST> TWICE? 
 
 //===================
 // Globals
@@ -143,6 +194,5 @@ static enum KEYS{UP, DOWN, LEFT, RIGHT, SPACE, R, ESC};
 //For the animations of all sprites.
 //LEFT means walking to the left, RIGHT means walking to the right.
 static enum FACING{WALKLEFT = -1, WALKRIGHT = 1, JUMPMODE = 3, CROUCH = 4};
-
 
 #endif CLASSES_H

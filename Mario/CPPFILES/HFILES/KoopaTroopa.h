@@ -10,8 +10,22 @@ class KoopaTroopa : public Autobot
 private:
 	int state;
 public:
+	//===================
+	// Constructors
+	//===================
 	KoopaTroopa() : Autobot () {setfacing(WALKLEFT); state = WALKING;}
 	void Init(int ID, int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image);
+
+	//===================
+	// Set & Get
+	//===================
+	int getState() {return state;}
+
+	//===================
+	// Methods
+	//===================
+	//TODO: CUT & PASTE these functions to CPP File later, Hfiles shouldn't be doing super long defines
+	// This function ...
 	void kickTurtle(int playerWalk = 0)
 	{
 		if(state == WALKING)
@@ -22,6 +36,9 @@ public:
 			moveTuckShell(playerWalk);
 		}
 	}
+
+	//----------------------------------------
+	// This function ...
 	void tuckShell() 
 	{
 		incrementAnimationRow(); 
@@ -35,6 +52,9 @@ public:
 		state = INSHELL; 
 		species = KOOPA_TROOPA_SHELL;
 	}
+	
+	//----------------------------------------
+	// This function ...
 	void moveTuckShell(int playerWalk) 
 	{
 		setVelX(playerWalk * 5);
@@ -49,8 +69,13 @@ public:
 		playerWalk > 0 ? facing = WALKRIGHT : facing = WALKLEFT;
 		// species is already KOOPA_TROOPA_SHELL;
 	}
-	int getState() {return state;}
+
+	//----------------------------------------
+	// This function
 	void draw();
+
+	//----------------------------------------
+	// This function
 	void update();
 };
 

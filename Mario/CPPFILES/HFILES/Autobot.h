@@ -28,7 +28,10 @@ class Autobot : public GameObject
 		// Methods
 		void takeLife(int i); // Minus i from lives
 		void addLife(int i); // add i to lives (may not be needed) 
-		// This is SPECIFICALLY for KoopaTroopas
+		// This is SPECIFICALLY for KoopaTroopas ,
+		 //  CL: THEN IT SHOULDN'T BE DEFINED HERE, IT SHOULD BE
+		    // DEFINED IN THE KOOPA TROOPA CLASS, if you call it virtual void
+			// every children class must implement(define the function) these functions
 		virtual void kickTurtle(int playerWalk) {}
 		virtual void specificFunction(){}
 };

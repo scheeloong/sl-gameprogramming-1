@@ -11,7 +11,10 @@ class Keyboard
 private:
 	State *state;
 public:
+	// Constructor
 	Keyboard(State *state) {Keyboard::state = state;}
+
+	// Methods
 	void updateKeyboard(ALLEGRO_EVENT *ev);
 };
 

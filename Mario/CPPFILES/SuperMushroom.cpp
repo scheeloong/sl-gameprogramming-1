@@ -1,5 +1,8 @@
-//
 #include "HFILES/SuperMushroom.h"
+
+//================
+// Constructors
+//================
 
 void SuperMushroom::Init(int ID, int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
 {
@@ -23,6 +26,9 @@ void SuperMushroom::Init(int ID, int species, int x, int y, int velX, int velY, 
 	//rewind = 1;
 }
 
+//================
+// Methods
+//================
 void SuperMushroom::draw()
 {
 	if(getAlive())

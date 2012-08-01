@@ -1,6 +1,10 @@
 #pragma once
 #include "HFILES/Timer.h"
 
+//================
+// Methods
+//================
+
 // This function checks if the object is flying, and if yes,
 // ensures that it accelerates at the right rate.
 bool Timer::isItFlying(GameObject *object)
@@ -19,6 +23,8 @@ bool Timer::isItFlying(GameObject *object)
 	}
 	return false;
 }
+//--------------------------------------------------------
+// This function is ....
 void Timer::updateTimer(ALLEGRO_EVENT *ev)
 {
 	
