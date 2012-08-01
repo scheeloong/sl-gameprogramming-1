@@ -16,15 +16,5 @@ public:
 	int getState() {return state;}
 	void setState(int state) {State::state = state;}
 
-/*
-	private:
-		enum modes{NORMAL, STRONG, SUPER, DEAD};
-		int state; 
-	public:
-		// Constructor
-		State(); 
-
-		// Methods
-		void changeState(State &state, State newState); */
 };
 #endif STATE_H

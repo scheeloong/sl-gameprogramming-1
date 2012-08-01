@@ -29,15 +29,15 @@ Display::Display(Database *database, State *state)
 // Methods
 //==============
 
-// This function ...
-void Display::displayScore(int posx, int posy) // Display message at x and y position of screen
+// This function displays the score at the (5, 5) position on the screen.
+void Display::displayScore(int posx, int posy)
 {
 	for(database->iterP = database->getPlayersBegin(); database->iterP != database->getPlayersEnd(); database->iterP++) 
 		al_draw_textf(font, al_map_rgb(0, 0, 0), 5, 5, 0, "Score: %i", (*(database->iterP))->getScore());
 }
 
 //----------------------------------------------------------------------------------------------------------------------
-// This function ...
+// This function updates the screen, drawing all the different elements such as the Mappy map, objects, score.
 void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 {
 	if(ev->type == ALLEGRO_EVENT_DISPLAY_CLOSE)

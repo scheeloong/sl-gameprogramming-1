@@ -179,7 +179,8 @@ public:
 	//----------------------------------------------------------------------------------------------
 
 	// CL: What is this for?
-	// This function ...
+	// VL: This function first deletes the current Mappy's map, and reloads a new one with all the
+	// original tiles back to where they once were before we changed it through class Collision.
 	void reloadMap()
 	{
 		MapFreeMem();

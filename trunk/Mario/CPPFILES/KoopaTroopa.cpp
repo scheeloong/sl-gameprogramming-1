@@ -23,8 +23,47 @@ void KoopaTroopa::Init(int ID, int species, int x, int y, int velX, int velY, in
 //=================
 // Methods
 //=================
+void KoopaTroopa::kickTurtle(int playerWalk = 0)
+{
+	if(state == WALKING)
+		tuckShell();
+	else if(state == INSHELL)
+	{
+		setCollidable(false);
+		moveTuckShell(playerWalk);
+	}
+}
 
-// This function ...
+void KoopaTroopa::tuckShell() 
+{
+	incrementAnimationRow(); 
+	setVelX(0); 
+	setAnchorX(getX()); 
+
+	curFrame = 0;
+	maxFrame = 0; 
+	animationColumns = 5;
+	rewind = 0;
+	state = INSHELL; 
+	species = KOOPA_TROOPA_SHELL;
+}
+
+void KoopaTroopa::moveTuckShell(int playerFacing) 
+{
+	setVelX(playerFacing * 5);
+	// After the object moves a certain distance away from from anchor point,
+	// it's collidable will be set back to true.
+	setAnchorX(getX()); 
+
+	curFrame = 0;
+	maxFrame = 4;
+	rewind = 1;
+	frameDelay = 8;
+
+	state = GLIDING; 
+	playerFacing > 0 ? facing = WALKRIGHT : facing = WALKLEFT;
+}
+
 void KoopaTroopa::draw()
 {
 	int fx = (curFrame % animationColumns) * frameWidth;

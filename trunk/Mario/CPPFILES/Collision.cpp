@@ -6,7 +6,6 @@ Collision::Collision(Database *database)
 	insertObjectBounds(PLAYER, BABY, 13, 23);
 	insertObjectBounds(PLAYER, RED, 20, 43);
 	insertObjectBounds(PLAYER, WHITE, 20, 43);
-	// Enemy only refers to Goomba as of now.
 	insertObjectBounds(ENEMY, GOOMBA, 22, 27);
 	insertObjectBounds(ENEMY, KOOPA_TROOPA, 22, 30);
 	insertObjectBounds(ENEMY, PIRANHA_PLANT, 20, 20);

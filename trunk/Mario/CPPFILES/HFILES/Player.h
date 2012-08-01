@@ -66,12 +66,17 @@ class Player : public GameObject
 
 		//----------------------
 		// State
-		// This function ...
+		// This function increments animationRow to draw the bigger Marios,
+		// after a mushroom has been eaten.
 		void promotePlayer() {incrementAnimationRow(); species++;}
+		// This function decrements, draws smaller Marios. If Mario is already small
+		// when this is called, it's GAMEOVER!
 		void demotePlayer() 
-		{
+		{			 
 			if(!decrementAnimationRow())
 			{
+				// TODO: Modify this to only decrease the lives of Mario if lives > 0. 
+				// Don't directly jump to GAMEOVER.
 				state->setState(GAMEOVER);
 			}
 			else

@@ -3,6 +3,9 @@
 
 //#pragma once
 
+// VL: First of all, testing has to do with lots of the syntax in the code. Many instances of trial and error were performed,
+// and some residue is still hanging around. Some good, some bad. Just a lot of them.
+
 // BEFORE YOU START DOING ANYTHING, PLEASE:
 // i) Try running, it should behave as it was in revision 72. (I was not able to run the file, probably some visual studio thingy)
 		// if you can't run, refer to CAN'T RUN
