@@ -116,6 +116,11 @@ class Database
 		// Destroys a specific enemy.
 		list<Autobot *>::iterator destroyEnemy(list<Autobot *>::iterator iter); 
 		list<Autobot *>::iterator destroyPowerUp(list<Autobot *>::iterator iter);
+
+		void setState(int state)
+		{
+			Database::state->setState(state);
+		}
 };
 
 #endif DATABASE_H

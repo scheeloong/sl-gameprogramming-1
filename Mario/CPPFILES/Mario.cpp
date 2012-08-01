@@ -107,12 +107,13 @@ public:
 		al_register_event_source(event_queue, al_get_timer_event_source(clocker));
 		//Object Initialization
 		database->InitImages(Mario, Goomba, KoopaTroopa, PowerUps, DeadQuestion, Sky, DeadBrick);
-		database->makePlayer(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true);
+		database->makePlayer(WIDTH/2 - 200, HEIGHT/2, 5, 5, 1, 1, true);
 		screen->initFont(font18);
 		//Let's start it up!
 		al_start_timer(clocker);
 		while(!done)
 		{
+			oldXOff = xOff;
 			ALLEGRO_EVENT ev;
 			al_wait_for_event(event_queue, &ev);
 			timer->updateTimer(&ev);
@@ -122,7 +123,7 @@ public:
 			if(state->getState() == PLAYING) {database->update(); reloadedMap = false;}
 			screen->updateDisplay(event_queue, &ev);
 			if(state->getState() == GAMEOVER && !reloadedMap) reloadMap();
-			// GAME LOOP
+			deltaXOff = xOff - oldXOff;
 		}
 		
 		database->deleteDatabase();
@@ -157,5 +158,7 @@ public:
 		if(MapLoad("50x50.FMP", 1))
 			exit(-5); 
 		reloadedMap = true;
+		xOff = 0;
+		yOff = 0;
 	}
 }; 

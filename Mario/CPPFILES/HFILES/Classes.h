@@ -114,6 +114,8 @@ extern bool isGameOver;
 static const int WIDTH = 800; 
 static const int HEIGHT = 600; 
 static const int FPS = 60;
+
+// This bool is used to let various functions know that the xOff has been changed from keyboard input. 
 static ALLEGRO_DISPLAY *display = NULL;
 static ALLEGRO_EVENT_QUEUE *event_queue = NULL;
 static ALLEGRO_TIMER *clocker = NULL;
@@ -123,6 +125,10 @@ extern bool keys[5];
 extern bool lock[5];
 extern int xOff;
 extern int yOff;
+extern int playerVelX;
+extern int oldXOff;
+extern int deltaXOff;
+extern bool isMoved;
 // NILL and NALL are space holders that represent 0. This is important in score keeping.
 static enum ID{PLAYER, ENEMY, POWERUP, BULLET, BORDER, MISC, EXPLOSION};
 static enum TILES{BRICK, COIN};

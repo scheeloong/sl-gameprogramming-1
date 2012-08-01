@@ -22,6 +22,7 @@ class Autobot : public GameObject
 		void Init(int ID, int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
 		{GameObject::Init(ID, x, y, velX, velY, dirX, dirY, alive, image); setSpecies(species);}
 		void InitImage(ALLEGRO_BITMAP *image) {setImage(image);}
+		void moveSideWays(int newVelX) {x += newVelX;}
 		virtual void update();
 		void destroy() {setAlive(false);}
 		// Methods

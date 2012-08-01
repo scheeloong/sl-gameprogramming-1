@@ -38,8 +38,8 @@ class Player : public GameObject
 		void crouch() {curFrame = CROUCH;}
 		void resetAnimation() {if(curFrame == JUMPMODE || curFrame == CROUCH || (!keys[RIGHT] && !keys[LEFT])) curFrame = 0;}
 
-		void moveLeft() {GameObject::moveLeft(); setfacing(WALKLEFT);}
-		void moveRight() {GameObject::moveRight(); setfacing(WALKRIGHT);}
+		void moveLeft() {if(x < WIDTH/2 || xOff <= -1 * WIDTH || !xOff) GameObject::moveLeft(); else if(x == WIDTH/2) {xOff -= velX; playerVelX = -1 * velX;} setfacing(WALKLEFT);}
+		void moveRight() {if(x < WIDTH/2 || xOff <= -1 * WIDTH) GameObject::moveRight(); else if(x == WIDTH/2) {xOff += velX; playerVelX = velX;} setfacing(WALKRIGHT); }
 
 		// Methods
 		int getLife() {return lives;}
