@@ -1,6 +1,7 @@
-//
 #ifndef BACKGROUND_H
 #define BACKGROUND_H
+
+// CL: What happen to Background.cpp?
 #include "Classes.h"
 #include "Player.h"
 //#include "mappy_A5.h"

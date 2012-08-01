@@ -16,8 +16,6 @@ public:
 	int getState() {return state;}
 	void setState(int state) {State::state = state;}
 
-	
-
 /*
 	private:
 		enum modes{NORMAL, STRONG, SUPER, DEAD};

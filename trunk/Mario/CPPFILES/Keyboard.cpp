@@ -1,7 +1,13 @@
 #include "HFILES/Keyboard.h"
 
+//=================
+// Methods
+//=================
+
+// This function updates the input from the keyboard.
 void Keyboard::updateKeyboard(ALLEGRO_EVENT *ev)
 {
+	// Key pressed
 	if(ev->type == ALLEGRO_EVENT_KEY_DOWN)
 	{
 		switch(ev->keyboard.keycode)
@@ -29,6 +35,7 @@ void Keyboard::updateKeyboard(ALLEGRO_EVENT *ev)
 			break;
 		}
 	}
+	// Key released
 	else if(ev->type == ALLEGRO_EVENT_KEY_UP)
 	{
 		switch(ev->keyboard.keycode)

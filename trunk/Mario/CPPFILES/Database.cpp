@@ -1,6 +1,8 @@
 #include "HFILES/Database.h"
 
-// Defining Methods
+//================
+// Constructor
+//================
 Database::Database(State *state)
 {
 	Database::state = state;
@@ -19,13 +21,24 @@ void Database::InitImages(ALLEGRO_BITMAP *BabyMario, ALLEGRO_BITMAP *Goomba, ALL
 	Database::sky = sky;
 	Database::deadBrick = deadBrick;
 }
-		
+
+//================
+// Methods
+//================
+
+//======================================================================================================
+// Make
+//======================================================================================================
+// These functions add a new GameObject into the linked list
+
 void Database::makePlayer(int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
 	Player *player = new Player(); 
 	player->Init(state, x, y, velX, velY, dirX, dirY, alive, BabyMario);
 	players.push_back(player);
 }
+
+//-----------------------------------------------------------------------------------------------------------------
 void Database::makeEnemy(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
 	if(species == GOOMBA)
@@ -41,12 +54,16 @@ void Database::makeEnemy(int species, int x, int y, int velX, int velY, int dirX
 		enemies.push_back(koopaTroopa);
 	}
 }
+
+//-----------------------------------------------------------------------------------------------------------------
 void Database::makePowerUp(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
 		SuperMushroom *mushroom = new SuperMushroom();
 		mushroom->Init(POWERUP, species, x, y, velX, velY, dirX, dirY, alive, PowerUpsPic);
 		powerUps.push_back(mushroom); 
 }
+
+//-----------------------------------------------------------------------------------------------------------------
 void Database::makeBounceBlock(int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive)
 {
 	BounceBlock *bblock = new BounceBlock();
@@ -62,6 +79,11 @@ void Database::makeBounceBlock(int species, int x, int y, int velX, int velY, in
 	bounceBlocks.push_back(bblock);
 }
 
+//======================================================================================================
+// Update
+//======================================================================================================
+// These functions ...
+
 void Database::updatePlayerList()
 {
 	for( iterP = players.begin(); iterP != players.end(); iterP ++)
@@ -69,6 +91,8 @@ void Database::updatePlayerList()
 		(*iterP)->update();
 	}
 }
+
+//-----------------------------------------------------------------------------------------------------------------
 void Database::updateEnemyList()
 {
 	for( iterE = enemies.begin(); iterE != enemies.end(); iterE++)
@@ -76,6 +100,8 @@ void Database::updateEnemyList()
 		(*iterE)->update();
 	}
 }
+
+//-----------------------------------------------------------------------------------------------------------------
 void Database::updatePowerUpList()
 {
 	for( iterPU = powerUps.begin(); iterPU != powerUps.end(); iterPU++)
@@ -83,6 +109,8 @@ void Database::updatePowerUpList()
 		(*iterPU)->update();
 	}
 }
+
+//-----------------------------------------------------------------------------------------------------------------
 void Database::updateBounceBlockList()
 {
 	for( iterB = bounceBlocks.begin(); iterB != bounceBlocks.end(); )
@@ -100,6 +128,11 @@ void Database::updateBounceBlockList()
 	}
 }
 
+//======================================================================================================
+// Draw
+//======================================================================================================
+// These functions ...
+
 void Database::drawPlayerList()
 {
 	for( iterP = players.begin(); iterP != players.end(); iterP ++)
@@ -107,6 +140,8 @@ void Database::drawPlayerList()
 		(*iterP)->draw();
 	}
 }
+
+//-----------------------------------------------------------------------------------------------------------------
 void Database::drawEnemyList()
 {
 	for( iterE = enemies.begin(); iterE != enemies.end(); iterE++)
@@ -114,6 +149,8 @@ void Database::drawEnemyList()
 		(*iterE)->draw();
 	}
 }
+
+//-----------------------------------------------------------------------------------------------------------------
 void Database::drawPowerUpList()
 {
 	for( iterPU = powerUps.begin(); iterPU != powerUps.end(); iterPU++)
@@ -121,6 +158,8 @@ void Database::drawPowerUpList()
 		(*iterPU)->draw();
 	}
 }
+
+//-----------------------------------------------------------------------------------------------------------------
 void Database::drawBounceBlockList()
 {
 	for (iterB = bounceBlocks.begin(); iterB != bounceBlocks.end(); iterB++)
@@ -128,6 +167,11 @@ void Database::drawBounceBlockList()
 		(*iterB)->draw();
 	}
 }
+
+//======================================================================================================
+// Destroy
+//======================================================================================================
+// These functions ...
 
 void Database::destroyPlayerList()
 {
@@ -145,6 +189,8 @@ void Database::destroyPlayerList()
 			iterP++;
 	}
 }
+
+//-----------------------------------------------------------------------------------------------------------------
 void Database::destroyEnemyList()
 {
 	for( iterE = enemies.begin(); iterE != enemies.end(); )
@@ -161,6 +207,8 @@ void Database::destroyEnemyList()
 			iterE++;
 	}
 }
+
+//-----------------------------------------------------------------------------------------------------------------
 void Database::destroyPowerUpList()
 {
 	for( iterPU = powerUps.begin(); iterPU != powerUps.end(); )
@@ -177,6 +225,8 @@ void Database::destroyPowerUpList()
 			iterPU++;
 	}
 }
+
+//-----------------------------------------------------------------------------------------------------------------
 void Database::destroyBounceBlockList()
 {
 	for( iterB = bounceBlocks.begin(); iterB != bounceBlocks.end(); )
@@ -194,6 +244,7 @@ void Database::destroyBounceBlockList()
 	}
 }
 
+//-----------------------------------------------------------------------------------------------------------------
 void Database::resetDatabase()
 {
 	killPlayers();
@@ -203,6 +254,8 @@ void Database::resetDatabase()
 	destroy();
 	makePlayer(WIDTH/2 - 200, HEIGHT/2, 5, 5, 1, 1, true);
 }
+
+//----------------------------------
 void Database::deleteDatabase()
 {
 	killPlayers();
@@ -212,39 +265,54 @@ void Database::deleteDatabase()
 	destroy();
 }
 
+//======================================================================================================
+// Kill
+//======================================================================================================
+// These functions ...
+
 void Database::killPlayers()
 {
 	for( iterP = players.begin(); iterP != players.end(); iterP ++)
 		(*iterP)->setAlive(false);
 }
+
+//----------------------------------------------------------------------
 void Database::killEnemies()
 {
 	for( iterE = enemies.begin(); iterE != enemies.end(); iterE ++)
 		(*iterE)->setAlive(false);
 }
+
+//----------------------------------------------------------------------
 void Database::killPowerUps()
 {
 	for( iterPU = powerUps.begin(); iterPU != powerUps.end(); iterPU ++)
 		(*iterPU)->setAlive(false);
 }
+
+//----------------------------------------------------------------------
 void Database::killBounceBlocks()
 {
 	for( iterB = bounceBlocks.begin(); iterB != bounceBlocks.end(); iterB ++)
 		(*iterB)->setAlive(false);
 }
 
+//--------------------------------------------------------------------------------
 list<Autobot *>::iterator Database::destroyEnemy(list<Autobot *>::iterator iter)
 {
 	(*iter)->destroy();
 	iter = enemies.erase(iter);
 	return iter;
 }
+
+//--------------------------------------------------------------------------------
 list<Autobot *>::iterator Database::destroyPowerUp(list<Autobot *>::iterator iter)
 {
 	(*iter)->destroy();
 	iter = powerUps.erase(iter);
 	return iter;
 }
+
 /* This is an old template for destroy. Very general.
 void Database::destroyEnemyList(list<Enemy *> *object_list, list<Enemy *>::iterator iter)
 {

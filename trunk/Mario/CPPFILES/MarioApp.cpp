@@ -16,7 +16,7 @@
 // where main function is
 //===================================
 
-	Mario *mario = new Mario();
+Mario *mario = new Mario();
 	
 // currently infinite loop before anything even happens
 int main()

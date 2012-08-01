@@ -1,5 +1,8 @@
 #include "HFILES/Display.h"
 
+//==============
+// Attributes
+//==============
 bool done = false;
 bool redraw = false;
 bool isGameOver = false;
@@ -13,18 +16,28 @@ int oldXOff = 0;
 int deltaXOff = 0;
 bool isMoved = false;
 
+//==============
+// Constructor
+//==============
 Display::Display(Database *database, State *state)
 {
 	Display::database = database;
 	Display::state = state;
 }
 
+//==============
+// Methods
+//==============
+
+// This function ...
 void Display::displayScore(int posx, int posy) // Display message at x and y position of screen
 {
 	for(database->iterP = database->getPlayersBegin(); database->iterP != database->getPlayersEnd(); database->iterP++) 
 		al_draw_textf(font, al_map_rgb(0, 0, 0), 5, 5, 0, "Score: %i", (*(database->iterP))->getScore());
 }
 
+//----------------------------------------------------------------------------------------------------------------------
+// This function ...
 void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 {
 	if(ev->type == ALLEGRO_EVENT_DISPLAY_CLOSE)

@@ -1,5 +1,6 @@
 #include "HFILES/BounceBlock.h"
 
+// Constructor
 void BounceBlock::Init(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, 
 	ALLEGRO_BITMAP *image, int startY, int species)
 {
@@ -9,6 +10,9 @@ void BounceBlock::Init(int x, int y, int velX, int velY, int dirX, int dirY, boo
 	BounceBlock::species = species;;
 }
 
+//------------------------------------------------------------------------------------------
+
+// This function ??
 void BounceBlock::update()
 {
 	/*if(isMoved)
@@ -41,6 +45,9 @@ void BounceBlock::update()
 		moveVertically();
 }
 
+//------------------------------------------------------------------------------------------
+
+// This function draws the block onto the screen
 void BounceBlock::draw()
 {
 	al_draw_bitmap(getImage(), x - xOff, y, 0);

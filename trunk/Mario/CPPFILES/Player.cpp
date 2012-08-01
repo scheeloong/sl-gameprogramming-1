@@ -1,21 +1,8 @@
 #include "HFILES\Player.h"
-// Constructor
+//=======================
+// Constructors
+//=======================
 //Player::Player() : lives(3) {}
-
-// Methods
-void Player::decrementLife()
-{
-	if(--lives < 0)
-		state->setState(GAMEOVER);
-}
-void Player::incrementLife ()
-{
-	lives++;
-}
-void Player::addScore(int ID_Harvested)
-{
-	score += (ID_Harvested + 1) * 100;
-}
 
 void Player::Init(State *state, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
 {
@@ -39,7 +26,35 @@ void Player::Init(State *state, int x, int y, int velX, int velY, int dirX, int 
 	//addLife(lives); I don't know why this is here.
 }
 
-//Update animations and velocity
+//=======================
+// Methods
+//=======================
+
+// This function decrements the player's live by 1
+// and changes the gamestate to GAMEOVER if
+// the player is dead.
+void Player::decrementLife()
+{
+	if(--lives < 0)
+		state->setState(GAMEOVER);
+}
+
+//------------------------------------------------------------------------
+// This function increments the player's live by 1.
+void Player::incrementLife ()
+{
+	lives++;
+}
+
+//------------------------------------------------------------------------
+// This function ...
+void Player::addScore(int ID_Harvested)
+{
+	score += (ID_Harvested + 1) * 100;
+}
+
+//------------------------------------------------------------------------
+// This function updates the animations and velocity of the player.
 void Player::update()
 {
 	moveVertically();
@@ -73,6 +88,8 @@ void Player::update()
 	}
 }
 
+//------------------------------------------------------------------------
+// This function ...
 void Player::draw()
 {
 	int fx = (curFrame % animationColumns) * frameWidth;
@@ -106,6 +123,8 @@ void Player::draw()
 	}
 }
 
+//------------------------------------------------------------------------
+// This function ...
 void Player::startLeap() 
 {
 	//Start the jump only if the object is NOT onAir, aka on the ground

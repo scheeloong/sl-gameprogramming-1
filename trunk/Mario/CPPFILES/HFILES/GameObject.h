@@ -11,30 +11,26 @@ protected:
 	int ID; 
 	int species;
 
-	// DO NOT CHANGE int TYPE to float for position and velocity.
-	// WILL CAUSE CRASH in Collision class
+	// DO NOT CHANGE:
+		// int TYPE to float for position and velocity.
+		// WILL CAUSE CRASH in Collision class
+
 	// Positions
 	int x; 
 	int y; 
 	// Velocities
 	int velX; 
-	int velY; 
-	// Direction of Movement ABSOLUTELY USELESS
+	int velY;
+	// Direction of Movement (ABSOLUTELY USELESS) // CL:why?
 	int dirX; 
 	int dirY; 
+	// Alive and Draw  //(currently unused)
 	ALLEGRO_BITMAP *image; 
-
-	// Alive and Draw, currently unused
 	bool alive; 
 	bool render; 
-	// This collidable var applies specifically to 
-	// inter-object collidability, not to tiles.
-	bool collidable;
-	// anchorX marks the original X position of the 
-	// object, to be used as a comparison for moving 
-	// it a certain distance before collidable is reset.
-	int anchorX;
-
+	bool collidable; // applies specifically to inter-object collidability only and not tiles.
+	int anchorX; // marks the original X position of the object, which is used
+				 // as a comparison for moving it a certain distance before collidable is reset
 	// Animations
 	int maxFrame;
 	int curFrame;
@@ -43,34 +39,32 @@ protected:
 	int frameWidth;
 	int frameHeight;
 	int animationColumns;
-	//Unused by Player class atm.
+	// Unused by Player class atm.
 	int animationDirection;
 
-	//animationRow only needed for gridded sprite sheets
+	// animationRow only needed for gridded sprite sheets
 	// not single row
 	int animationRow;
 	int rewind;
-	//Direction the sprite is facing.
-	int facing;
-
+	int facing; // Direction the sprite is facing
 	int gravity;
-
 	bool onAir;
-	// See Timer::isItFlying(object)
+	// Refer to Timer::isItFlying(object)
 	int halffire;
 
 public:
-	// Constructor
+	//===================
+	// Constructors
+	//===================
 	GameObject();
 
-	// Method for constructor (more specific) 
 	// This Init function is expected to be called ONCE for each GameObject, so some parameters 
 	// might never need to be updated. (state, col..?)
 	void Init(int ID, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image); 
 
-	//===============================
+	//===================
 	// Set & Get
-	//===============================
+	//===================
 	void setID(int id) { ID = id; } 
 	int getID() {return ID;}
 	int getSpecies() {return species;}
@@ -98,6 +92,10 @@ public:
 	ALLEGRO_BITMAP *getImage() {return image;}
 	void setImage(ALLEGRO_BITMAP *im) { image = im; }
 	void setAnimationRow(int animationRow) {GameObject::animationRow = animationRow;}
+
+	//===================
+	// Methods
+	//===================
 	// TODO: determine if we need a cap for this.
 	void incrementAnimationRow()
 	{
@@ -126,7 +124,7 @@ public:
 	int getSpecies() {return species;}*/
 	
 	//===================================
-	// Moving the Object
+	// Movement Of Object
 	//===================================
 	//since velY fluxes between + and - values, and the objects 
 	//can't normally move down, this function is sufficient
@@ -177,7 +175,9 @@ public:
 	virtual void jumpGlide() {}
 	virtual void destroy() {}
 	
+	//===================
 	// Friend Class
+	//===================
 //	friend class Collision; // Allow collision class to access private members of GameObject's data
 }; 
 

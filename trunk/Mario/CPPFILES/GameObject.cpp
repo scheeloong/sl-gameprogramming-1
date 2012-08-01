@@ -1,5 +1,8 @@
 #include "HFILES/GameObject.h"
-// Defining Methods
+
+//================
+// Constructors
+//================
 GameObject::GameObject()
 {
 	x = 0, y = 0; 
@@ -16,7 +19,6 @@ GameObject::GameObject()
 	
 }
 
-// Initializing
 void GameObject::Init(int ID, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
 {
 	setID(ID);
@@ -31,3 +33,7 @@ void GameObject::Init(int ID, int x, int y, int velX, int velY, int dirX, int di
 	if(image)
 		setImage(image);  
 }
+
+//===================
+// Methods (if any)
+//===================

@@ -1,5 +1,8 @@
 #include "HFILES/Goomba.h"
 
+//=================
+// Constructors
+//=================
 void Goomba::Init(int ID, int species, int x, int y, int velX, int velY, int dirX, int dirY, bool alive, ALLEGRO_BITMAP *image)
 {
 	Autobot::Init(ID, species, x, y, velX, velY, dirX, dirY, alive, image);
@@ -19,6 +22,9 @@ void Goomba::Init(int ID, int species, int x, int y, int velX, int velY, int dir
 	facing = WALKLEFT;
 }
 
+//=================
+// Methods
+//=================
 void Goomba::draw()
 {
 		int fx = (curFrame % animationColumns) * frameWidth;
