@@ -15,7 +15,7 @@ void BounceBlock::Init(int x, int y, int velX, int velY, int dirX, int dirY, boo
 // This function updates the position and properties of the block.
 void BounceBlock::update()
 {
-	x -= xOff;
+	moveSideWays(deltaXOff);
 // If the block is back down to its starting height
 	if (getY() + getVelY() > startY - 3)
 	{   // Set the tile on Mappy back to brick
