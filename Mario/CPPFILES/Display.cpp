@@ -50,14 +50,10 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 			MapDrawBG(xOff, yOff, 0, 0, WIDTH, HEIGHT);
 			MapDrawFG(xOff, yOff, 0, 0, WIDTH, HEIGHT, 0);
 			MapDrawFG(xOff, yOff, 0, 0, WIDTH, HEIGHT, 1);
-		/*	MapDrawBG(0, 0, xOff, yOff, WIDTH, HEIGHT);
-			MapDrawFG(0, 0, xOff, yOff, WIDTH, HEIGHT, 0);
-			MapDrawFG(0, 0, xOff, yOff, WIDTH, HEIGHT, 1);*/
 			//Layer 1 features foreground tiles such as coin and ? blocks.
 			//Collision is detected on Layer 0 though.
 			MapChangeLayer(1);
-			MapDrawBG(0, 0, xOff, yOff, WIDTH, HEIGHT);
-		//	MapDrawBG(xOff, yOff, 0, 0, WIDTH, HEIGHT);
+			MapDrawBG(xOff, yOff, 0, 0, WIDTH, HEIGHT);
 			MapChangeLayer(0);
 			redraw = false;
 			if(state->getState() == PLAYING)
