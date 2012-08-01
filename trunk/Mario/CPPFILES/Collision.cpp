@@ -18,7 +18,7 @@ Collision::Collision(Database *database)
 //Adds new GameObject bounds to the two lists. 
 //The ID is just a stub, so you see what you're adding.
 //It's not used in the function at all. The ID should be 
-// the index of the added bounds.
+// the  index of the added bounds.
 void Collision::insertObjectBounds(int ID, int species, int boundX, int boundY)
 {
 	if(ID == PLAYER)
@@ -62,7 +62,7 @@ void Collision::checkPlayerTileCollision()
 		//Check 4 corners of object1's bound box.
 		//Underfeet check
 		{
-			if (!isTileCollidable(x, y + by)) {lock[DOWN] = false; (*(database->iterP))->setonAir(true);}
+			if (!isTileCollidable(x + xOff, y + by)) {lock[DOWN] = false; (*(database->iterP))->setonAir(true);}
 			else 
 			{
 				lock[DOWN] = true; 
@@ -76,63 +76,68 @@ void Collision::checkPlayerTileCollision()
 					(*(database->iterP))->resetAnimation();
 			}
 			//Overhead check
-			if (isTileCollidable(x, y - by)) {lock[UP] = true; (*(database->iterP))->reverseDirection();}
+			if (isTileCollidable(x + xOff, y - by)) {lock[UP] = true; (*(database->iterP))->reverseDirection();}
 			else lock[UP] = false;
 			//Rightside check
-			if (isTileCollidable(x + bx, y)) lock[RIGHT] = true;
+			if (isTileCollidable(x + xOff + bx, y)) lock[RIGHT] = true;
 			else lock[RIGHT] = false;
 			//Leftside check
-			if (isTileCollidable(x - bx, y)) lock[LEFT] = true;
+			if (isTileCollidable(x + xOff - bx, y)) lock[LEFT] = true;
 			else lock[LEFT] = false;
 
-			//TODO: modify to check every side of body.
-			if(isTileSpecial(x, y - by))
+			//isTileSpecial checks for environmental triggers, and don't include enemy triggers.
+			if(isTileSpecial(x + xOff, y - by))
 			{
-				if(isQuestionTile(x, y - by))
+				if(isQuestionTile(x + xOff - xOff, y - by))
 				{
-					database->makeBounceBlock(DEAD_QUESTION, (x/mapblockwidth) * 50, ((y-by)/mapblockheight) * 50, 0, -5, 1, 1, true);
+					database->makeBounceBlock(DEAD_QUESTION, ((x + xOff)/mapblockwidth) * 50, ((y-by)/mapblockheight) * 50, 0, -5, 1, 1, true);
 					// The species of the powerup must match that of the player. 
-					database->makePowerUp((*(database->iterP))->getSpecies(), (x/mapblockwidth) * 50 + 25, ((y-by)/mapblockheight) * 50 - 30, 2, -5, 1, 1, true);
-					killSpecialTile(x, y - by);
+					database->makePowerUp((*(database->iterP))->getSpecies(), ((x + xOff)/mapblockwidth) * 50 + 25, ((y-by)/mapblockheight) * 50 - 30, 2, -5, 1, 1, true);
+					killSpecialTile(x + xOff, y - by);
 				}
-				else if(isCoinTile(x, y - by))
+				else if(isCoinTile(x + xOff, y - by))
 				{
 					(*(database->iterP))->addScore(COIN);
 					MapChangeLayer(1);
-					vapourizeTile(x, y);
+					vapourizeTile(x + xOff, y);
 					MapChangeLayer(0);
-					vapourizeTile(x, y);
+					vapourizeTile(x + xOff, y);
 				}
-				else if(isBrickTile(x, y - by))
+				else if(isBrickTile(x + xOff, y - by))
 				{
 					if((*(database->iterP))->getSpecies() == BABY)
 					{
-						database->makeBounceBlock(DEAD_BRICK, (x/mapblockwidth) * 50, ((y-by)/mapblockheight) * 50, 0, -4, 1, 1, true);
-						killSpecialTile(x, y - by);
+						database->makeBounceBlock(DEAD_BRICK, ((x + xOff)/mapblockwidth) * 50, ((y-by)/mapblockheight) * 50, 0, -4, 1, 1, true);
+						killSpecialTile(x + xOff, y - by);
 					}
 					else if ((*(database->iterP))->getSpecies() == RED || (*(database->iterP))->getSpecies() == WHITE)
 					{
 						(*(database->iterP))->addScore(BRICK);
-						vapourizeTile(x, y - by);
+						vapourizeTile(x + xOff, y - by);
 					}
 				}
 			}
-			if(isGoombaTriggerTile(x, y))
+			if(isGoombaTriggerTile(x + xOff, y))
 			{
 				database->makeEnemy(GOOMBA, WIDTH/2, HEIGHT/2, -3, 0, 1, 1, true);
-				killGoombaTriggerTile(x, y);
+				vapourizeTileColumn(x + xOff);
 			}
-			if(isKoopaTroopaTriggerTile(x, y))
+			if(isKoopaTroopaTriggerTile(x + xOff, y))
 			{
 				database->makeEnemy(KOOPA_TROOPA, WIDTH/2, HEIGHT/2, -3, 0, 1, 1, true);
-				killKoopaTroopaTriggerTile(x, y);
+				vapourizeTileColumn(x + xOff);
+			}
+			if(isTileDeath(x + xOff, y))
+			{
+				// lives --;
+				database->setState(GAMEOVER);
 			}
 		}
 	}
 }
 void Collision::checkEnemyTileCollision()
 {
-	for(database->iterE = database->getEnemiesBegin(); database->iterE != database->getEnemiesEnd(); database->iterE++)
+	for(database->iterE = database->getEnemiesBegin(); database->iterE != database->getEnemiesEnd();)
 	{
 		//This check might not be necessary.
 		if((*(database->iterE))->getAlive())
@@ -145,10 +150,10 @@ void Collision::checkEnemyTileCollision()
 	
 			//Underfeet check. Due to some strange logic, we first have to check if it's onAir,
 			//if not then check if it's on the ground. 
-			if (!isTileCollidable(x, y + by)) {(*(database->iterE))->setonAir(true); }
+			if (!isTileCollidable(x + xOff, y + by)) {(*(database->iterE))->setonAir(true); }
 			else 
 			{
-				if(!isTileBouncing(x, y + by))
+				if(!isTileBouncing(x + xOff, y + by))
 				{
 					(*(database->iterE))->setonAir(false); 
 					// Sets enemy at ground level with VelY = 0 //
@@ -161,26 +166,29 @@ void Collision::checkEnemyTileCollision()
 					(*(database->iterE))->setAlive(false);
 					(*(database->iterE))->setCollidable(false);
 					(*(database->iterE))->setonAir(true);
+					cout << "Bouncing" << endl;
 				}
 				//////////////////////////////////////////////
 			}
 			//Overhead check - won't really happen with enemies
-			if (isTileCollidable(x, y - by)) {}
+			if (isTileCollidable(x + xOff, y - by)) {}
 
 			//Rightside check. Only reverseDirection if the dude is currently TRYING TO WALKRIGHT && hitting a tile on the right!
-			if (isTileCollidable(x + bx, y) && (*(database->iterE))->getfacing() == WALKRIGHT) 
+			if (isTileCollidable(x + xOff + bx, y) && (*(database->iterE))->getfacing() == WALKRIGHT) 
 				(*(database->iterE))->reverseDirection();
 			//Leftside check. Only reverseDirection if the dude is currently TRYING TO WALKLEFT && hitting a tile on the left!
-			if (isTileCollidable(x - bx, y) && (*(database->iterE))->getfacing() == WALKLEFT) 
+			if (isTileCollidable(x + xOff - bx, y) && (*(database->iterE))->getfacing() == WALKLEFT) 
 			{(*(database->iterE))->reverseDirection();}
-			if(isTileDeath(x, y))
+			if(isTileDeath(x + xOff, y))
 				database->iterE = database->destroyEnemy(database->iterE);
+			else
+				database->iterE ++;
 		}
 	}
 }
 void Collision::checkPowerUpTileCollision()
 {
-	for(database->iterPU = database->getPowerUpsBegin(); database->iterPU != database->getPowerUpsEnd(); database->iterPU++)
+	for(database->iterPU = database->getPowerUpsBegin(); database->iterPU != database->getPowerUpsEnd();)
 	{
 	//This check might not be necessary.
 		if((*(database->iterPU))->getAlive())
@@ -193,11 +201,11 @@ void Collision::checkPowerUpTileCollision()
 
 			//Underfeet check. Due to some strange logic, we first have to check if it's onAir,
 			//if not then check if it's on the ground. 
-			if (!isTileCollidable(x, y + by)) {(*(database->iterPU))->setonAir(true);}
+			if (!isTileCollidable(x + xOff, y + by)) {(*(database->iterPU))->setonAir(true);}
 			
 			else 
 			{
-				if(!isTileBouncing(x, y + by))
+				if(!isTileBouncing(x + xOff, y + by))
 				{
 					(*(database->iterPU))->setonAir(false); 
 					// Sets player at ground level with VelY = 0 //
@@ -209,13 +217,17 @@ void Collision::checkPowerUpTileCollision()
 					(*(database->iterPU))->setVelY(-5); 
 			}
 			//Overhead check - won't really happen with autobots
-			if (isTileCollidable(x, y - by)) {}
+			if (isTileCollidable(x + xOff, y - by)) {}
 			//Rightside check. Only reverseDirection if the dude is currently TRYING TO WALKRIGHT && hitting a tile on the right!
-			if (isTileCollidable(x + bx, y) && (*(database->iterPU))->getfacing() == WALKRIGHT) 
+			if (isTileCollidable(x + xOff + bx, y) && (*(database->iterPU))->getfacing() == WALKRIGHT) 
 			{(*(database->iterPU))->reverseDirection();}
 			//Leftside check. Only reverseDirection if the dude is currently TRYING TO WALKLEFT && hitting a tile on the left!
-			if (isTileCollidable(x - bx, y) && (*(database->iterPU))->getfacing() == WALKLEFT) 
+			if (isTileCollidable(x + xOff - bx, y) && (*(database->iterPU))->getfacing() == WALKLEFT) 
 				(*(database->iterPU))->reverseDirection();
+			if(isTileDeath(x + xOff, y))
+				database->iterPU = database->destroyPowerUp(database->iterPU);
+			else
+				database->iterPU++;
 		}
 	}
 }

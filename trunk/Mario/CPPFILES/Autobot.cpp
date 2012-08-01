@@ -28,11 +28,15 @@ void Autobot::addLife(int i) // add i to lives (may not be needed)
 void Autobot::update()
 {
 	//the enemy moves on its own, so calling arbitrary move function.
-	/*if(!getCollidable() && checkAnchorXDistance(100))
-	{setCollidable(true);}*/
-	moveRight();
-	moveVertically();
+	if(!getCollidable() && checkAnchorXDistance(100))
+	{setCollidable(true);}
+	//moveSideWays(velX + playerVelX);
 
+	moveSideWays(velX - deltaXOff);
+	//isMoved = false;
+	//	moveRight();
+	moveVertically();
+	cout << deltaXOff << " " << xOff << endl;
 	// The below is a 1 2 3 2 1 2 3 2 1 animation
 	if(++frameCount >= frameDelay)
 	{

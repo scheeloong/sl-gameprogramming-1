@@ -110,18 +110,7 @@ public:
 		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
 		return blockdata->user4;
 	}
-	inline void killGoombaTriggerTile(int x, int y)
-	{
-		BLKSTR *blockdata;
-		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
-		blockdata->user3 = 0;
-	}
-	inline void killKoopaTroopaTriggerTile(int x, int y)
-	{
-		BLKSTR *blockdata;
-		blockdata = MapGetBlock(x/mapblockwidth, y/mapblockheight); 
-		blockdata->user4 = 0;
-	}
+
 	// Replaces a special tile with a solid collidable tile.
 	inline void killSpecialTile(int x, int y)
 	{
@@ -134,6 +123,15 @@ public:
 	inline void vapourizeTile(int x, int y)
 	{
 		MapSetBlock(x/mapblockwidth, y/mapblockheight, 10);
+	}
+
+	inline void vapourizeTileColumn(int x)
+	{
+		for(int y = 0; y <= HEIGHT; y+=50)
+		{
+			if(isGoombaTriggerTile(x, y) || isKoopaTroopaTriggerTile(x, y))
+				vapourizeTile(x, y);
+		}
 	}
 };
 

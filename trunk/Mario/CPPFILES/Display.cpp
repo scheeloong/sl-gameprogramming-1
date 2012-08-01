@@ -8,6 +8,10 @@ bool lock[] = {false, false, false, false, false};
 const float PI = 3.14159;
 int xOff = 0;
 int yOff = 0;
+int playerVelX = 0;
+int oldXOff = 0;
+int deltaXOff = 0;
+bool isMoved = false;
 
 Display::Display(Database *database, State *state)
 {
@@ -29,14 +33,18 @@ void Display::updateDisplay(ALLEGRO_EVENT_QUEUE *event_queue, ALLEGRO_EVENT *ev)
 	}
 	if(redraw && al_is_event_queue_empty(event_queue))
 		{
-			//xOff and yOff as defined in classes.h
+			//xOff and yOff as defined in classes.h 
 			MapDrawBG(xOff, yOff, 0, 0, WIDTH, HEIGHT);
 			MapDrawFG(xOff, yOff, 0, 0, WIDTH, HEIGHT, 0);
 			MapDrawFG(xOff, yOff, 0, 0, WIDTH, HEIGHT, 1);
+		/*	MapDrawBG(0, 0, xOff, yOff, WIDTH, HEIGHT);
+			MapDrawFG(0, 0, xOff, yOff, WIDTH, HEIGHT, 0);
+			MapDrawFG(0, 0, xOff, yOff, WIDTH, HEIGHT, 1);*/
 			//Layer 1 features foreground tiles such as coin and ? blocks.
 			//Collision is detected on Layer 0 though.
 			MapChangeLayer(1);
-			MapDrawBG(xOff, yOff, 0, 0, WIDTH, HEIGHT);
+			MapDrawBG(0, 0, xOff, yOff, WIDTH, HEIGHT);
+		//	MapDrawBG(xOff, yOff, 0, 0, WIDTH, HEIGHT);
 			MapChangeLayer(0);
 			redraw = false;
 			if(state->getState() == PLAYING)

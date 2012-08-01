@@ -201,7 +201,7 @@ void Database::resetDatabase()
 	killPowerUps();
 	killBounceBlocks();
 	destroy();
-	makePlayer(WIDTH/2, HEIGHT/2, 5, 5, 1, 1, true);
+	makePlayer(WIDTH/2 - 200, HEIGHT/2, 5, 5, 1, 1, true);
 }
 void Database::deleteDatabase()
 {
