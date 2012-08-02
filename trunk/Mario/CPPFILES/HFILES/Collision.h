@@ -42,13 +42,21 @@ public:
 	void checkPlayerEnemyCollision();
 	void checkPlayerPowerUpCollision();
 
+	// VL: Leave the commented couts here. They're incredibly helpful for 
+	// troubleshooting.
 	void checkCollision()
 	{
+		//cout << "1" << endl;
 		checkPlayerTileCollision();
+		//cout << "2" << endl;
 		checkEnemyTileCollision();
+		//cout << "3" << endl;
 		checkPowerUpTileCollision();
+		//cout << "4" << endl;
 		checkPlayerEnemyCollision();
+		//cout << "5" << endl;
 		checkPlayerPowerUpCollision();
+		//cout << "6" << endl;
 	}
 
 	//====================
@@ -159,7 +167,7 @@ public:
 	// These methods deal with getting rid of used Tiles
 	
 	// This function replaces a special tile with a solid collidable tile.
-	inline void killSpecialTile(int x, int y)
+	inline void setTileBouncing(int x, int y)
 	{
 		// Tile #423 is a special replacement tile with User7 set as true.
 		// It is only activated when a block is currently being pushed from below.

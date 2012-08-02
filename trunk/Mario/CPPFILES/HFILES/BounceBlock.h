@@ -11,13 +11,15 @@ class BounceBlock : public Autobot
 {
 private:
 	// the next two variables store coordinates of the block on the map
+	int startX;
 	int startY; // initial y position
 	int species; // type of bounce block
+	bool active;
 public:
 	// Constructor
 	BounceBlock() : Autobot() {velX = 0; ID = MISC; onAir = true;}
 	void Init(int x, int y, int velX, int velY, int dirX, int dirY, bool alive, 
-		ALLEGRO_BITMAP *image, int startY, int species);
+		ALLEGRO_BITMAP *image, int species);
 	// Get & Set
 	int getStartY() {return startY;}
 	// Methods
