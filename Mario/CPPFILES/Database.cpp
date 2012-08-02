@@ -67,12 +67,12 @@ void Database::makeBounceBlock(int species, int x, int y, int velX, int velY, in
 	BounceBlock *bblock = new BounceBlock();
 	if(species == DEAD_QUESTION)
 	{	
-		bblock->Init(x, y, velX, velY, dirX, dirY, alive, deadQuestion, y, species);
+		bblock->Init(x, y, velX, velY, dirX, dirY, alive, deadQuestion, species);
 	}
 	else if(species == SKY)
-		bblock->Init(x, y, velX, velY, dirX, dirY, alive, sky, y, species);
+		bblock->Init(x, y, velX, velY, dirX, dirY, alive, sky, species);
 	else if(species == DEAD_BRICK)
-		bblock->Init(x, y, velX, velY, dirX, dirY, alive, deadBrick, y, species);
+		bblock->Init(x, y, velX, velY, dirX, dirY, alive, deadBrick, species);
 
 	bounceBlocks.push_back(bblock);
 }

@@ -46,7 +46,7 @@ void Autobot::update()
 		setCollidable(true);
 	moveSideWays(velX - deltaXOff);
 	moveVertically();
-	cout << deltaXOff << " " << xOff << endl;
+	//cout << deltaXOff << " " << xOff << endl;
 	//=============================================
 	// 1 2 3 2 1 2 3 2 1 animation
 	//=============================================

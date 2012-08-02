@@ -92,7 +92,8 @@ void Collision::checkPlayerTileCollision()
 					database->makeBounceBlock(DEAD_QUESTION, ((x + xOff)/mapblockwidth) * 50, ((y-by)/mapblockheight) * 50, 0, -5, 1, 1, true);
 					// The species of the powerup must match that of the player. 
 					database->makePowerUp((*(database->iterP))->getSpecies(), ((x + xOff)/mapblockwidth) * 50 + 25, ((y-by)/mapblockheight) * 50 - 30, 2, -5, 1, 1, true);
-					killSpecialTile(x + xOff, y - by);
+					setTileBouncing(x + xOff, y - by);
+					cout << "Question tile" << endl;
 				}
 				else if(isCoinTile(x + xOff, y - by))
 				{
@@ -107,7 +108,7 @@ void Collision::checkPlayerTileCollision()
 					if((*(database->iterP))->getSpecies() == BABY)
 					{
 						database->makeBounceBlock(DEAD_BRICK, ((x + xOff)/mapblockwidth) * 50, ((y-by)/mapblockheight) * 50, 0, -4, 1, 1, true);
-						killSpecialTile(x + xOff, y - by);
+						setTileBouncing(x + xOff, y - by);
 					}
 					else if ((*(database->iterP))->getSpecies() == RED || (*(database->iterP))->getSpecies() == WHITE)
 					{
@@ -183,6 +184,7 @@ void Collision::checkEnemyTileCollision()
 			else
 				database->iterE ++;
 		}
+		else database->iterE++;
 	}
 }
 void Collision::checkPowerUpTileCollision()
@@ -228,6 +230,7 @@ void Collision::checkPowerUpTileCollision()
 			else
 				database->iterPU++;
 		}
+		else database->iterPU++;
 	}
 }
 
